@@ -89,7 +89,7 @@ Con estas reglas:
 
 **Requisitos:**
 1. Tests con Vitest que cubran cada categoría, cada prioridad y al menos dos casos ambiguos que tú elijas.
-2. Todos los tests pasan con `npx vitest run`.
+2. Todos los tests pasan con `npm test`. Tu repo ya trae Vitest configurado para correr los tests de `nivelacion/`.
 3. Un `NOTAS.md` breve que responda:
    - ¿Qué coding agent y qué modelo usaste?
    - ¿Cuántas veces tuviste que corregir al agente y por qué?

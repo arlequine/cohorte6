@@ -15,7 +15,7 @@ Es asíncrona: avanza a tu ritmo durante la semana. Calcula entre 3 y 4 horas en
 | Parte | Tiempo | Resultado |
 |---|---|---|
 | 1. Instalar y verificar tu entorno | 60–90 min | `verificar-entorno.sh` sin errores en lo obligatorio |
-| 2. Crear tu repo personal | 15 min | Repo `ai4dev-<tu-usuario>` en GitHub |
+| 2. Crear tu repo personal | 15 min | Repo `ai4dev-<tu-usuario>` en GitHub, creado desde la plantilla |
 | 3. Diagnóstico | 30 min | Autoevaluación completa |
 | 4. Reto práctico | 45 min | Una función con tests, hecha con tu coding agent |
 | 5. Entregar | 10 min | `nivelacion/entrega.md` en tu repo |
@@ -71,14 +71,18 @@ El script revisa cada herramienta y te dice qué falta. Lo obligatorio debe sali
 
 ## 2. Crea tu repo personal
 
-Ahí vas a construir tu producto durante todo el programa y ahí vas a entregar cada estación.
+Ahí vas a construir tu producto durante todo el programa y ahí vas a entregar cada estación. Parte de [`plantilla-alumno/`](../plantilla-alumno), que ya trae una app Next.js, tests, CI, `AGENTS.md` y las carpetas para tus entregables.
 
 ```bash
-gh repo create ai4dev-<tu-usuario> --private --clone --add-readme
+npx degit arlequine/cohorte6/plantilla-alumno ai4dev-<tu-usuario>
 cd ai4dev-<tu-usuario>
-mkdir nivelacion
-cp <ruta-a-este-repo>/nivelacion1/plantilla-entrega.md nivelacion/entrega.md
+git init -b main && git add . && git commit -m "Repo inicial desde la plantilla"
+gh repo create ai4dev-<tu-usuario> --private --source . --push
+npm install && npm run hooks && npm run verify
+cp <ruta-a-cohorte6>/nivelacion1/plantilla-entrega.md nivelacion/entrega.md
 ```
+
+`npm run verify` debe terminar sin errores: es la misma verificación que corre el CI de tu repo en cada push.
 
 Agrega a los mentores como colaboradores cuando te compartan sus usuarios.
 
