@@ -136,7 +136,7 @@ Abre **Agente LLM** con rango *Last 1 hour*. Es el dashboard que responde las pr
 
 - **Llamadas al LLM** > 0 y **Errores del modelo** = 0 (el panel muestra `0`, no *No data*: la app inicializa los counters al arrancar).
 - **Latencia P95** entre 1 y 10 s: un LLM tarda segundos, no milisegundos.
-- **Latencia por modelo** muestra `gpt-4o · p50/p95/p99`; **por operación** distingue `conversation` y `evaluation`.
+- **Latencia por modelo** muestra `<modelo> · p50/p95/p99` (por ejemplo `gpt-6-luna`); **por operación** distingue `conversation` y `evaluation`.
 - **Tokens por minuto**: la serie `input` domina a `output` (el prompt y el contexto pesan más que la respuesta).
 
 ### 5.2 Dashboards de plataforma

@@ -34,7 +34,7 @@ Solo una llave es obligatoria: la de OpenAI. La de Telegram es opcional; sin ell
 2. En **Settings → Billing** agrega un método de pago o crédito. Sin saldo la API responde `429 insufficient_quota` aunque la llave sea válida.
 3. Ve a [platform.openai.com/api-keys](https://platform.openai.com/api-keys) y pulsa **Create new secret key**. Ponle un nombre (por ejemplo `entrevista-ai-local`) y copia la llave: empieza por `sk-` y **solo se muestra una vez**.
 4. Pégala en `webapp/.env.local` como `OPENAI_API_KEY=sk-...`.
-5. Costo de referencia: la app usa `gpt-4o` y una entrevista completa de prueba cuesta unos pocos centavos de dólar. En **Billing → Limits** puedes fijar un tope mensual.
+5. Costo de referencia: la app usa `gpt-6-luna` por defecto (configurable con `CONVERSATION_MODEL` y `EVALUATOR_MODEL`) y una entrevista completa de prueba cuesta unos pocos centavos de dólar. En **Billing → Limits** puedes fijar un tope mensual.
 
 **Telegram (opcional, 3 minutos)**
 
@@ -452,7 +452,7 @@ Los dashboards asumen los siguientes UIDs (configurados en otel-stack):
 | Frontend         | Next.js 16, React 19, Tailwind CSS 4, Shadcn-ui |
 | Backend          | Next.js API Routes, NextAuth 4 (JWT)            |
 | Base de datos    | DynamoDB (LocalStack en desarrollo)              |
-| IA               | OpenAI GPT-4o (chat + evaluacion)                |
+| IA               | OpenAI `gpt-6-luna` (chat + evaluacion)          |
 | Mensajeria       | Telegram (Grammy SDK)                            |
 | Auth (prod)      | AWS Cognito                                      |
 | Infra            | Terraform, ECS Fargate, ALB, VPC                 |

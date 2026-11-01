@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 
 const client = new OpenAI();
+const PERSONA_MODEL = process.env.PERSONA_MODEL ?? 'gpt-6-luna';
 
 interface PersonaConfig {
   id: string;
@@ -82,9 +83,9 @@ REGLAS:
       ? 'Inicia la conversación con el asistente con tu primera consulta o saludo, según tu perfil.'
       : 'Continúa la conversación de forma natural basándote en la última respuesta del asistente.';
 
-    console.log(`    🤖 [Persona · gpt-4o-mini] generando mensaje turno ${i}...`);
+    console.log(`    🤖 [Persona · ${PERSONA_MODEL}] generando mensaje turno ${i}...`);
     const respuestaPersona = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: PERSONA_MODEL,
       max_tokens: 300,
       messages: [
         { role: 'system', content: systemPrompt },

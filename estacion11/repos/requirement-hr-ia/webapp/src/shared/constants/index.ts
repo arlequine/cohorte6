@@ -16,8 +16,8 @@ export const OPENAI_CONFIG = {
   RETRY_DELAY_MS: 3000,
   MAX_RETRIES: 1,
   TIMEOUT_MS: 15000,
-  CONVERSATION_MODEL: 'gpt-4o',
-  EVALUATOR_MODEL: 'gpt-4o',
+  CONVERSATION_MODEL: process.env.CONVERSATION_MODEL ?? 'gpt-6-luna',
+  EVALUATOR_MODEL: process.env.EVALUATOR_MODEL ?? 'gpt-6-luna',
 } as const;
 
 export const DYNAMODB_TABLES = {

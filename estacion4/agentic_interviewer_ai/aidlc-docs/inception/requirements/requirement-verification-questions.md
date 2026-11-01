@@ -39,7 +39,7 @@ E) Otro (por favor describe después del tag [Answer]:)
 ## Pregunta 3
 ¿Qué proveedor y modelo LLM se usará como núcleo del agente conversacional?
 
-A) Anthropic Claude (claude-sonnet-4-6 o claude-opus-4-6) — mejor razonamiento en español, menor alucinación
+A) Anthropic Claude (claude-sonnet-5-5 o claude-opus-5-5) — mejor razonamiento en español, menor alucinación
 B) OpenAI GPT-4o
 C) Google Gemini 1.5 Pro
 D) Modelo open-source self-hosted (Llama 3.x, Mistral)

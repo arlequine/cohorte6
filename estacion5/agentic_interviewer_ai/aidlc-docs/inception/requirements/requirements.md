@@ -26,7 +26,7 @@
 |---|---|---|
 | **AI Backend** | Python 3.11+ + FastAPI | Main AI/API service |
 | **Agentic Framework** | Anthropic Claude Agent SDK | Python-native orchestration |
-| **LLM Model** | Anthropic Claude (claude-sonnet-4-6 / claude-opus-4-6) | Primary reasoning engine |
+| **LLM Model** | Anthropic Claude (claude-sonnet-5-5 / claude-opus-5-5) | Primary reasoning engine |
 | **Telegram Bot** | Telegraf (Node.js/TypeScript) | Separate gateway service |
 | **Frontend Dashboard** | React + TypeScript + Vite | Recruiter web interface |
 | **Primary Database** | MongoDB (Atlas) | Semi-structured documents, transcripts |

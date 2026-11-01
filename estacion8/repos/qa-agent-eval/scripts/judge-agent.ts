@@ -4,6 +4,7 @@ import * as path from 'path';
 import type { Turno } from './persona-agent';
 
 const client = new OpenAI();
+const JUDGE_MODEL = process.env.JUDGE_MODEL ?? 'gpt-6-luna';
 
 export interface Dimensiones {
   precision_factual: number;
@@ -66,9 +67,9 @@ ${conversacionFormateada}
   "observaciones": "<hallazgos clave: qué hizo bien el agente, qué debe mejorar, patrones detectados>"
 }`;
 
-  console.log(`  ⚖️  [Juez · gpt-4o] evaluando ${conversacion.length} turnos...`);
+  console.log(`  ⚖️  [Juez · ${JUDGE_MODEL}] evaluando ${conversacion.length} turnos...`);
   const resultado = await client.chat.completions.create({
-    model: 'gpt-4o',
+    model: JUDGE_MODEL,
     max_tokens: 1000,
     response_format: { type: 'json_object' },
     messages: [{ role: 'user', content: prompt }],
