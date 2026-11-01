@@ -3,6 +3,8 @@
 **Nombre:**
 **Usuario de GitHub:**
 **Empresa o proyecto propio:**
+**Coding agent principal:** Claude Code / Cursor / Codex / Antigravity / GitHub Copilot / otro
+**Plan o cuenta:**
 
 ## Entorno
 

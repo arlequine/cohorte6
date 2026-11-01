@@ -49,7 +49,30 @@ revisar "Git"         git    2.40 obligatoria "control de versiones"
 revisar "Node.js"     node   20.0 obligatoria "todos los proyectos de ejemplo"
 revisar "npm"         npm    9.0  obligatoria "dependencias"
 revisar "GitHub CLI"  gh     2.40 obligatoria "repo personal y PRs"
-revisar "Claude Code" claude ""   obligatoria "coding agent del programa"
+
+# Coding agent: basta con uno. Claude Code es la herramienta de referencia.
+agentes=""
+for par in "claude:Claude Code" "cursor-agent:Cursor CLI" "cursor:Cursor" "codex:Codex" "agy:Antigravity CLI" "copilot:Copilot CLI"; do
+  cmd="${par%%:*}"; nombre="${par#*:}"
+  if command -v "$cmd" >/dev/null 2>&1; then
+    version="$("$cmd" --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -n1)"
+    agentes="${agentes}${nombre}${version:+ $version}, "
+  fi
+done
+if command -v code >/dev/null 2>&1 && code --list-extensions 2>/dev/null | grep -qi '^github\.copilot'; then
+  agentes="${agentes}Copilot (VS Code), "
+fi
+if [ -n "$agentes" ]; then
+  printf '%s✓ %-14s%s %s\n' "$VERDE" "Coding agent" "$FIN" "${agentes%, }"
+  case "$agentes" in
+    *"Claude Code"*) ;;
+    *) printf '%s  %-14s%s %sLas demos y el soporte garantizado son en Claude Code%s\n' "" "" "" "$GRIS" "$FIN" ;;
+  esac
+else
+  printf '%s✗ %-14s%s ninguno encontrado  %s(instala uno: ver "Elige tu coding agent")%s\n' "$ROJO" "Coding agent" "$FIN" "$GRIS" "$FIN"
+  printf '%s  %-14s%s %sSi usas solo el IDE de Cursor o Antigravity, anótalo a mano en tu entrega%s\n' "" "" "" "$GRIS" "$FIN"
+  faltan_obligatorias=$((faltan_obligatorias + 1))
+fi
 
 if command -v gh >/dev/null 2>&1; then
   if gh auth status >/dev/null 2>&1; then

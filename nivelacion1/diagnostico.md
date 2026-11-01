@@ -23,7 +23,7 @@ Copia la tabla de tu sección a `nivelacion/entrega.md` con tu calificación.
 
 | # | Afirmación | 0–3 |
 |---|---|---|
-| B1 | Uso un coding agent (Claude Code, Cursor, Copilot u otro) en mi trabajo diario | |
+| B1 | Uso un coding agent (Claude Code, Cursor, Codex, Antigravity, Copilot u otro) en mi trabajo diario | |
 | B2 | Le doy al agente el contexto que necesita (archivos, convenciones, objetivo) en lugar de pedir todo en una línea | |
 | B3 | Reviso y pruebo el código que genera el agente antes de aceptarlo | |
 | B4 | Uso archivos de instrucciones del proyecto (`CLAUDE.md`, `AGENTS.md` o similares) | |
@@ -67,7 +67,7 @@ Tu sección más baja es la que más te conviene reforzar esta semana. En el REA
 
 ## Reto práctico (45 minutos)
 
-Hazlo con Claude Code dentro de tu repo personal, en `nivelacion/reto/`.
+Hazlo con tu coding agent dentro de tu repo personal, en `nivelacion/reto/`.
 
 **El problema.** Un equipo de soporte recibe tickets en texto libre y quiere clasificarlos automáticamente sin usar un LLM, por ahora.
 
@@ -91,6 +91,7 @@ Con estas reglas:
 1. Tests con Vitest que cubran cada categoría, cada prioridad y al menos dos casos ambiguos que tú elijas.
 2. Todos los tests pasan con `npx vitest run`.
 3. Un `NOTAS.md` breve que responda:
+   - ¿Qué coding agent y qué modelo usaste?
    - ¿Cuántas veces tuviste que corregir al agente y por qué?
    - ¿Qué caso ambiguo encontraste y cómo decidiste resolverlo?
    - ¿Qué le pedirías distinto al agente si empezaras de nuevo?
