@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 
 const client = new OpenAI();
+const AGENT_MODEL = process.env.AGENT_MODEL ?? 'gpt-6-luna';
 
 export const SYSTEM_PROMPT = `Eres un asistente virtual de soporte para TechAssist, una empresa de software y servicios tecnológicos.
 
@@ -44,7 +45,7 @@ export async function generateLLMResponse(
   ];
 
   const completion = await client.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: AGENT_MODEL,
     max_tokens: 500,
     messages,
   });

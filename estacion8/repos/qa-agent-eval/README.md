@@ -66,7 +66,7 @@ Resultado esperado: Carlos y Pedro **reprueban** (el agente no sabe responder so
 
 ### Opción B — Agente con LLM (conversación realista, usa tokens de OpenAI)
 
-El agente está respaldado por `gpt-4o-mini` con un system prompt de soporte generalista. Las conversaciones son dinámicas y el agente responde correctamente a preguntas técnicas.
+El agente está respaldado por un LLM (`AGENT_MODEL`, por defecto `gpt-6-luna`) con un system prompt de soporte generalista. Las conversaciones son dinámicas y el agente responde correctamente a preguntas técnicas.
 
 ```bash
 # Evaluar carlos contra el agente LLM
@@ -88,11 +88,11 @@ Resultado esperado: las 4 personas **aprueban** con promedios entre 4.5 y 5.0.
 ```mermaid
 flowchart TD
     Orq["run-evaluation.ts<br/>(orquestador)"]
-    Persona["persona-agent<br/>gpt-4o-mini<br/><br/>Simula usuarios realistas con<br/>perfil, estilo e intenciones"]
-    Juez["judge-agent<br/>gpt-4o<br/><br/>Evalúa la conversación completa<br/>contra la rúbrica y retorna JSON"]
+    Persona["persona-agent<br/>PERSONA_MODEL<br/><br/>Simula usuarios realistas con<br/>perfil, estilo e intenciones"]
+    Juez["judge-agent<br/>JUDGE_MODEL<br/><br/>Evalúa la conversación completa<br/>contra la rúbrica y retorna JSON"]
     Demo["demo-api (Next.js)"]
     Chat["/api/agent/chat<br/>reglas determinísticas (sin LLM)"]
-    LLM["/api/agent/llm<br/>gpt-4o-mini + system prompt de soporte"]
+    LLM["/api/agent/llm<br/>AGENT_MODEL + system prompt de soporte"]
 
     Orq --> Persona
     Orq --> Juez
@@ -102,7 +102,7 @@ flowchart TD
 ```
 
 **Flujo por persona:**
-1. El Persona genera el mensaje del turno 1 con `gpt-4o-mini`
+1. El Persona genera el mensaje del turno 1 con `PERSONA_MODEL`
 2. Lo envía al agente bajo prueba vía HTTP
 3. Inyecta la respuesta del agente en su historial y genera el turno 2
 4. Repite N turnos
@@ -162,12 +162,14 @@ Definida en `rubrics/evaluacion.md`. El Juez evalúa cada dimensión en escala 1
 
 ## Modelos utilizados
 
-| Rol | Modelo | Razón |
+Los modelos se configuran con variables de entorno. Los valores por defecto están en [`versions.md`](../../../versions.md).
+
+| Rol | Variable (por defecto) | Razón |
 |---|---|---|
-| Agente Persona | `gpt-4o-mini` | Genera mensajes de usuario — tarea de simulación, bajo costo |
-| Agente Juez | `gpt-4o` | Evalúa con rúbrica compleja — requiere razonamiento profundo |
+| Agente Persona | `PERSONA_MODEL` (`gpt-6-luna`) | Genera mensajes de usuario — tarea de simulación, bajo costo |
+| Agente Juez | `JUDGE_MODEL` (`gpt-6-luna`) | Evalúa con rúbrica compleja. Si el Juez se queda corto, prueba con `gpt-6-sol`, que es más capaz y más caro |
 | Agente bajo prueba (estático) | Reglas + regex | Sin LLM, costo cero, comportamiento predecible |
-| Agente bajo prueba (LLM) | `gpt-4o-mini` | Soporte generalista real con system prompt estructurado |
+| Agente bajo prueba (LLM) | `AGENT_MODEL` (`gpt-6-luna`) | Soporte generalista real con system prompt estructurado |
 
 **Costo aproximado por ejecución** (`TURNOS=4`, 2 personas):
 
@@ -175,6 +177,8 @@ Definida en `rubrics/evaluacion.md`. El Juez evalúa cada dimensión en escala 1
 |---|---|---|
 | Opción A (agente estático) | 8 Persona + 2 Juez | ~$0.01 |
 | Opción B (agente LLM) | 8 Persona + 8 Agente + 2 Juez | ~$0.04 |
+
+Estimado con los modelos de la Cohorte 4 (`gpt-4o` y `gpt-4o-mini`). Con `gpt-6-luna` el costo debería ser menor; recalcúlalo con los precios vigentes.
 
 ---
 
@@ -285,7 +289,7 @@ El agente también extrae **nombre** (`me llamo X`, `soy X`) y **temas mencionad
 
 ### Agente con LLM — `/api/agent/llm`
 
-Usa `gpt-4o-mini` con un system prompt estructurado definido en `lib/llm-agent.ts`. El agente está configurado como asistente de soporte para TechAssist y puede responder preguntas técnicas reales.
+Usa `AGENT_MODEL` (por defecto `gpt-6-luna`) con un system prompt estructurado definido en `lib/llm-agent.ts`. El agente está configurado como asistente de soporte para TechAssist y puede responder preguntas técnicas reales.
 
 **Capacidades cubiertas por el system prompt:**
 - Integraciones y APIs (webhooks, SDKs, OAuth2, JWT, API keys)
@@ -310,7 +314,7 @@ El estado se guarda en `lib/store.ts` usando `globalThis` (persiste entre reques
 |---|---|---|
 | `GET` | `/api/health` | Health check — `{ "status": "ok" }` |
 | `POST` | `/api/agent/chat` | Agente estático (reglas) |
-| `POST` | `/api/agent/llm` | Agente con LLM (gpt-4o-mini + system prompt) |
+| `POST` | `/api/agent/llm` | Agente con LLM (`AGENT_MODEL` + system prompt) |
 | `GET` | `/api/conversations` | Lista conversaciones en memoria |
 
 ---

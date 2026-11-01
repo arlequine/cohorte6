@@ -67,7 +67,7 @@
 **Configuration** (env vars via Secrets Manager):
 - `MONGODB_URI` — MongoDB Atlas connection string
 - `ANTHROPIC_API_KEY` — Anthropic API key for Claude + embeddings
-- `CLAUDE_MODEL_ID` — e.g. `claude-opus-4-6`
+- `CLAUDE_MODEL_ID` — e.g. `claude-opus-5-5`
 - `EVALUATION_LAMBDA_URL` — REST URL of SVC-03
 - `CAMPAIGN_LAMBDA_URL` — REST URL of SVC-04
 - `COMPLIANCE_LAMBDA_URL` — REST URL of SVC-05
