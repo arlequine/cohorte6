@@ -4,7 +4,7 @@ locals {
 
 # ── Datos: historial de conversaciones del agente ──────────────────────────────
 resource "aws_dynamodb_table" "conversaciones" {
-  name         = "${local.nombre}-conversaciones"
+  name = "${local.nombre}-conversaciones"
   # Modo provisionado con la capacidad mínima: queda dentro del nivel gratuito permanente de DynamoDB
   # (25 unidades de lectura, 25 de escritura y 25 GB por cuenta y región). El modo bajo demanda
   # (PAY_PER_REQUEST) no entra en ese nivel gratuito: se cobra cada petición.
