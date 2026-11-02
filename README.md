@@ -45,7 +45,7 @@ mcp/                   ← un snippet de configuración MCP por herramienta
 | 6 | E9 Despliegue | Producto en la nube con pipeline completo |
 | 6 | E10 Seguridad | Reporte de seguridad + hallazgos cerrados |
 | 7 | E11 Observabilidad | Dashboard + prueba de carga |
-| 7 | E12 Demo Day | Presentación del producto (con video de respaldo) |
+| 7 | E12 Demo Day | Presentación del producto + video (lo entregan todos) |
 
 El detalle está en el [mapa curricular de la Cohorte 6](https://claude.ai/artifact/KCGYvyP2ADN63jUkLNEJRg).
 

@@ -54,7 +54,7 @@ Asegúrate de tener listo antes de la sesión:
 3. Implementa al menos 3 métricas personalizadas para tu agente de IA: latencia de inferencia, tokens consumidos y tasa de error del modelo.
 4. Verifica que los traces de tu app aparecen en Grafana (Tempo) y que las métricas se registran en Prometheus.
 5. Versiona al menos un dashboard de Grafana como JSON en tu repo y cárgalo con `DASHBOARDS_DIR`, y copia el skill `.claude/skills/observabilidad/SKILL.md` ajustado a tu producto.
-6. Prepara tu speech del Demo Day siguiendo la [guía de la Estación 12](../estacion12/README.md): guion, ensayo con cronómetro y video de respaldo de tu demo.
+6. Prepara tu speech del Demo Day siguiendo la [guía de la Estación 12](../estacion12/README.md): guion, ensayo y el video de tu presentación, que entregan todos.
 
 ## 🛠 Qué vas a producir
 

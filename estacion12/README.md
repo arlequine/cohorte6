@@ -3,19 +3,17 @@
 ## Objetivo
 Presentar en tus propias palabras el producto que construiste durante el programa: qué problema resuelve, cómo funciona y qué aprendiste al construirlo con IA.
 
-El Demo Day es una sesión de presentaciones. No hay calificación: es el espacio para mostrar tu trabajo a tus compañeros y mentores.
+El Demo Day es una sesión de presentaciones. No hay calificación: es el espacio para mostrar tu trabajo a tus compañeros y mentores. Los mentores coordinan la sesión y dan espacio a todos los que se pueda. **Todos entregan un video**: respalda tu presentación en vivo y, si no alcanzas a presentar en la sesión, es tu presentación.
 
 ## Antes de la sesión
 - Tu producto desplegado y respondiendo en su URL de Vercel
-- Tu speech preparado y ensayado en voz alta con un cronómetro, al menos dos veces
-- Un video de respaldo de tu demo, por si algo falla en vivo
+- Tu speech preparado y ensayado en voz alta al menos dos veces
+- Tu video grabado y con un enlace que abre sin iniciar sesión
 - El archivo `docs/demo-day.md` en tu repo (ver "Tu tarea")
-
-La coordinación confirma cuántos minutos tiene cada presentación y el orden. Prepara tu speech para ese tiempo exacto.
 
 ## Estructura del speech
 
-Reutiliza lo que ya hiciste: casi todo sale de tu Product Vision Board, tu PRD y tu repo.
+Reutiliza lo que ya hiciste: casi todo sale de tu Product Vision Board, tu PRD y tu repo. Apunta a entre 3 y 5 minutos; el peso de cada parte te ayuda a repartir el tiempo.
 
 | Parte | Peso | Qué dices | De dónde sale |
 |---|---|---|---|
@@ -25,47 +23,40 @@ Reutiliza lo que ya hiciste: casi todo sale de tu Product Vision Board, tu PRD y
 | 4. Cómo lo construiste | 20 % | Una decisión de diseño y una cosa que aprendiste trabajando con agentes | Tu `AGENTS.md`, tus specs y tus PRs |
 | 5. Cierre | 10 % | Qué sigue para tu producto y una frase para recordar | Tú |
 
-### Tiempos según la duración asignada
-
-| Parte | 2 min | 3 min | 5 min |
-|---|---|---|---|
-| 1. Problema | 20 s | 25 s | 45 s |
-| 2. Propuesta | 15 s | 25 s | 45 s |
-| 3. Demo | 50 s | 75 s | 2 min |
-| 4. Cómo lo construiste | 25 s | 35 s | 1 min |
-| 5. Cierre | 10 s | 20 s | 30 s |
-
 ### Consejos
 - **Una demo, un flujo.** Muestra el recorrido que mejor explica el valor. No intentes enseñar todas las pantallas.
 - **Prepara los datos.** Ten la sesión iniciada, el token escrito y los datos de ejemplo cargados antes de que te toque.
 - **Habla del problema, no de la tecnología.** El stack cabe en una frase dentro de la parte 4.
 - **Sé honesto con lo que falta.** "Esto todavía no funciona y es lo siguiente que construyo" es mejor que esconderlo.
-- **Termina a tiempo.** Si te pasas, el mentor te va a cortar para que todos alcancen a presentar.
+- **Sé breve en vivo.** Mientras más concreto seas, más compañeros alcanzan a presentar.
 
-## Video de respaldo
-Graba la parte 3 (la demo) con tu producto funcionando, sin narración o con narración breve. Debe durar menos que el tiempo de la demo en tu speech.
+## El video
+Graba tu speech completo, con la demo de tu producto funcionando, en entre 3 y 5 minutos. Cumple dos funciones:
 
-Si en vivo falla la URL, el internet o el agente, dices "les muestro la grabación", reproduces el video y sigues con tu speech. Sube el video a un enlace que se pueda abrir sin iniciar sesión (YouTube no listado, Loom, Google Drive con acceso por enlace).
+- **Respaldo:** si en vivo falla la URL, el internet o el agente, dices "les muestro la grabación", reproduces la parte de la demo y sigues con tu speech.
+- **Presentación:** si no alcanzas a presentar en la sesión, tu video queda como tu presentación y se comparte con la cohorte.
+
+Súbelo a un enlace que se pueda abrir sin iniciar sesión (YouTube no listado, Loom, Google Drive con acceso por enlace).
 
 ## Tu tarea
 1. Escribe tu guion siguiendo la estructura de arriba.
-2. Ensáyalo en voz alta con cronómetro hasta que quepa en el tiempo asignado.
-3. Graba el video de respaldo de tu demo.
+2. Ensáyalo en voz alta.
+3. Graba tu video.
 4. Agrega a tu repo `docs/demo-day.md` con:
    - La URL de tu producto
-   - El enlace a tu video de respaldo
+   - El enlace a tu video
    - Tu guion
-5. Comparte el enlace a ese archivo en el formulario de la cohorte antes de la sesión, para que los mentores armen el orden.
+5. Comparte el enlace a ese archivo en el formulario de la cohorte antes de la sesión, para que los mentores organicen las presentaciones.
 
 ## Checklist del día
 
 **Un día antes**
 - [ ] La URL responde y el flujo de la demo funciona de principio a fin
-- [ ] El video de respaldo abre desde un navegador sin sesión iniciada
+- [ ] Tu video abre desde un navegador sin sesión iniciada
 - [ ] Probaste compartir pantalla en la herramienta de la sesión
 
 **15 minutos antes**
-- [ ] Pestañas abiertas: tu producto, el video de respaldo y nada más
+- [ ] Pestañas abiertas: tu producto, tu video y nada más
 - [ ] Sesión iniciada y token escrito en tu producto
 - [ ] Notificaciones silenciadas
 - [ ] Micrófono y cámara probados
