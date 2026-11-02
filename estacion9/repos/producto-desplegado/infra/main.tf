@@ -57,6 +57,7 @@ resource "vercel_project_environment_variable" "tabla" {
   key        = "DYNAMODB_TABLE"
   value      = aws_dynamodb_table.conversaciones.name
   target     = ["production"]
+  sensitive  = false
 }
 
 resource "vercel_project_environment_variable" "region" {
@@ -65,6 +66,7 @@ resource "vercel_project_environment_variable" "region" {
   key        = "APP_AWS_REGION"
   value      = var.aws_region
   target     = ["production"]
+  sensitive  = false
 }
 
 resource "vercel_project_environment_variable" "access_key_id" {

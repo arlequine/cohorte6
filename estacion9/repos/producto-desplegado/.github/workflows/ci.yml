@@ -24,8 +24,8 @@ jobs:
   verificar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -40,7 +40,7 @@ jobs:
   secretos:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Buscar secretos con gitleaks
@@ -64,7 +64,7 @@ jobs:
       VERCEL_API_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       TF_IN_AUTOMATION: "true"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Credenciales de AWS por OIDC
         uses: aws-actions/configure-aws-credentials@v4
@@ -127,8 +127,8 @@ jobs:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
           cache: npm
