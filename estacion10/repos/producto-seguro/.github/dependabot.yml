@@ -1,11 +1,15 @@
 # Dependabot abre pull requests cuando hay actualizaciones o parches de seguridad.
 # Cada PR pasa por el mismo pipeline: tests, SAST, auditoría de dependencias y plan de Terraform.
+# cooldown: espera 7 días antes de proponer una versión recién publicada. La mayoría de los paquetes
+# comprometidos (como en Mini Shai-Hulud) se detectan y retiran en ese lapso.
 version: 2
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 5
     groups:
       dependencias-menores:
@@ -15,8 +19,12 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: terraform
     directories: [/infra, /infra/bootstrap]
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7

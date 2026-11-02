@@ -105,17 +105,54 @@ resource "aws_iam_role_policy" "github_actions" {
         ]
         Resource = "arn:aws:dynamodb:${var.aws_region}:${local.cuenta}:table/${var.proyecto}-*"
       },
+      # El pipeline crea el usuario de IAM de la app. Para que no pueda usar eso para escalar privilegios,
+      # solo puede crear usuarios o darles políticas si llevan el límite de permisos "limite_app",
+      # que restringe cualquier política a leer y escribir las tablas del proyecto (Estación 10, hallazgo H5).
+      # Semgrep marca estas acciones por patrón; el riesgo residual está documentado en docs/seguridad.md.
       {
-        Sid    = "UsuarioDeLaApp"
+        Sid    = "CrearUsuarioSoloConLimite"
         Effect = "Allow"
+        # nosemgrep: terraform.lang.security.iam.no-iam-priv-esc-funcs.no-iam-priv-esc-funcs, terraform.lang.security.iam.no-iam-priv-esc-other-users.no-iam-priv-esc-other-users, terraform.lang.security.iam.no-iam-resource-exposure.no-iam-resource-exposure, terraform.lang.security.iam.no-iam-creds-exposure.no-iam-creds-exposure
+        Action   = ["iam:CreateUser", "iam:PutUserPolicy", "iam:PutUserPermissionsBoundary"]
+        Resource = "arn:aws:iam::${local.cuenta}:user/${var.proyecto}-*"
+        Condition = {
+          StringEquals = { "iam:PermissionsBoundary" = aws_iam_policy.limite_app.arn }
+        }
+      },
+      {
+        Sid    = "GestionarUsuarioDeLaApp"
+        Effect = "Allow"
+        # nosemgrep: terraform.lang.security.iam.no-iam-priv-esc-funcs.no-iam-priv-esc-funcs, terraform.lang.security.iam.no-iam-priv-esc-other-users.no-iam-priv-esc-other-users, terraform.lang.security.iam.no-iam-resource-exposure.no-iam-resource-exposure, terraform.lang.security.iam.no-iam-creds-exposure.no-iam-creds-exposure
         Action = [
-          "iam:CreateUser", "iam:GetUser", "iam:DeleteUser", "iam:TagUser", "iam:UntagUser", "iam:ListUserTags",
-          "iam:PutUserPolicy", "iam:GetUserPolicy", "iam:DeleteUserPolicy", "iam:ListUserPolicies",
+          "iam:GetUser", "iam:DeleteUser", "iam:TagUser", "iam:UntagUser", "iam:ListUserTags",
+          "iam:GetUserPolicy", "iam:DeleteUserPolicy", "iam:ListUserPolicies",
           "iam:ListAttachedUserPolicies", "iam:ListGroupsForUser",
           "iam:CreateAccessKey", "iam:DeleteAccessKey", "iam:ListAccessKeys",
         ]
         Resource = "arn:aws:iam::${local.cuenta}:user/${var.proyecto}-*"
       },
+      {
+        Sid      = "NoQuitarElLimite"
+        Effect   = "Deny"
+        Action   = ["iam:DeleteUserPermissionsBoundary"]
+        Resource = "*"
+      },
     ]
+  })
+}
+
+# ── Límite de permisos para el usuario de la app ──────────────────────────────
+# Aunque el pipeline le asigne otra política, el usuario nunca podrá hacer más que esto.
+resource "aws_iam_policy" "limite_app" {
+  name        = "${var.proyecto}-limite-app"
+  description = "Límite de permisos del usuario de la app: solo leer y escribir las tablas del proyecto"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["dynamodb:PutItem", "dynamodb:GetItem", "dynamodb:Scan"]
+      Resource = "arn:aws:dynamodb:${var.aws_region}:${local.cuenta}:table/${var.proyecto}-*"
+    }]
   })
 }

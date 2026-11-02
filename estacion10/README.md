@@ -48,7 +48,7 @@ Trabaja en tu repo personal, con tu coding agent.
    - Un job `dependencias` con `npm audit --omit=dev --audit-level=high`.
    - `.github/dependabot.yml` para npm, GitHub Actions y Terraform.
    - El job de infraestructura debe esperar a que pasen todos los controles.
-2. **Corrige lo que encuentren** los controles, o documenta por qué aceptas el riesgo. Nunca desactives un control para que pase el PR.
+2. **Corrige lo que encuentren** los controles, o documenta por qué aceptas el riesgo. Nunca desactives un control para que pase el PR. Si partiste de la Estación 9 sin cambios, Semgrep va a encontrar lo mismo que en la solución de referencia: Actions sin fijar, permisos de IAM que permiten escalar privilegios, Dependabot sin espera y un falso positivo en DynamoDB. Están explicados como H4 a H7 en su `docs/seguridad.md`.
 3. **Haz tu modelo de amenazas** con [`plantillas/modelo-amenazas.md`](plantillas/modelo-amenazas.md) en `docs/modelo-amenazas.md`. Elige los tres riesgos más importantes para tu producto.
 4. **Corre el red team** contra tu propia URL. Copia [`scripts/red-team.mjs`](repos/producto-seguro/scripts/red-team.mjs) y agrega al menos dos casos propios basados en tu modelo de amenazas.
    ```bash

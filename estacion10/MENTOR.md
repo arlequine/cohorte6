@@ -24,7 +24,7 @@ El alumno sale con controles de seguridad automáticos en su pipeline, un modelo
 | 115–120 | Entregable, rúbrica y conexión con E11 | Anotan dudas | README |
 
 ## Demo
-1. **Un control fallando.** Abre el PR de la rama preparada: Semgrep o `npm audit` fallan y el job de infraestructura no corre. Mensaje: el pipeline no despliega lo que no pasa los controles.
+1. **Un control fallando.** Abre el PR de la rama preparada: Semgrep o `npm audit` fallan y el job de infraestructura no corre. Mensaje: el pipeline no despliega lo que no pasa los controles. La primera corrida de Semgrep sobre el código de la Estación 9 dio 23 resultados reales (H4 a H7 en `docs/seguridad.md` de la solución): úsalos para mostrar los tres desenlaces posibles de un hallazgo, que son corregirlo, mitigarlo con riesgo residual documentado o aceptarlo como falso positivo.
 2. **Del hallazgo al cierre.** En una copia de la solución sin las defensas de `lib/agent.ts` (quita la regla, el canario y el filtro), corre el caso `filtrar-instrucciones` del red team. Luego restaura las defensas, despliega y vuelve a correrlo. Esa secuencia es la que se pide en el entregable.
 3. **Pentest con agentes.** Corre Shannon contra tu instancia aislada. Muestra cómo forma hipótesis, las prueba y reporta el impacto. Recalca que solo se hace con autorización y en un entorno propio.
 

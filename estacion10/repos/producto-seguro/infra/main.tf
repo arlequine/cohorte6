@@ -1,10 +1,17 @@
+data "aws_caller_identity" "actual" {}
+
 locals {
   nombre = "${var.proyecto}-${var.entorno}"
+  # Lo crea infra/bootstrap. En LocalStack no existe, así que solo se usa en producción.
+  limite_app = "arn:aws:iam::${data.aws_caller_identity.actual.account_id}:policy/${var.proyecto}-limite-app"
 }
 
 # ── Datos: historial de conversaciones del agente ──────────────────────────────
+# DynamoDB cifra siempre los datos en reposo con una llave propiedad de AWS. Semgrep pide una llave de KMS
+# administrada, que agrega costo por petición y permisos de KMS; se acepta como falso positivo (H7 en docs/seguridad.md).
+# nosemgrep: terraform.aws.security.aws-dynamodb-table-unencrypted.aws-dynamodb-table-unencrypted
 resource "aws_dynamodb_table" "conversaciones" {
-  name         = "${local.nombre}-conversaciones"
+  name = "${local.nombre}-conversaciones"
   # Modo provisionado con la capacidad mínima: queda dentro del nivel gratuito permanente de DynamoDB
   # (25 unidades de lectura, 25 de escritura y 25 GB por cuenta y región). El modo bajo demanda
   # (PAY_PER_REQUEST) no entra en ese nivel gratuito: se cobra cada petición.
@@ -36,7 +43,8 @@ resource "aws_dynamodb_table" "conversaciones" {
 
 # ── Identidad de la app: usuario con permisos mínimos sobre la tabla ──────────
 resource "aws_iam_user" "app" {
-  name = "${local.nombre}-app"
+  name                 = "${local.nombre}-app"
+  permissions_boundary = var.entorno == "produccion" ? local.limite_app : null
 }
 
 resource "aws_iam_user_policy" "app_dynamodb" {
