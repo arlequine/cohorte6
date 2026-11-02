@@ -61,6 +61,7 @@ estacionN/
 plantillas/       ← plantillas de estación y de guía del mentor
 plantilla-alumno/ ← repo inicial de cada alumno: se crea en la Nivelación 1 y se completa en E3
 scripts/          ← utilidades, como sync-skills.sh
+deck/             ← cambios al deck comercial para la cohorte
 versions.md       ← modelos, SDKs y herramientas fijados para la cohorte
 ```
 
