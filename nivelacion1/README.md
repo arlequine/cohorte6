@@ -3,7 +3,7 @@
 ## Objetivo
 Terminar la semana 1 con tu entorno de trabajo funcionando, tu repo personal creado y tu track asignado (base o avanzado).
 
-Es asíncrona: avanza a tu ritmo durante la semana. Calcula entre 3 y 4 horas en total. Después sigue la [Nivelación 2](../nivelacion2/demo-paso-a-paso.md), donde construyes tu primer agente.
+Es asíncrona: avanza a tu ritmo durante la semana. Calcula entre 3 y 4 horas en total. Después sigue la [Nivelación 2](../nivelacion2/README.md), donde construyes tu primer agente.
 
 ## Antes de empezar
 - Una computadora con macOS, Linux o Windows con WSL 2, y permisos para instalar software
