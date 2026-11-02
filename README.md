@@ -59,6 +59,8 @@ estacionN/
 ├── slides/
 └── repos/        ← código de práctica y demo
 plantillas/       ← plantillas de estación y de guía del mentor
+plantilla-alumno/ ← repo inicial de cada alumno: se crea en la Nivelación 1 y se completa en E3
+scripts/          ← utilidades, como sync-skills.sh
 versions.md       ← modelos, SDKs y herramientas fijados para la cohorte
 ```
 

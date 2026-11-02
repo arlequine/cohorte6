@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Lint, tipos y tests
+        run: npm run verify
+      - name: Skills sincronizadas
+        run: bash scripts/sync-skills.sh --check
+      - name: Build
+        run: npm run build
+
+
+  # Estación 3: agrega aquí un job que busque secretos en el repo (por ejemplo, con gitleaks).
