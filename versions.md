@@ -37,5 +37,6 @@ OpenAI retira `gpt-4o`, `gpt-4o-mini`, `gpt-4.1` y `gpt-4.1-mini` de la API el 1
 | Provider `hashicorp/aws` | ~> 6.0 (validado con 6.71) | E9 |
 | Provider `vercel/vercel` | ~> 5.24 | E9 |
 | `@aws-sdk/client-dynamodb` y `lib-dynamodb` | ^3 | E9 `producto-desplegado` |
+| Semgrep | Imagen `semgrep/semgrep` (última), reglas `p/default` y `p/terraform` | E10 |
 | Terraform (material de C4, ruta solo AWS) | >= 1.5, AWS provider ~> 5.0 | E9 `iac-infra` |
 | OpenTelemetry SDK (Node) | Por definir | E11 |

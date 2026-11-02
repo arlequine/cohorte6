@@ -19,6 +19,7 @@ jobs:
           - plantilla-alumno
           - estacion3/repos/walking-skeleton
           - estacion9/repos/producto-desplegado
+          - estacion10/repos/producto-seguro
     defaults:
       run:
         working-directory: ${{ matrix.proyecto }}
@@ -43,6 +44,8 @@ jobs:
         carpeta:
           - estacion9/repos/producto-desplegado/infra
           - estacion9/repos/producto-desplegado/infra/bootstrap
+          - estacion10/repos/producto-seguro/infra
+          - estacion10/repos/producto-seguro/infra/bootstrap
     defaults:
       run:
         working-directory: ${{ matrix.carpeta }}
@@ -56,3 +59,13 @@ jobs:
       - run: terraform validate
       - name: Versiones de providers resueltas
         run: terraform providers lock -platform=linux_amd64 >/dev/null 2>&1; cat .terraform.lock.hcl | grep -E '^provider|version ' || true
+
+  semgrep:
+    name: semgrep · estacion10/repos/producto-seguro
+    runs-on: ubuntu-latest
+    container: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@v5
+      - name: La solución de referencia de E10 no debe tener hallazgos
+        working-directory: estacion10/repos/producto-seguro
+        run: semgrep scan --config p/default --config p/terraform --error --metrics=off
