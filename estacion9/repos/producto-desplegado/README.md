@@ -48,4 +48,5 @@ npm run dev
 ## Notas
 - Vercel reserva los nombres `AWS_*`; por eso la app usa `APP_AWS_REGION`, `APP_AWS_ACCESS_KEY_ID` y `APP_AWS_SECRET_ACCESS_KEY`.
 - Las variables que Terraform define en Vercel son solo de producción. Los despliegues de vista previa de los PR no tienen historial.
+- La tabla está en modo provisionado con la capacidad mínima (1 y 1) para quedar dentro del nivel gratuito permanente de DynamoDB. El modo bajo demanda cobra cada petición.
 - La llave del usuario de IAM queda en el estado de Terraform. Por eso el estado vive en un bucket privado, cifrado y con versiones.
