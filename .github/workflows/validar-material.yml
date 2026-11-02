@@ -1,0 +1,58 @@
+name: Validar material
+
+# Verifica que los proyectos de ejemplo del programa compilen, pasen sus tests y que el Terraform sea válido.
+# No despliega nada ni usa credenciales.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  node:
+    name: node · ${{ matrix.proyecto }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        proyecto:
+          - plantilla-alumno
+          - estacion3/repos/walking-skeleton
+          - estacion9/repos/producto-desplegado
+    defaults:
+      run:
+        working-directory: ${{ matrix.proyecto }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run verify
+      - run: bash scripts/sync-skills.sh --check
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
+  terraform:
+    name: terraform · ${{ matrix.carpeta }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        carpeta:
+          - estacion9/repos/producto-desplegado/infra
+          - estacion9/repos/producto-desplegado/infra/bootstrap
+    defaults:
+      run:
+        working-directory: ${{ matrix.carpeta }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+      - run: terraform fmt -check -recursive -diff
+      - run: terraform init -backend=false -input=false
+      - run: terraform validate
+      - name: Versiones de providers resueltas
+        run: terraform providers lock -platform=linux_amd64 >/dev/null 2>&1; cat .terraform.lock.hcl | grep -E '^provider|version ' || true
