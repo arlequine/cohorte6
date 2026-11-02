@@ -3,7 +3,7 @@
 Instrucciones para cualquier coding agent que trabaje en este repo (Claude Code, Cursor, Codex, Antigravity o GitHub Copilot).
 
 ## Qué es este proyecto
-Walking skeleton del programa AI for Developers: una app Next.js con una página, un endpoint `/api/agent` que responde con Claude y CI en GitHub Actions. Se despliega en Vercel. Sobre esta base se construye el producto del alumno.
+Producto de referencia de la Estación 9 del programa AI for Developers: una app Next.js con un agente que responde con Claude y guarda el historial en DynamoDB. La app vive en Vercel y la infraestructura (DynamoDB, IAM y las variables de Vercel) se gestiona con Terraform en `infra/`. Se despliega solo desde el pipeline de GitHub Actions.
 
 ## Comandos
 - Instalar: `npm install`
@@ -11,10 +11,12 @@ Walking skeleton del programa AI for Developers: una app Next.js con una página
 - Verificar todo: `npm run verify` (lint + tipos + tests)
 - Tests: `npm test`
 - Sincronizar skills para Claude Code: `npm run sync-skills`
+- Infraestructura en LocalStack: `bash scripts/tf-local.sh plan` o `apply`
 
 ## Estructura
 - `app/` páginas y rutas de API (App Router de Next.js)
-- `lib/` lógica sin dependencias de Next.js: `agent.ts` (llamada al LLM) y `logger.ts` (logs JSON)
+- `lib/` lógica sin dependencias de Next.js: `agent.ts` (llamada al LLM), `historial.ts` (DynamoDB), `auth.ts` (token) y `logger.ts` (logs JSON)
+- `infra/` Terraform: `main.tf` (recursos), `bootstrap/` (bucket del estado y rol OIDC, se aplica una vez a mano)
 - `tests/` tests de Vitest
 - `docs/` investigación y contexto del producto; `specs/` PRD y especificaciones
 - `.agents/skills/` skills compartidas por todas las herramientas
@@ -26,6 +28,9 @@ Walking skeleton del programa AI for Developers: una app Next.js con una página
 - Registra eventos con `log()` de `lib/logger.ts`, nunca con `console.log` suelto.
 - Los textos que ve el usuario van en español.
 - El modelo se lee de `ANTHROPIC_MODEL`; no lo escribas fijo en el código.
+- Toda la infraestructura va en `infra/`. Nunca crees ni cambies recursos desde la consola de AWS o el dashboard de Vercel.
+- Corre `terraform fmt -recursive` en `infra/` antes de terminar si tocaste Terraform.
+- Vercel reserva los nombres `AWS_*`: las variables de la app usan el prefijo `APP_AWS_`.
 
 ## Antes de dar una tarea por terminada
 1. Corre `npm run verify` y asegúrate de que pase.

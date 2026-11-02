@@ -1,5 +1,7 @@
 # Clase 9: Producción y Operación — Infraestructura en Nube con IaC e IA Generativa
 
+> **Material de la Cohorte 4.** En la Cohorte 6 la guía de esta estación es [`README.md`](README.md), que usa Vercel + AWS gestionados con Terraform. Este documento y `repos/iac-infra/` quedan como referencia de la ruta "todo en AWS".
+
 **Programa:** AI for Developers | 30X · **Instructor:** Andres Caicedo · **Duración:** 2h
 
 ## 👋 Bienvenida

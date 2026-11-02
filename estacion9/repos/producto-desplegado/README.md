@@ -1,54 +1,51 @@
-# Walking skeleton · solución de referencia
+# Producto desplegado · solución de referencia de la Estación 9
 
-Estado final esperado al terminar la Estación 3. Parte de [`plantilla-alumno/`](../../../plantilla-alumno), que es el repo con el que cada alumno empieza en la Nivelación 1.
+El walking skeleton de la [Estación 3](../../../estacion3/repos/walking-skeleton) más lo que se construye en la Estación 9: historial en DynamoDB, infraestructura en Terraform (AWS y Vercel) y un pipeline que despliega a producción después de revisar el plan.
 
-Sirve para dos cosas:
-- **Al mentor:** es la demo de la estación y el plan B si algo falla en vivo.
-- **Al alumno:** puede compararla con su repo cuando termine. Conviene no copiarla: lo que se evalúa es cómo dirigiste al agente para llegar ahí.
-
-## Qué agrega respecto a la plantilla
+## Qué agrega respecto a la Estación 3
 
 | Pieza | Archivos |
 |---|---|
-| Agente que responde con Claude | `lib/agent.ts`, `app/api/agent/route.ts` |
-| Página con formulario | `app/page.tsx` |
-| Logs estructurados en JSON | `lib/logger.ts` |
-| Tests del agente y de la ruta, sin llamar a la API real | `tests/agent.test.ts`, `tests/route.test.ts` |
-| Protección del endpoint con token | `AGENT_ACCESS_TOKEN` en `app/api/agent/route.ts` |
-| Una skill propia del proyecto | `.agents/skills/nuevo-endpoint/` |
-| Secret scanning en CI | job `secretos` en `.github/workflows/ci.yml` |
-| `AGENTS.md` completo | `AGENTS.md` |
-
-## Correr en local
-
-```bash
-npm install
-cp .env.example .env   # y pon tu ANTHROPIC_API_KEY
-npm run dev            # http://localhost:3000
-npm run verify         # lint + tipos + tests
-```
+| Historial de conversaciones con TTL de 30 días | `lib/historial.ts`, `app/api/historial/route.ts` |
+| Verificación del token compartida | `lib/auth.ts` |
+| Tabla de DynamoDB, usuario de IAM y variables de producción en Vercel | `infra/main.tf` |
+| Mismo código para LocalStack y AWS | `infra/local.tfvars`, `infra/produccion.tfvars`, `scripts/tf-local.sh`, `docker-compose.yml` |
+| Bucket del estado y rol de GitHub Actions por OIDC | `infra/bootstrap/` |
+| Pipeline completo | `.github/workflows/ci.yml` |
+| Producción solo desde el pipeline | `vercel.json` |
+| Tests del historial y de la ruta con el historial activo o caído | `tests/historial.test.ts`, `tests/route.test.ts` |
 
 ## Endpoints
 
-| Método y ruta | Cuerpo | Respuesta |
-|---|---|---|
-| `GET /api/health` | — | `{ "estado": "ok" }` |
-| `POST /api/agent` | `{ "mensaje": "..." }` (máximo 1000 caracteres) | `{ "respuesta", "modelo", "tokens": { "entrada", "salida" } }` |
+| Método y ruta | Respuesta |
+|---|---|
+| `GET /api/health` | `{ "estado": "ok" }` |
+| `POST /api/agent` | `{ "respuesta", "modelo", "tokens" }`, y guarda la conversación si `DYNAMODB_TABLE` está definida |
+| `GET /api/historial` | `{ "conversaciones": [...] }` con las 10 más recientes; 503 si el historial no está configurado |
 
-Si `AGENT_ACCESS_TOKEN` está definido, `POST /api/agent` exige `Authorization: Bearer <token>`.
+Los dos endpoints del agente exigen `Authorization: Bearer <token>` si `AGENT_ACCESS_TOKEN` está definido.
 
-## Desplegar en Vercel
+## Pipeline
 
-1. Sube el repo a GitHub.
-2. En [vercel.com/new](https://vercel.com/new), importa el repo. Vercel detecta Next.js solo.
-3. En **Settings → Environment Variables**, agrega `ANTHROPIC_API_KEY` y `AGENT_ACCESS_TOKEN` (genera uno con `openssl rand -hex 24`).
-4. Despliega. Cada push a `main` vuelve a desplegar, y cada pull request tiene su propia URL de vista previa.
+```
+Pull request ─► verificar ─► secretos ─► terraform plan ─► comentario en el PR
+Push a main ──► verificar ─► secretos ─► terraform apply ─► deploy a producción en Vercel
+```
 
-Alternativa por terminal: `npx vercel`, luego `npx vercel env add ANTHROPIC_API_KEY` y `npx vercel --prod`.
+Los jobs de infraestructura y deploy se omiten hasta que el repo tenga la variable `AWS_ROLE_ARN`. La configuración completa está en la guía de la [Estación 9](../../README.md).
 
-> Antes de desplegar, fija un límite de gasto en la [consola de Anthropic](https://console.anthropic.com). La URL es pública: el token y el límite evitan que alguien más gaste tu saldo.
+## En local
+
+```bash
+npm install
+cp .env.example .env          # ANTHROPIC_API_KEY y, si quieres historial, las variables de LocalStack
+export LOCALSTACK_AUTH_TOKEN=ls-...
+docker compose up -d
+bash scripts/tf-local.sh apply
+npm run dev
+```
 
 ## Notas
-
-- El modelo por defecto es `claude-haiku-5-5`, el más económico para este uso. Cámbialo con `ANTHROPIC_MODEL`.
-- La acción de gitleaks es gratuita en cuentas personales. En repos de una organización de GitHub pide una licencia (`GITLEAKS_LICENSE`).
+- Vercel reserva los nombres `AWS_*`; por eso la app usa `APP_AWS_REGION`, `APP_AWS_ACCESS_KEY_ID` y `APP_AWS_SECRET_ACCESS_KEY`.
+- Las variables que Terraform define en Vercel son solo de producción. Los despliegues de vista previa de los PR no tienen historial.
+- La llave del usuario de IAM queda en el estado de Terraform. Por eso el estado vive en un bucket privado, cifrado y con versiones.
