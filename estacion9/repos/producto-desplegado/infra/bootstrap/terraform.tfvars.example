@@ -1,0 +1,4 @@
+github_repo = "tu-usuario/ai4dev-tu-usuario"
+# proyecto  = "producto"
+# aws_region = "us-east-1"
+# crear_proveedor_oidc = false   # si tu cuenta ya tiene el proveedor OIDC de GitHub

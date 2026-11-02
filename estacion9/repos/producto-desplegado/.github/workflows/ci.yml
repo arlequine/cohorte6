@@ -1,0 +1,144 @@
+name: CI/CD
+
+# Pull request: verificar + buscar secretos + terraform plan (comentado en el PR).
+# Push a main:  verificar + buscar secretos + terraform apply + deploy a producción en Vercel.
+#
+# Configuración del repo (Settings → Secrets and variables → Actions), ver estacion9/README.md:
+#   Variables: AWS_ROLE_ARN, TF_STATE_BUCKET, VERCEL_PROJECT_NAME, AWS_REGION (opcional), VERCEL_TEAM (opcional)
+#   Secretos:  VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+# Mientras AWS_ROLE_ARN no exista, los jobs de infraestructura y deploy se omiten.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Lint, tipos y tests
+        run: npm run verify
+      - name: Skills sincronizadas
+        run: bash scripts/sync-skills.sh --check
+      - name: Build
+        run: npm run build
+
+  secretos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Buscar secretos con gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  infra:
+    needs: [verificar, secretos]
+    if: vars.AWS_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # OIDC: credenciales temporales de AWS, sin llaves guardadas
+      contents: read
+      pull-requests: write # para comentar el plan en el PR
+    defaults:
+      run:
+        shell: bash # activa pipefail: si terraform plan falla, el paso falla aunque pase por tee
+        working-directory: infra
+    env:
+      VERCEL_API_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      TF_IN_AUTOMATION: "true"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Credenciales de AWS por OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: terraform init
+        run: >
+          terraform init -input=false
+          -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+          -backend-config="key=producto/terraform.tfstate"
+          -backend-config="region=${{ env.AWS_REGION }}"
+          -backend-config="encrypt=true"
+          -backend-config="use_lockfile=true"
+
+      - name: terraform fmt y validate
+        run: terraform fmt -check -recursive && terraform validate
+
+      - name: terraform plan
+        run: >
+          terraform plan -input=false -no-color -out=tfplan
+          -var-file=produccion.tfvars
+          -var="aws_region=${{ env.AWS_REGION }}"
+          -var="vercel_proyecto=${{ vars.VERCEL_PROJECT_NAME }}"
+          -var="vercel_team=${{ vars.VERCEL_TEAM }}"
+          | tee plan.txt
+
+      - name: Comentar el plan en el PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const plan = fs.readFileSync('infra/plan.txt', 'utf8');
+            const recorte = plan.length > 60000 ? plan.slice(-60000) : plan;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '### terraform plan\n\n```\n' + recorte + '\n```',
+            });
+
+      - name: terraform apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -input=false tfplan
+
+  desplegar:
+    needs: infra
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.AWS_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    environment:
+      name: produccion
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Traer la configuración de producción de Vercel
+        run: npx --yes vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build
+        run: npx --yes vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy
+        id: deploy
+        run: |
+          url=$(npx --yes vercel@latest deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Desplegado en $url" >> "$GITHUB_STEP_SUMMARY"
