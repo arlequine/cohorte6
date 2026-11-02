@@ -44,8 +44,8 @@ mcp/                   ← un snippet de configuración MCP por herramienta
 | 5 | E8 Calidad | Suite E2E + evals del agente como gate en CI |
 | 6 | E9 Despliegue | Producto en la nube con pipeline completo |
 | 6 | E10 Seguridad | Reporte de seguridad + hallazgos cerrados |
-| 7 | E11 Observabilidad | Dashboard + prueba de carga + pitch ensayado |
-| 7 | E12 Demo Day | Video de 3 min + demo en vivo |
+| 7 | E11 Observabilidad | Dashboard + prueba de carga |
+| 7 | E12 Demo Day | Presentación del producto + video (lo entregan todos) |
 
 El detalle está en el [mapa curricular de la Cohorte 6](https://claude.ai/artifact/KCGYvyP2ADN63jUkLNEJRg).
 
