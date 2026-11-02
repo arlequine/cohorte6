@@ -8,7 +8,7 @@ El alumno sale con una URL pública donde su agente responde, con tests y CI, y 
 - [ ] Crea un repo de demo desde `plantilla-alumno/` (paso 2 de la Nivelación 1) y conéctalo a Vercel: es tu punto de partida en vivo
 - [ ] Ten a la mano una llave de Anthropic con límite de gasto y un `AGENT_ACCESS_TOKEN` generado
 - [ ] Prepara la demo del minuto 0: la misma petición al agente en un repo sin `AGENTS.md` y en otro con `AGENTS.md` (ver Demo, paso 1)
-- [ ] Revisa en `versions.md` el modelo vigente y que la URL de la solución de referencia en Vercel responde
+- [ ] Despliega la solución de referencia (`repos/walking-skeleton/`) en tu cuenta de Vercel siguiendo su README, y comprueba que la URL responde con el modelo vigente de `versions.md`. Es tu plan B
 - [ ] Revisa el semáforo: quién no tiene su repo creado desde la plantilla o no entregó el PRD
 
 ## Guion (120 min)
@@ -36,7 +36,7 @@ Todo en Claude Code, que es la herramienta de referencia.
 
 Plan B si algo falla en vivo:
 - La API de Anthropic no responde: muestra los tests, que usan un doble y no necesitan red.
-- Vercel falla o tarda: usa la URL ya desplegada de la solución de referencia y explica los pasos en `repos/walking-skeleton/README.md`.
+- Vercel falla o tarda: usa la URL de la solución de referencia que desplegaste en la preparación y explica los pasos con `repos/walking-skeleton/README.md`.
 - No alcanza el tiempo: salta el paso 3 de la demo; el track avanzado lo cubre.
 
 ## Conceptos clave
