@@ -1,4 +1,4 @@
-# Construye tu primer agente de IA: triage de tickets de soporte con Claude, MCP y Skills
+# Construye tu primer agente de IA: triage de tickets de soporte con tu coding agent, MCP y Skills
 
 Bienvenido. En esta guía vas a construir, paso a paso, un **agente de IA** que trabaja de verdad: lee tickets de soporte pendientes desde una base de datos en Supabase, los clasifica por criticidad (alta, media o baja) siguiendo las reglas de tu negocio, y actualiza la base de datos con su evaluación.
 
@@ -14,9 +14,11 @@ Esa suma es, en esencia, lo que hoy llamamos un agente:
 AGENTE  =  Modelo (razona)  +  MCP (actúa sobre sistemas)  +  Skill (sabe el procedimiento)
 ```
 
-Esta guía está pensada para que la sigas en vivo durante la clase **y también para que la repitas completa en tu casa**. Si es tu primera vez, empieza por el **Anexo A** (instalar Claude CLI y crear tu cuenta de Supabase) y el **Anexo B** (preparar la base de datos). Si ya tienes todo instalado, sigue de largo.
+Esta guía está pensada para que la sigas en vivo durante la clase **y también para que la repitas completa en tu casa**. Si es tu primera vez, empieza por el **Anexo A** (crear tu cuenta de Supabase) y el **Anexo B** (preparar la base de datos). Si ya tienes todo listo, sigue de largo.
 
-**Archivos que acompañan esta guía** (carpeta `referencias/`):
+**Sobre la herramienta.** Los comandos de esta guía son de **Claude Code**, la herramienta de referencia del programa. Si usas Cursor, Codex, Antigravity o GitHub Copilot, el ejercicio es el mismo: el **Anexo D** te da el equivalente de cada paso (elegir modelo, registrar el MCP, dónde va la skill y cómo invocarla).
+
+**Archivos que acompañan esta guía** (carpeta `nivelacion2/` del repo del programa; en los comandos aparece como `<ruta-a-cohorte6>/nivelacion2/`):
 
 | Archivo | Para qué sirve |
 |---|---|
@@ -31,7 +33,7 @@ Esta guía está pensada para que la sigas en vivo durante la clase **y también
 
 Verifica que tienes todo esto listo (los anexos te explican cómo conseguir cada cosa):
 
-- [ ] Claude Code CLI instalado y con sesión iniciada → **Anexo A**
+- [ ] Tu coding agent instalado y con sesión iniciada → lo dejaste listo en la **Nivelación 1**
 - [ ] Una cuenta de Supabase con un proyecto creado → **Anexo A**
 - [ ] Un *Personal Access Token* de Supabase (`sbp_...`) y el *project ref* de tu proyecto → **Anexo A**
 - [ ] La tabla `tickets` creada y con los 8 tickets de prueba cargados → **Anexo B**
@@ -43,7 +45,7 @@ Un consejo si vas a compartir pantalla o grabar: ten tu token en un archivo apar
 
 ## ACTO 1 — El LLM solo: sabe pensar, no puede actuar
 
-Empecemos por lo más básico: abrir una conversación con un modelo de lenguaje. Vamos a usar **Haiku**, el modelo más rápido y económico de la familia Claude, porque para esta tarea no necesitamos más.
+Empecemos por lo más básico: abrir una conversación con un modelo de lenguaje. Vamos a usar **Haiku**, el modelo más rápido y económico de la familia Claude, porque para esta tarea no necesitamos más. (En otras herramientas, elige un modelo rápido y económico: ver Anexo D.)
 
 Abre una terminal, entra a tu carpeta de trabajo y arranca el chat:
 
@@ -76,7 +78,7 @@ Sal del chat con `/exit` (o `Ctrl+C`).
 
 **MCP (Model Context Protocol)** es un protocolo abierto que estandariza cómo un modelo de IA se conecta con sistemas externos. Piénsalo como el USB-C de la IA: un mismo "enchufe" para bases de datos, APIs, navegadores, lo que sea. Cada *servidor MCP* expone un conjunto de herramientas (listar tablas, ejecutar SQL, etc.) que el modelo puede invocar cuando las necesita.
 
-Supabase publica su propio servidor MCP oficial. Vamos a registrarlo en Claude Code. En la terminal (fuera del chat), ejecuta — reemplazando `sbp_TU_TOKEN` y `TU_PROJECT_REF` por tus valores del Anexo A:
+Supabase publica su propio servidor MCP oficial. Vamos a registrarlo en Claude Code (para otras herramientas, ver Anexo D). En la terminal (fuera del chat), ejecuta — reemplazando `sbp_TU_TOKEN` y `TU_PROJECT_REF` por tus valores del Anexo A:
 
 ```bash
 claude mcp add supabase \
@@ -108,7 +110,7 @@ Dentro del chat puedes escribir `/mcp` para ver el servidor y la lista de herram
 
 > Lista los tickets de soporte pendientes de nuestra base de datos, en una tabla con id, título, cliente y estado.
 
-Observa lo que pasa: el agente explora la base de datos, encuentra la tabla `tickets`, arma una consulta SQL, y te muestra los 8 tickets. En el camino, Claude Code te pedirá **aprobación** antes de ejecutar cada herramienta del MCP. Eso no es un estorbo, es una característica: tú sigues en control de lo que el agente puede hacer.
+Observa lo que pasa: el agente explora la base de datos, encuentra la tabla `tickets`, arma una consulta SQL, y te muestra los 8 tickets. En el camino, tu agente te pedirá **aprobación** antes de ejecutar cada herramienta del MCP. Eso no es un estorbo, es una característica: tú sigues en control de lo que el agente puede hacer.
 
 **Ahora descubramos el problema que nos falta resolver.** Pídele:
 
@@ -130,14 +132,18 @@ Sal del chat con `/exit`.
 
 Un **skill** es, en su forma más simple, un archivo markdown con instrucciones que el agente carga automáticamente cuando detecta que la tarea lo amerita. Es la "receta" de cómo se hace algo en tu organización: qué proceso seguir, qué reglas aplicar, qué campos actualizar. Y como es un archivo de texto, se versiona en git y se comparte con el equipo — la receta deja de vivir en la cabeza de una persona.
 
-En Claude Code, los skills de un proyecto viven en `.claude/skills/<nombre>/SKILL.md`. Creemos el nuestro:
+En el programa, las skills de un proyecto viven en `.agents/skills/<nombre>/SKILL.md`, que es donde las buscan Cursor, Codex, Antigravity y Copilot. Claude Code las lee de `.claude/skills/`, así que ahí va una copia. Creemos la nuestra:
 
 ```bash
-mkdir -p .claude/skills/triage-tickets
-cp referencias/SKILL-triage-tickets.md .claude/skills/triage-tickets/SKILL.md
+mkdir -p .agents/skills/triage-tickets
+cp <ruta-a-cohorte6>/nivelacion2/SKILL-triage-tickets.md .agents/skills/triage-tickets/SKILL.md
+
+# Solo para Claude Code: la copia que lee
+mkdir -p .claude/skills
+cp -R .agents/skills/triage-tickets .claude/skills/
 ```
 
-Abre el archivo y léelo con calma (está completo en `referencias/SKILL-triage-tickets.md`). Su estructura tiene tres partes que conviene entender:
+Abre el archivo y léelo con calma (también está en `nivelacion2/SKILL-triage-tickets.md`). Su estructura tiene tres partes que conviene entender:
 
 **1. El frontmatter** (el bloque entre `---` al inicio):
 
@@ -178,7 +184,7 @@ Cuando termine, revisa los resultados con ojo crítico:
 - El **"reporte no exporta a PDF"** debió quedar en **MEDIA** — hay workaround (Excel).
 - El **logo** y el **modo oscuro** debieron quedar en **BAJA**.
 
-Si el agente no activara el skill solo (raro, pero puede pasar), invócalo explícitamente escribiendo `/triage-tickets` en el chat.
+Si el agente no activara el skill solo (raro, pero puede pasar), invócalo explícitamente: en Claude Code, escribe `/triage-tickets` en el chat; en otras herramientas, ver Anexo D.
 
 ---
 
@@ -194,7 +200,7 @@ También puedes pedírselo al propio agente, desde el chat:
 
 > ¿Cuántos tickets quedaron en cada nivel de criticidad? Dame el conteo desde la base de datos.
 
-**¿Quieres repetir todo el ejercicio?** Pídele al agente que "rebobine" (ver el prompt de reset en el Anexo B) o ejecuta `referencias/reset-tickets.sql` en el SQL Editor de Supabase. Los tickets vuelven a `pendiente` y puedes correr el triage de nuevo.
+**¿Quieres repetir todo el ejercicio?** Pídele al agente que "rebobine" (ver el prompt de reset en el Anexo B) o ejecuta `nivelacion2/reset-tickets.sql` en el SQL Editor de Supabase. Los tickets vuelven a `pendiente` y puedes correr el triage de nuevo.
 
 ---
 
@@ -211,41 +217,11 @@ En menos de una hora pasaste de un chat "encerrado en una caja" a un agente que 
 
 # ANEXO A — Instalación y cuentas (hazlo una sola vez)
 
-## A.1 Instalar Claude Code CLI
+## A.1 Tu coding agent
 
-Claude Code es la herramienta de línea de comandos de Anthropic para trabajar con agentes desde la terminal. Necesitas una cuenta de Claude (plan Pro o Max) o una cuenta de la API de Anthropic.
+Ya lo instalaste en la Nivelación 1. Si todavía no, sigue la sección "Elige tu coding agent" de [`nivelacion1/README.md`](../nivelacion1/README.md). Esta guía usa Claude Code; las equivalencias para las demás herramientas están en el Anexo D.
 
-**macOS / Linux / WSL:**
-
-```bash
-curl -fsSL https://claude.ai/install.sh | bash
-```
-
-**Windows (PowerShell):**
-
-```powershell
-irm https://claude.ai/install.ps1 | iex
-```
-
-(Alternativa vía npm, si ya usas Node.js: `npm install -g @anthropic-ai/claude-code`)
-
-Verifica la instalación e inicia sesión:
-
-```bash
-claude --version
-claude          # dentro del chat, escribe /login y sigue el flujo en el navegador
-```
-
-Documentación oficial: https://code.claude.com/docs
-
-## A.2 (Opcional) Instalar Claude Desktop
-
-Claude Desktop es la aplicación de escritorio de Claude para Mac y Windows. No la usamos en este ejercicio (todo corre en la CLI), pero también soporta servidores MCP y es útil para uso conversacional diario.
-
-1. Descárgala desde https://claude.ai/download
-2. Instala y entra con la misma cuenta de Claude.
-
-## A.3 Crear una cuenta y un proyecto en Supabase
+## A.2 Crear una cuenta y un proyecto en Supabase
 
 Supabase es una plataforma de base de datos PostgreSQL en la nube con un plan gratuito más que suficiente para este ejercicio.
 
@@ -253,7 +229,7 @@ Supabase es una plataforma de base de datos PostgreSQL en la nube con un plan gr
 2. Crea una **organización** (te la pedirá la primera vez) y luego un **proyecto**, por ejemplo `demo-triage`. Elige la región más cercana y guarda la contraseña de la base de datos que te pide (no la usaremos hoy, pero guárdala).
 3. Espera 1–2 minutos a que el proyecto termine de aprovisionarse.
 
-## A.4 Obtener las dos credenciales que necesita el MCP
+## A.3 Obtener las dos credenciales que necesita el MCP
 
 1. **Personal Access Token:** en el dashboard de Supabase, haz clic en tu avatar → **Account Settings → Access Tokens → Generate new token**. Dale un nombre (ej. `mcp-demo`) y copia el token que empieza con `sbp_...`. **Se muestra una sola vez**: guárdalo en un lugar seguro.
 2. **Project ref:** es el identificador de tu proyecto. Lo ves en la URL del dashboard: `https://supabase.com/dashboard/project/<ESTE-ES-TU-PROJECT-REF>`, o en **Project Settings → General**.
@@ -266,11 +242,11 @@ Supabase es una plataforma de base de datos PostgreSQL en la nube con un plan gr
 
 Aquí hay algo bonito: **vamos a usar el mismo agente para preparar su propia base de datos**. En lugar de escribir SQL a mano en el dashboard, le describimos al agente la estructura y los datos que queremos, y él ejecuta las operaciones por MCP. (Si prefieres el camino tradicional, al final tienes la alternativa con SQL directo.)
 
-**Prerrequisito:** haber registrado el MCP de Supabase (comando `claude mcp add supabase ...` del Acto 2).
+**Prerrequisito:** haber registrado el MCP de Supabase (Acto 2, o Anexo D si usas otra herramienta).
 
 ## B.1 Crear la estructura
 
-Entra al chat (`claude --model haiku`, aunque para este paso puedes usar cualquier modelo) y pídele:
+Abre tu agente (`claude --model haiku` en Claude Code; para este paso sirve cualquier modelo) y pídele:
 
 > Crea en Supabase una tabla llamada `tickets` para tickets de soporte, con estas columnas:
 > - `id`: serial, llave primaria
@@ -316,8 +292,8 @@ Cuando quieras volver a correr el triage desde cero, pídele al agente:
 
 Si prefieres o si algo falla con el MCP, en el dashboard de Supabase abre el **SQL Editor** y ejecuta:
 
-- `referencias/setup-tickets.sql` — crea la tabla y carga los 8 tickets.
-- `referencias/reset-tickets.sql` — rebobina la demo.
+- `nivelacion2/setup-tickets.sql` — crea la tabla y carga los 8 tickets.
+- `nivelacion2/reset-tickets.sql` — rebobina la demo.
 
 ---
 
@@ -333,7 +309,7 @@ Si prefieres o si algo falla con el MCP, en el dashboard de Supabase abre el **S
 
 **Agente (agente de IA).** Un sistema donde un LLM no solo responde: **decide y actúa en ciclos** para lograr un objetivo. Recibe una meta ("haz el triage"), planifica, usa herramientas, observa los resultados y ajusta hasta terminar. Fórmula práctica: modelo + herramientas + instrucciones de procedimiento.
 
-**Herramienta (tool).** Una capacidad concreta que el agente puede invocar: ejecutar una consulta SQL, leer un archivo, llamar a una API. El modelo decide *cuándo* usarla y con qué parámetros; el sistema anfitrión (Claude Code) la ejecuta y le devuelve el resultado.
+**Herramienta (tool).** Una capacidad concreta que el agente puede invocar: ejecutar una consulta SQL, leer un archivo, llamar a una API. El modelo decide *cuándo* usarla y con qué parámetros; el sistema anfitrión (tu coding agent) la ejecuta y le devuelve el resultado.
 
 **ReAct (Reasoning + Acting).** El patrón de funcionamiento de los agentes modernos: el modelo alterna **razonar** ("necesito ver los tickets pendientes") → **actuar** (ejecuta la consulta por MCP) → **observar** (lee los resultados) → y vuelve a razonar, en ciclo, hasta completar la tarea. Lo viste en vivo cada vez que el agente encadenó consultas y actualizaciones.
 
@@ -341,7 +317,7 @@ Si prefieres o si algo falla con el MCP, en el dashboard de Supabase abre el **S
 
 **Servidor MCP.** El programa que expone un sistema concreto a través del protocolo. El servidor MCP de Supabase expone herramientas como "listar tablas" o "ejecutar SQL". Existen servidores MCP para GitHub, Slack, navegadores, sistemas de archivos y cientos de servicios más.
 
-**Cliente MCP.** La aplicación donde vive el modelo y que consume servidores MCP: Claude Code, Claude Desktop, y otros IDEs y chats compatibles.
+**Cliente MCP.** La aplicación donde vive el modelo y que consume servidores MCP: Claude Code, Cursor, Codex, Antigravity, GitHub Copilot y otros IDEs y chats compatibles.
 
 **Skill.** Un paquete de instrucciones (en esencia, un archivo `SKILL.md` con metadatos) que le enseña al agente **cómo** ejecutar una tarea según tus reglas: proceso, criterios, formatos. El agente lo carga automáticamente cuando la petición coincide con su descripción. Diferencia clave con MCP: **MCP le da capacidades (poder hacer); un skill le da procedimiento (saber hacer bien)**.
 
@@ -349,4 +325,72 @@ Si prefieres o si algo falla con el MCP, en el dashboard de Supabase abre el **S
 
 **Supabase.** Plataforma de backend en la nube construida sobre PostgreSQL: base de datos, autenticación, APIs y almacenamiento. En este ejercicio la usamos como la "base de datos de la empresa" que el agente consulta y actualiza.
 
-**Human-in-the-loop (humano en el circuito).** Práctica de diseño donde las acciones del agente requieren aprobación humana. Lo viviste cada vez que Claude Code te pidió confirmar una operación sobre la base de datos antes de ejecutarla.
+**Human-in-the-loop (humano en el circuito).** Práctica de diseño donde las acciones del agente requieren aprobación humana. Lo viviste cada vez que tu agente te pidió confirmar una operación sobre la base de datos antes de ejecutarla.
+
+---
+
+# ANEXO D — Equivalencias por herramienta
+
+El ejercicio es el mismo con cualquier coding agent: un modelo que razona, un MCP que le da manos y una skill que le da el procedimiento. Lo que cambia es dónde se configura cada pieza. Las demos y el soporte garantizado de los mentores son en Claude Code.
+
+| Paso | Claude Code (referencia) | Cursor | Codex | Antigravity | GitHub Copilot |
+|---|---|---|---|---|---|
+| Abrir el agente con un modelo rápido | `claude --model haiku` | Chat del agente; elige un modelo rápido en el selector | `codex`, luego `/model` | `agy`, luego `/model` | VS Code: chat en modo agente y selector de modelo. CLI: `copilot`, luego `/model` |
+| Registrar el MCP de Supabase | `claude mcp add` (Acto 2) | `~/.cursor/mcp.json` | `~/.codex/config.toml` | `/mcp` dentro de `agy` | VS Code: `.vscode/mcp.json`. CLI: `/mcp add` |
+| Ver las herramientas del MCP | `/mcp` | Configuración → MCP | `/mcp` | `/mcp` | VS Code: herramientas del chat. CLI: `/mcp` |
+| Dónde va la skill | `.claude/skills/triage-tickets/` | `.agents/skills/triage-tickets/` | `.agents/skills/triage-tickets/` | `.agents/skills/triage-tickets/` | `.agents/skills/triage-tickets/` |
+| Invocar la skill a mano | `/triage-tickets` | Pide: "Usa la skill triage-tickets para hacer el triage" | Igual que Cursor | Igual que Cursor | Igual que Cursor |
+
+## D.1 Registrar el MCP de Supabase en cada herramienta
+
+En todos los casos usas los mismos dos valores del Anexo A: tu token `sbp_...` y tu *project ref*.
+
+> 🔐 **Cuida el token.** Configura el MCP a nivel de usuario (en tu carpeta personal), no en un archivo del repo, para no subir el token a git por accidente. La excepción es VS Code, porque el ejemplo de abajo pide el token al arrancar y no lo guarda en el archivo.
+
+**Cursor** — `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--project-ref=TU_PROJECT_REF"],
+      "env": { "SUPABASE_ACCESS_TOKEN": "sbp_TU_TOKEN" }
+    }
+  }
+}
+```
+
+**Codex** — `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.supabase]
+command = "npx"
+args = ["-y", "@supabase/mcp-server-supabase@latest", "--project-ref=TU_PROJECT_REF"]
+env = { SUPABASE_ACCESS_TOKEN = "sbp_TU_TOKEN" }
+```
+
+**GitHub Copilot en VS Code** — `.vscode/mcp.json` en tu carpeta de trabajo. VS Code te pide el token la primera vez que arranca el servidor:
+
+```json
+{
+  "inputs": [
+    { "type": "promptString", "id": "supabase-token", "description": "Token de Supabase (sbp_...)", "password": true }
+  ],
+  "servers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--project-ref=TU_PROJECT_REF"],
+      "env": { "SUPABASE_ACCESS_TOKEN": "${input:supabase-token}" }
+    }
+  }
+}
+```
+
+**GitHub Copilot CLI y Antigravity** — dentro de `copilot` o `agy`, usa `/mcp add` (Copilot) o `/mcp` (Antigravity) y captura el mismo comando, argumentos y variable de entorno del ejemplo de Cursor. Si prefieres editar el archivo, revisa la [documentación de MCP de Copilot CLI](https://docs.github.com/copilot/how-tos/copilot-cli) o la [de Antigravity](https://antigravity.google/docs/mcp): la ubicación puede cambiar entre versiones.
+
+Después de registrarlo, reinicia el agente y verifica que el servidor `supabase` aparece con sus herramientas.
+
+## D.2 La skill
+
+Copia la skill a `.agents/skills/triage-tickets/SKILL.md` (Acto 3). Cursor, Codex, Antigravity y Copilot la leen de ahí; la copia en `.claude/skills/` solo hace falta para Claude Code. Si tu herramienta no la activa sola al pedir "haz el triage de los tickets de soporte pendientes", pídelo nombrando la skill.
