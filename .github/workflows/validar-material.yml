@@ -20,6 +20,7 @@ jobs:
           - estacion3/repos/walking-skeleton
           - estacion9/repos/producto-desplegado
           - estacion10/repos/producto-seguro
+          - estacion8/repos/entrevista-qa
     defaults:
       run:
         working-directory: ${{ matrix.proyecto }}
@@ -82,3 +83,21 @@ jobs:
         run: node scripts/generar-rubricas.mjs --check
       - name: Tests de los scripts
         run: node --test scripts/*.test.mjs
+
+  playwright:
+    name: playwright · estacion8/repos/entrevista-qa
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: estacion8/repos/entrevista-qa
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: E2E, BDD y API contra el motor de reglas
+        run: npm run test:playwright
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"

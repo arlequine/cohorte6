@@ -1,0 +1,95 @@
+name: Calidad
+
+# Dos gates de calidad, además del CI de siempre (ci.yml):
+#   pruebas       → E2E, BDD y API con Playwright, contra el motor de reglas. Sin costo. Corre siempre.
+#   evaluacion    → Persona + Juez contra el agente real con Claude. Gasta tokens, así que solo evalúa cuando
+#                   el PR toca el agente (lib/, app/api/, evals/) o tiene la etiqueta "evaluar-agente".
+#                   Si no hay nada que evaluar, termina en verde: así puede ser un check obligatorio.
+# Para que bloqueen el merge, márcalos como checks obligatorios en Settings → Branches.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: calidad-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: E2E, BDD y API
+        run: npm run test:playwright
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  evaluacion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: ¿Hay algo que evaluar?
+        id: decidir
+        env:
+          EVENTO: ${{ github.event_name }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          ETIQUETAS: ${{ join(github.event.pull_request.labels.*.name, ' ') }}
+        run: |
+          if [ "$EVENTO" != "pull_request" ]; then
+            echo "evaluar=true" >> "$GITHUB_OUTPUT"
+          elif echo " $ETIQUETAS " | grep -q " evaluar-agente "; then
+            echo "evaluar=true" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "$BASE"...HEAD | grep -qE '^(lib|app/api|evals)/'; then
+            echo "evaluar=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "evaluar=false" >> "$GITHUB_OUTPUT"
+            echo "El PR no toca el agente: no hay nada que evaluar." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/setup-node@v5
+        if: steps.decidir.outputs.evaluar == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - if: steps.decidir.outputs.evaluar == 'true'
+        run: npm ci && npm run build
+      - name: Persona + Juez
+        if: steps.decidir.outputs.evaluar == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PERSONA_MODEL: ${{ vars.PERSONA_MODEL }}
+          JUDGE_MODEL: ${{ vars.JUDGE_MODEL }}
+          AGENT_URL: http://localhost:3000
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::Falta el secreto ANTHROPIC_API_KEY: la evaluación del agente no puede correr."
+            exit 1
+          fi
+          npm run start > servidor.log 2>&1 &
+          for i in $(seq 1 30); do curl -fs http://localhost:3000/api/health > /dev/null && break; sleep 2; done
+          npm run evals
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.decidir.outputs.evaluar == 'true'
+        with:
+          name: evaluacion-agente
+          path: |
+            evals/reportes/
+            servidor.log
+          retention-days: 30
