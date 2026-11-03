@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "_comment": "Restricted allowlist for SkillWall Live (cohorte4). Tools needed to execute the CONSTRUCTION phase end-to-end: infra (Terraform), backend (Node.js Lambda), frontend (Next.js + Vercel), and E2E tests (Playwright MCP). `rm` and `terraform apply` are intentionally NOT in the allowlist and will always prompt for confirmation.",
+  "_comment": "Restricted allowlist for SkillWall Live. Tools needed to execute the CONSTRUCTION phase end-to-end: infra (Terraform), backend (Node.js Lambda), frontend (Next.js + Vercel), and E2E tests (Playwright MCP). `rm` and `terraform apply` are intentionally NOT in the allowlist and will always prompt for confirmation.",
   "permissions": {
     "allow": [
       "Bash(ls:*)",

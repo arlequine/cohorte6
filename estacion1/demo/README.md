@@ -2,7 +2,7 @@
 
 Aplicación web para eventos en vivo donde los asistentes se registran en una sesión, opcionalmente suben una foto, eligen 3-5 skills y pueden dar **like a las skills** de otros participantes (no a la persona). Wall y leaderboard se actualizan vía polling de 2 s.
 
-El "efecto wow" no está en la app — es el **proceso de desarrollo end-to-end con AIDLC**: requirements → spec → arquitectura → IaC → backend → frontend → deploy → pruebas E2E. **Estación 1 — Cohorte 4 (HardcoreAI)**: este repo parte con la fase INCEPTION completa (requirements, user stories, diseño); tu trabajo es ejecutar la fase CONSTRUCTION con IA y generar las 3 unidades de código hasta dejarlas desplegadas. El prompt de arranque está al final de este README.
+El "efecto wow" no está en la app — es el **proceso de desarrollo end-to-end con AIDLC**: requirements → spec → arquitectura → IaC → backend → frontend → deploy → pruebas E2E. **Demo de la Estación 1**: este repo parte con la fase INCEPTION completa (requirements, user stories, diseño); tu trabajo es ejecutar la fase CONSTRUCTION con IA y generar las 3 unidades de código hasta dejarlas desplegadas. El prompt de arranque está al final de este README.
 
 ## Arquitectura
 
@@ -158,9 +158,9 @@ Costo del demo en free tier: **~$0** mientras dure el evento y todo se destruye 
 ├── adr.md                                 ← decisiones arquitectónicas (input para INCEPTION)
 ├── requirement.md                         ← PRD (input para INCEPTION)
 ├── troubleshooting.md                     ← 33 lecciones aprendidas
-├── .claude/                               ← Workflow AIDLC para Claude Code
-│   ├── CLAUDE.md
-│   └── settings.json                      ← Allowlist restringido del proyecto
+├── AGENTS.md                              ← Workflow AIDLC (lo leen todos los coding agents)
+├── CLAUDE.md                              ← Solo importa AGENTS.md para Claude Code
+├── .claude/settings.json                  ← Allowlist restringido del proyecto (Claude Code)
 ├── .aidlc-rule-details/                   ← Reglas detalladas por fase AIDLC
 ├── aidlc-docs/                            ← Documentos del flujo AIDLC
 │   ├── audit.md                           ← Log de interacción usuario↔IA (lo alimenta el flujo)
@@ -182,7 +182,7 @@ Todas las lecciones aprendidas en las cohortes anteriores están en [`troublesho
 
 ## Cómo arrancar la estación
 
-Abre Claude Code en la raíz de este directorio y pega el siguiente prompt — el workflow de `.claude/CLAUDE.md` hace el resto (te irá pidiendo aprobación en cada etapa):
+Abre Claude Code en la raíz de este directorio y pega el siguiente prompt — el workflow de `AGENTS.md` hace el resto (te irá pidiendo aprobación en cada etapa). Funciona igual con Cursor, Codex, Antigravity o Copilot, porque todos leen `AGENTS.md`; la allowlist de `.claude/settings.json` solo aplica a Claude Code.
 
 ```text
 Inicia el flujo AIDLC. Ten en cuenta que la fase de INCEPTION ya está completa
@@ -200,4 +200,4 @@ revisión de troubleshooting.md después de generar el código de cada unidad
 
 ## Licencia
 
-Material de entrenamiento HardcoreAI / 30X — uso interno educativo.
+Material de entrenamiento AI for Developers | 30X — uso interno educativo.

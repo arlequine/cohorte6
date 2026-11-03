@@ -2,7 +2,7 @@
 
 ## Descubrimiento y Definición del Problema
 
-**AI for Developers | 30X · Cohorte 4 · 27 de agosto, 2026**
+**AI for Developers | 30X · Cohorte 6**
 
 ---
 
@@ -14,7 +14,7 @@ Este es el manual ampliado de la Estación 2. Es lo que viste y escuchaste en cl
 - **Ejecutar la práctica** de refinar tu PVB y co-crear tu PRD con AI, incluso si no terminaste durante la sesión.
 - **Tener referencia rápida** para las próximas estaciones del programa.
 
-El documento está organizado en seis partes y cinco anexos. La Parte III y IV son las más operativas — son los pasos concretos que debes ejecutar antes del viernes; la Parte IV (co-crear tu PRD con AI) es donde está el corazón de la sesión.
+El documento está organizado en seis partes y cinco anexos. La Parte III y IV son las más operativas — son los pasos concretos que debes ejecutar antes de la Estación 3; la Parte IV (co-crear tu PRD con AI) es donde está el corazón de la sesión.
 
 Si vas a leerlo de una sentada: **45 minutos aproximadamente.** Si vas a usarlo como referencia mientras trabajas en tu PVB y PRD: **lee la Parte III y IV con detalle, el resto lo consultás cuando lo necesites.**
 
@@ -676,7 +676,7 @@ El template oficial del programa estructura el PRD en **13 segmentos** que se ge
 ### 15.4 Qué NO incluye un PRD
 
 - **Diseño visual detallado** — eso va en Figma o en docs de diseño aparte
-- **Arquitectura técnica completa** — eso es el output del Prompt 2 (Arquitectura). En C4 el diseño técnico se trabaja en la Estación 5, *Diseñando el Cómo*
+- **Arquitectura técnica completa** — eso es el output del Prompt 2 (Arquitectura). En el programa, el diseño técnico se trabaja con AI-DLC en las Estaciones 4 y 5
 - **Backlog de ingeniería con stories detalladas** — eso es el output del Prompt 3 (Backlog)
 - **Plan de marketing** — otro documento
 
@@ -761,44 +761,38 @@ No apures este paso. Tomate el tiempo de leer cada conflicto, pensarlo, y darle 
 
 ## 18. Cómo co-crear tu PRD con AI
 
-El programa tiene un **template público en GitHub** que estandariza este ejercicio. No vas a inventar tus propios prompts — vas a usar los que están en el repo y reemplazar los archivos de ejemplo con los tuyos.
+El programa estandariza este ejercicio. No vas a inventar tus propios prompts: usas el Prompt 1 del repo del programa y trabajas con tus documentos en tu repo personal.
 
 ### 18.1 El repo
 
 ```
-https://github.com/hardcore-ai/c4
+https://github.com/arlequine/cohorte6
 ```
 
-Dentro hay una carpeta `Estación 2/` con esta estructura:
+La carpeta `estacion2/` tiene esta estructura:
 
 ```
-Estación 2/
-├── README.md                       # Guía rápida del workflow
-├── prompts-especificacion.md       # Los 3 prompts secuenciales (PRD, Arquitectura, Backlog)
-├── docs/                           # Inputs — ejemplo trabajado (AgentVault)
+estacion2/
+├── README.md                       # Guía de la estación
+├── prompts-especificacion.md       # El Prompt 1 (PRD)
+├── docs/                           # Inputs — ejemplo trabajado (EntreVista AI)
 │   ├── pvb.md
 │   ├── overview.md
 │   ├── mercado.md
 │   ├── icp.md
-│   └── critica.md
-└── specs/                          # Output (vacío hasta que ejecutes el prompt)
-    └── README.md
+│   ├── critica.md
+│   └── conflictos.md               # Resultado del Paso 0
+└── specs/
+    └── prd.md                      # El PRD que salió de esos docs
 ```
 
-El ejemplo trabajado que vas a encontrar en `docs/` es **AgentVault** — un escrow autónomo en USDC para agentes (un agente deposita fondos, otro entrega el trabajo, el contrato libera el pago cuando se cumple la condición). Sirve como referencia de la **profundidad esperada** en cada input: mirá qué tan concreto está cada documento antes de escribir los tuyos.
+El ejemplo trabajado es **EntreVista AI**, un agente que hace entrevistas de screening por Telegram para empresas de alto volumen en LATAM. Es el producto de referencia de todo el programa: lo vas a ver evolucionar hasta la Estación 12. Sirve como referencia de la **profundidad esperada** en cada input: mirá qué tan concreto está cada documento antes de escribir los tuyos.
 
 ### 18.2 Paso a paso
 
-**1. Clona el repo:**
+**1. Abre tu repo personal** (el que creaste desde la plantilla en la Nivelación 1). Ya tiene `docs/` y `specs/`, y en la Estación 1 dejaste ahí tu PVB y tu investigación.
 
-```bash
-gh repo clone hardcore-ai/c4
-cd c4/estacion2
-```
-
-**2. Reemplaza los archivos de `docs/` con los tuyos.**
-
-Los archivos que están allí pertenecen al ejemplo trabajado (AgentVault). Sirven como referencia de la profundidad esperada. Tu trabajo es reemplazarlos con tus propios documentos:
+**2. Completa tu `docs/`** tomando como referencia los archivos del ejemplo:
 
 | Archivo | Tu versión |
 |---------|------------|
@@ -814,26 +808,26 @@ Puedes añadir tantos archivos adicionales a `docs/` como tengas: benchmarks, no
 
 > **Markdown > PDF para los inputs.** Convertí tus documentos a Markdown antes de meterlos en `docs/`. Opus es el modelo que vas a usar para el análisis serio, y es **caro**: el Markdown es mucho más eficiente en tokens que un PDF (un PDF arrastra layout, imágenes y ruido que se traduce en tokens que pagás sin que aporten). Mismo contenido, fracción del costo. Como regla: si lo podés pasar a `.md`, pasalo.
 
-**3. Abre `prompts-especificacion.md` y copia el Prompt 1 — PRD.**
+**3. Abre `estacion2/prompts-especificacion.md` del repo del programa y copia el Prompt 1 — PRD.**
 
 Es un prompt largo. Está completo, listo para pegar. NO lo modifiques.
 
-**4. Abre una conversación nueva dedicada solo a tu PRD.** Pega el Prompt 1 y adjunta (o, si trabajas dentro del repo con Claude Code, deja que lea) **todos** los archivos de tu `docs/`.
+**4. Abre una conversación nueva dedicada solo a tu PRD.** Pega el Prompt 1 y adjunta (o, si trabajas dentro de tu repo con tu coding agent, deja que lea) **todos** los archivos de tu `docs/`.
 
-> **Tip que te ahorra la frustración #1 de la clase — Sonnet vs Opus.** Este prompt está diseñado para avanzar **segmento por segmento**, deteniéndose en cada uno a pedirte aprobación. Con **Sonnet en reasoning medium** el modelo a veces **no respeta** ese ritmo: se adelanta, te escupe varios segmentos de una, o ignora el "pará y pregúntame". Si te pasa, tenés dos salidas:
+> **Tip que te ahorra la frustración #1 de la clase — el modelo correcto.** Este prompt está diseñado para avanzar **segmento por segmento**, deteniéndose en cada uno a pedirte aprobación. Con un modelo mediano y poco razonamiento (por ejemplo, Sonnet en esfuerzo medio) el modelo a veces **no respeta** ese ritmo: se adelanta, te escupe varios segmentos de una, o ignora el "pará y pregúntame". Si te pasa, tenés dos salidas:
 > 1. **Abrí una sesión nueva con Opus** (sigue el prompt segmento-por-segmento con mucha más disciplina), o
 > 2. Decile explícitamente **"no vayamos paso a paso"** y dejá que genere el PRD de corrido, para después refinarlo.
 >
 > No pelees con un modelo que no quiere ir despacio: cambiá de modelo o cambiá de modo. Es la causa #1 de frustración en esta práctica.
 
-> **Si trabajás en Claude Code**, tres comandos que te salvan la sesión:
+> **Si trabajás en Claude Code** (la herramienta de referencia; las demás tienen equivalentes para reanudar sesiones), tres comandos que te salvan la sesión:
 > - **`/init`** — arranca el contexto del repo (lee la estructura, los `docs/`, los steering files).
 > - **`/rename`** — ponle un nombre a la sesión de tu PRD para encontrarla después.
 > - **`/resume`** — retomá esa misma sesión al día siguiente. El PRD se construye a lo largo de varios días; si no nombrás y retomás la sesión, perdés el hilo (y el contexto acumulado). Nombralá hoy, retomala mañana.
 
 **5. Trabaja el Paso 0 primero — sin apurarlo.**
 
-La AI te va a presentar una tabla de conflictos detectados entre tus documentos (ver sección 17.1). Resuélvelos uno por uno. **Acá no estás aprobando texto: estás tomando decisiones de producto.** El agente te muestra las contradicciones; vos decidís. Estas decisiones moldean todo el PRD que viene después. Es el paso de mayor valor de todo el ejercicio — no lo saltes.
+La AI te va a presentar una tabla de conflictos detectados entre tus documentos (ver sección 17.1). Resuélvelos uno por uno y guarda la tabla con tus decisiones en `docs/conflictos.md`: es parte del entregable. **Acá no estás aprobando texto: estás tomando decisiones de producto.** El agente te muestra las contradicciones; vos decidís. Estas decisiones moldean todo el PRD que viene después. Es el paso de mayor valor de todo el ejercicio — no lo saltes.
 
 **6. Trabaja segmento por segmento.**
 
@@ -853,11 +847,11 @@ El `.md` es perfecto para el LLM, pero **no es cómodo de leer** para vos o tus 
 
 ### 18.2.1 Antes del PRD: deep research de tus inputs
 
-El PRD es tan bueno como los `docs/` que le des. Si tu deep research es flojo, el PRD va a ser flojo (basura entra, basura sale). Herramientas que Danny recomienda para armar inputs ricos antes de ejecutar el prompt:
+El PRD es tan bueno como los `docs/` que le des. Si tu deep research es flojo, el PRD va a ser flojo (basura entra, basura sale). Herramientas recomendadas para armar inputs ricos antes de ejecutar el prompt:
 
 | Herramienta | Para qué brilla |
 |-------------|-----------------|
-| **Gemini (Deep Research)** | La mejor a juicio de Danny para investigación profunda de mercado, competencia y dominio. |
+| **Gemini (Deep Research)** | Muy buena para investigación profunda de mercado, competencia y dominio. |
 | **Perplexity** | Respuestas con citas verificables, rápida para mapear el panorama. |
 | **Grok** | Acceso a data de X (Twitter) — útil para señales en tiempo real y conversación de mercado. |
 | **NotebookLM** | Cuando ya tenés tus fuentes y querés interrogarlas y sintetizarlas sin que invente nada. |
@@ -870,17 +864,9 @@ El Segmento 3 (ICP Detallado) tiene espacio natural para tu **Stakeholder Map**:
 
 Si tu situación requiere modificar el Segmento 12 (Riesgos) para incluir riesgos políticos internos (cambio de sponsor, presupuesto recortado, IT bloquea), hazlo. Es tu PRD.
 
-### 18.4 Cuándo usar los Prompts 2 y 3
+### 18.4 Qué viene después del PRD
 
-`prompts-especificacion.md` incluye dos prompts adicionales que **NO ejecutas esta semana**:
-
-| Prompt | Cuándo lo vas a usar | Output |
-|--------|----------------------|--------|
-| **Prompt 1 — PRD** | Esta semana (entrega Estación 3) | `specs/prd.md` |
-| **Prompt 2 — Arquitectura** | Estación 5 — *Diseñando el Cómo* (AI-DLC Construction, ADR) | `specs/arquitectura.md` |
-| **Prompt 3 — Backlog** | Estaciones de implementación (E6–E7) | `specs/backlog.md` |
-
-Concéntrate solo en el Prompt 1 esta semana.
+El PRD es el input de todo lo que sigue. En la Estación 4 el flujo AI-DLC lo convierte en requerimientos e historias de usuario (el QUÉ); en la Estación 5, en arquitectura y decisiones técnicas (el CÓMO); en la Estación 6, en un plan de tareas. Esta semana concéntrate solo en el PRD.
 
 ---
 
@@ -888,7 +874,7 @@ Concéntrate solo en el Prompt 1 esta semana.
 
 No hay plantilla en blanco para llenar a mano — la generas ejecutando el Prompt 1 con tus inputs. La estructura de salida son los 13 segmentos descritos en la sección 17.
 
-Si querés ver cómo se ve un PRD generado con esta metodología, mira el ejemplo de AgentVault o de EntreVistaAI en los repos del programa.
+Si querés ver cómo se ve un PRD generado con esta metodología, mira `estacion2/specs/prd.md` en el repo del programa: es el de EntreVista AI, generado a partir de los `docs/` del ejemplo.
 
 ---
 
@@ -943,21 +929,21 @@ Esto no es retórica. Es la razón por la que existe el **FDE (Forward Deploymen
 
 # PARTE VI — TAREA + RECURSOS
 
-## 22. Lo que debes traer al martes 1 de septiembre
+## 22. Lo que debes traer a la Estación 3
 
-**Deadline:** Estación 3 — martes 1 de septiembre, 7:00 PM.
+**Deadline:** antes de la Estación 3, en un pull request con la etiqueta `estacion-2` (ver la guía de la estación).
 
 ### Para todos
 
 1. **PVB refinado** — todos los campos llenos o con su pregunta de investigación anotada.
-2. **PRD v1** — co-creado con AI, incorporando el feedback de la práctica de la clase y, sobre todo, lo que te sacó el Análisis de Conflictos.
-3. **Entorno de coding agents listo** — la Estación 3 es *Ingeniería Agéntica* con Carlos Alarcón: coding agents, MCP, skills, hooks y subagentes, hands-on. Llega con Claude Code funcionando y tus credenciales resueltas. No quemamos clase en setup.
+2. **Análisis de conflictos** — `docs/conflictos.md` con cada conflicto y la decisión que tomaste.
+3. **PRD v1** en `specs/prd.md` — co-creado con AI, con los 13 segmentos, incluidas las métricas de éxito y el plan de evaluación del agente.
 
-> Si además quieres ir adelantando decisiones técnicas (stack, modelo, integraciones, datos), anótalas — las vas a formalizar como ADR en la Estación 5, *Diseñando el Cómo*. No es requisito para el martes.
+> Si además quieres ir adelantando decisiones técnicas (stack, modelo, integraciones, datos), anótalas — las vas a formalizar como ADR en la Estación 5, *Diseñando el Cómo*. No es requisito para la Estación 3.
 
 ### Adicional para FDE
 
-4. **Stakeholder Map** — sponsor, usuario final, veto holder, aliado técnico. Diagrama simple. Lo importante es que sepas a quién tienes que convencer, en qué orden, y con qué argumento.
+4. **Stakeholder Map** en `docs/stakeholders.md` — sponsor, usuario final, veto holder, aliado técnico. Diagrama simple. Lo importante es que sepas a quién tienes que convencer, en qué orden, y con qué argumento.
 
 ---
 
@@ -965,11 +951,11 @@ Esto no es retórica. Es la razón por la que existe el **FDE (Forward Deploymen
 
 ### Soporte continuo (tutorías/bonus)
 
-C4 tiene **once espacios fijos de refuerzo**, lunes y miércoles de 7 a 8pm, uno por estación. El de la Estación 2 es el **lunes 31 de agosto**: lleva tu PRD a medio camino y lo trabajamos ahí. El **canal de la cohorte** sigue siendo tu primer recurso para cualquier duda entre sesiones.
+Cada estación tiene su espacio de refuerzo. En el de la Estación 2 lleva tu PRD a medio camino y lo trabajamos ahí. El **canal de la cohorte** sigue siendo tu primer recurso para cualquier duda entre sesiones.
 
 ### Material de referencia
 
-Repasa este manual (Partes II, III y IV) y los repos del programa con los ejemplos trabajados (AgentVault, EntreVistaAI) mientras refinas tu PVB y co-creas tu PRD.
+Repasa este manual (Partes II, III y IV) y el ejemplo trabajado de EntreVista AI en `estacion2/` mientras refinas tu PVB y co-creas tu PRD.
 
 ---
 
@@ -987,7 +973,7 @@ Repasa este manual (Partes II, III y IV) y los repos del programa con los ejempl
 | **Human-in-the-loop** | Diseño donde la IA propone/ejecuta pero un humano valida en puntos clave (aprobaciones, escalaciones). Suele ser un *principio no negociable* del producto (Segmento 6 del PRD). |
 | **ICP / Buyer persona** | Ideal Customer Profile: descripción precisa de a quién le sirve tu producto (firmographics: industria, tamaño, geografía). La *buyer persona* es el retrato del individuo que decide o usa dentro de ese perfil (rol, dolores, triggers, objeciones). Cuanto más específico, mejor el PRD. |
 | **Job to be Done (JTBD)** | El "trabajo" que el usuario contrata a tu producto para resolver. La gente no compra un taladro, compra el hueco — en realidad, el cuadro colgado. Define el producto por el trabajo, no por sus features. |
-| **MADR / ADR** | Markdown Architectural Decision Records. Formato para documentar decisiones de arquitectura en Markdown. En C4 se trabaja en la Estación 5, *Diseñando el Cómo*. |
+| **MADR / ADR** | Markdown Architectural Decision Records. Formato para documentar decisiones de arquitectura en Markdown. En el programa se trabaja en la Estación 5, *Diseñando el Cómo*. |
 | **MoSCoW** | Método de priorización del MVP: **Must / Should / Could / Won't**. Define qué entra a v1 (Must) y qué queda en el roadmap, sin matarlo. |
 | **MVP** | Minimum Viable Product. La versión más pequeña del producto que demuestra el valor central. Se prioriza con MoSCoW. |
 | **Mob session** | En AI-DLC, sesión donde todo el equipo + la IA validan en tiempo real. Reemplaza al trabajo aislado. |
@@ -1086,11 +1072,11 @@ Gross margin proyectado: ______%
 
 ## D. PRD — no hay plantilla en blanco
 
-A diferencia del PVB, el PRD **no se llena a mano.** Se **genera ejecutando el Prompt 1** de `prompts-especificacion.md` del repo `hardcore-ai/c4`, alimentado con tus inputs en la carpeta `docs/`.
+A diferencia del PVB, el PRD **no se llena a mano.** Se **genera ejecutando el Prompt 1** de `prompts-especificacion.md` del repo del programa (`estacion2/`), alimentado con tus inputs en la carpeta `docs/`.
 
 Ver sección 17 de este manual para los 13 segmentos que la AI va a producir, y sección 18 para el paso a paso operativo del workflow.
 
-Si quieres ver cómo se ve un PRD completo generado con esta metodología, mira el ejemplo de **EntreVistaAI** (`hardcore-ai/EntreVistaAI` → `specs/prd.md`).
+Si quieres ver cómo se ve un PRD completo generado con esta metodología, mira el ejemplo de **EntreVista AI** en `estacion2/specs/prd.md`.
 
 ---
 
@@ -1116,8 +1102,8 @@ El programa sigue **AI-DLC (AI-Driven Development Lifecycle)**, la metodología 
 - **3 fases:** Inception → Construction → Operations.
 - **Micro-loop (en cada fase):** Human Task → AI Plan → Human Approves → AI Executes → Human Verifies → ↻.
 - **Vocabulario vs SDLC:** Bolts (en vez de sprints), Units of Work / UoW (en vez de epics), IA como teammate (no herramienta auxiliar), Mob sessions (equipo + IA en tiempo real).
-- **Cómo encaja en el journey C4:** Inception = E1–E5 (producto → el QUÉ → el CÓMO) · Construction = E6–E7 (del spec al harness, del backlog al merge) · Operations = E8–E11 (calidad, despliegue, seguridad, observabilidad) · E12 = Demo Day. **El PVB y el PRD de esta semana son Inception.**
+- **Cómo encaja en el journey del programa:** Inception = E1–E5 (producto → el QUÉ → el CÓMO) · Construction = E6–E7 (del spec al harness, del backlog al merge) · Operations = E8–E11 (calidad, despliegue, seguridad, observabilidad) · E12 = Demo Day. **El PVB y el PRD de esta semana son Inception.**
 
 ---
 
-*AI for Developers | 30X · Cohorte 4 · Estación 2 · Agosto 2026*
+*AI for Developers | 30X · Cohorte 6 · Estación 2*

@@ -1,82 +1,43 @@
-# Análisis de mercado — Agentic commerce M2M en LatAm
+# Mercado — HR Tech y screening en América Latina
 
-> Documento de contexto para AgentVault.
-> Fuente: Deep research de validación, mayo 2026.
+> **Ejemplo trabajado.** Deep research de validación del mercado de EntreVista AI. Las cifras son las de la investigación original del ejemplo; verifícalas en su fuente antes de citarlas en un producto real.
 
----
+## 1. Tamaño y crecimiento
 
-## 1. Tamaño y volumen de stablecoins en LatAm
+- El mercado de HR Tech en LATAM se proyecta en **USD 6,541 millones para 2030**, con un CAGR de **15.5 %** entre 2025 y 2030.
+- Solo el **14 %** de las organizaciones de la región tiene proyectos de IA agéntica en producción (IDC). La mayoría de las herramientas son asistentes que siguen reglas.
 
-LatAm es **el mercado más maduro del mundo en stablecoins B2B** medido por tasa de adopción institucional.
+## 2. El dolor medido
 
-- **2025 LatAm:** $324B en transaction volume con 75% institutional adoption; >$730B en crypto transactions totales.
-- **Brasil:** $318.8B crypto value received (1/3 del LatAm total). **>90% de flujos crypto brasileños son stablecoin.** Procesó $89B en stablecoin transactions 2025.
-- **Argentina:** 61%+ del crypto volume en stablecoins. En Bitso, USDT 50% / USDC 22% del crypto trading.
-- **México:** MXNB + MXNe tokens peso-backed alcanzaron $34M en julio 2025 vs <$55K un año antes.
+| Dato | Valor | Segmento |
+|---|---|---|
+| Rotación anual en BPO | 80 % a más de 120 % | BPO |
+| Candidatos que abandonan por procesos engorrosos (México) | 4 de cada 10 | Todos |
+| Personas a reclutar al año para sostener 1,000 agentes | 800 a 1,200 | BPO |
 
-## 2. B2B y enterprise adoption
+## 3. Competidores
 
-- **B2B stablecoin payments globalmente:** $100M/mes (early 2023) → **$6B/mes (mid-2025)** — **60x en 30 meses**.
-- **71% de instituciones LatAm ya usan stablecoins cross-border** — la tasa más alta del mundo (Fireblocks 2025 survey).
-- **Bitso Business:** $82B TPV anualizado 2025; 45% de su volumen ya viene de FX/treasury/arbitration (no remesas).
-- **Proyección Juniper:** Cross-border B2B stablecoin pasará de $13.4B en 2026 a **$5T en 2035**.
-
-## 3. Empresas LatAm activas en stablecoins / fintech infra
-
-| Empresa | País | Foco | Funding/scale |
+| Competidor | Origen | Qué hace bien | Dónde se queda corto |
 |---|---|---|---|
-| **Bitso / Bitso Business** | México | Stablecoin B2B — ~$82B TPV 2025, 1,900 enterprise clients | Series C $250M |
-| **Belo** | Argentina | Stablecoin payments + FX | **$14M Series A (abril 2026) led por Tether** |
-| **Lemon** | Argentina | Crypto fintech | $20M Series B (oct 2025) |
-| **Pomelo** | Argentina | Card-issuing infra, stablecoin cards | $55M Series C |
-| **Yuno** | Colombia | Orquestación de pagos — Mastercard Agent Pay partner | — |
-| **Wenia** | Colombia | Wallet stablecoin de Bancolombia | — |
+| Magneto 365 | Colombia | Ecosistema completo: llamadas, parseo de CV, agendamiento | Flujos predefinidos; no entrega evidencia evaluativa |
+| Webcand | Colombia | Entrevistas por WhatsApp y video | Preguntas fijas; video asíncrono sin interacción |
+| Genomawork | Chile | Psicometría y analítica predictiva | Formato examen, alta fricción |
+| Buk | Chile | Suite HCM muy adoptada | Su reclutamiento es un ATS con filtros por palabras clave |
+| Glider AI | Global | Entrevistas agénticas y tareas prácticas | Sin localización LATAM, pricing enterprise |
+| HireVue | Global | Transcripción e insights de competencias | Requiere video, pricing enterprise |
 
-> **Nota:** Estas empresas son adjacent — operan en stablecoins pero NO son agent-native. Son posibles partners, no competidores directos.
+**Hueco:** nadie combina razonamiento agéntico, un canal de mensajería y evidencia estructurada para el reclutador, a un precio accesible para LATAM.
 
----
+## 4. Regulación por país
 
-## 4. Marco regulatorio — el matiz crítico
+| País | Estado |
+|---|---|
+| Colombia | Proyecto de ley de IA ética en trámite |
+| México | Por investigar: regulación de IA y protección de datos de candidatos |
+| Argentina | Por investigar: regulación de IA y protección de datos de candidatos |
 
-El use-case M2M USDC tiene **viento de cola macro** (adopción) pero **viento de cara regulatorio** específicamente en Brasil y México. Argentina es el mercado más limpio regulatoriamente para empezar. Colombia ofrece runway intermedio.
+## 5. Factores de éxito
 
-### Brasil (BCB, noviembre 2025 – mayo 2026)
-
-- BCB Resoluções **519, 520, 521**.
-- **Resolução 521** clasifica operaciones con virtual assets referenciados a moneda extranjera como **operaciones de cambio (FX)** → sujetas a **IOF-Câmbio 3.5%** sobre transacciones USDC/USDT.
-- Crea figura de **SPSAV** con minimums de capital + autorização BCB.
-- **2 mayo 2026:** BCB **prohibió a eFX providers usar stablecoins/crypto para settlement cross-border**. Hold individual sigue ok.
-- En paralelo, **Drex** (CBDC brasileña) avanza con programmable payments — competencia regulatoria directa.
-
-### México (CNBV/Banxico)
-
-- Stablecoins peso-denominados **no autorizados aún**: business model de emisión contra fondos en legal tender es actividad bancaria restringida.
-- 2025: México abrió consultas públicas para frameworks de tokenización y peso-backed stablecoins. **Pendiente.**
-- USDC/USDT operables vía exchanges regulados bajo Fintech Law, no como issuer doméstico.
-
-### Argentina (era Milei)
-
-- CNV Resolución 1058/2025 define framework para virtual asset service providers.
-- Marco favorable para uso, pero macro inflacionario sigue siendo el driver real de adopción USDT/USDC.
-
-### Colombia
-
-- SFC (Superintendencia Financiera) mantiene postura cautelosa pero no restrictiva.
-- Sandbox regulatorio abierto.
-- Runway intermedio entre Brasil (restrictivo) y Argentina (favorable).
-
----
-
-## 5. Implicancia para AgentVault
-
-**Go-to-market geográfico recomendado:**
-
-1. **Argentina + Colombia (meses 1–6)** — entorno regulatorio amigable, base de builders Web3 razonable, USDC ya integrado en wallets locales.
-2. **México (meses 6–12)** — tras claridad regulatoria sobre stablecoins peso-denominados.
-3. **Brasil (meses 12+)** — solo cuando la fricción regulatoria (IOF 3.5%, ban eFX) se navegue vía partner local o estructura legal local.
-
-**Hipótesis comercial:** El cliente target NO es la empresa fintech tradicional. Es el **builder Web3 LatAm** y la **fintech early-stage** que ya razona en USDC y no necesita convencer compliance interno sobre stablecoins.
-
----
-
-*Hardcore AI by 30X — Cohorte 3 — Estación 1*
+1. Localización real: español neutro y canales que ya usan los candidatos.
+2. Cumplimiento por diseño, no por certificación posterior.
+3. Pricing alineado con el resultado, porque los equipos de reclutamiento tienen presupuesto alto en volumen pero bajo por posición.

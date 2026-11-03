@@ -1,11 +1,11 @@
 # Prompts para Co-Crear la Especificación Inicial de un Producto Agéntico
 
 > [!NOTE]
-> Cada prompt está diseñado para ejecutarse **secuencialmente** en conversaciones separadas de Claude.
-> El output de cada uno alimenta al siguiente.
+> El Prompt 1 genera el PRD de la Estación 2. Funciona en Claude (claude.ai o Claude Code) y en cualquier coding agent: si trabajas dentro de tu repo, el agente lee `docs/` directamente.
+> El diseño técnico y el backlog se trabajan después con AI-DLC (Estaciones 4 a 6), a partir de este PRD.
 
 > [!IMPORTANT]
-> **Modo de trabajo: Co-creación iterativa.** Estos prompts NO piden que Claude genere todo de una vez. Cada prompt instruye a Claude a producir **un segmento a la vez**, pausar, y esperar tu revisión y aprobación antes de avanzar al siguiente. Esto garantiza que cada pieza del artefacto refleje tanto el criterio de la IA como el del creador.
+> **Modo de trabajo: Co-creación iterativa.** Este prompt NO pide que Claude genere todo de una vez. Instruye a Claude a producir **un segmento a la vez**, pausar, y esperar tu revisión y aprobación antes de avanzar al siguiente. Esto garantiza que cada pieza del artefacto refleje tanto el criterio de la IA como el del creador.
 
 ---
 
@@ -14,6 +14,8 @@
 ```
 proyecto/
 ├── docs/          ← Documentos de entrada (todo lo que alimenta la especificación)
+│   ├── pvb.md
+│   ├── critica.md
 │   ├── overview.md
 │   ├── icp.md
 │   ├── mercado.md
@@ -21,17 +23,15 @@ proyecto/
 │   ├── benchmark-competidores.md
 │   └── ... (cualquier doc adicional)
 │
-├── specs/         ← Especificaciones generadas (outputs de estos prompts)
-│   ├── prd.md              ← Output del Prompt 1
-│   ├── arquitectura.md     ← Output del Prompt 2
-│   └── backlog.md          ← Output del Prompt 3
+├── specs/         ← Especificaciones generadas
+│   └── prd.md              ← Output del Prompt 1
 │
-└── prompts-especificacion.md  ← Este archivo
+└── AGENTS.md      ← Instrucciones de tu repo (Estación 3)
 ```
 
 > [!TIP]
-> **Inputs**: Coloca en `docs/` todos los documentos que tengas: overview, ICP, mercado, transcripciones de entrevistas con usuarios/clientes, análisis competitivos, benchmarks, notas de campo. Adjúntalos todos en cada prompt.
-> **Outputs**: Cuando Claude consolide cada documento final, guárdalo en `specs/` con el nombre indicado.
+> **Inputs**: Coloca en `docs/` todos los documentos que tengas: overview, ICP, mercado, transcripciones de entrevistas con usuarios/clientes, análisis competitivos, benchmarks, notas de campo. Adjúntalos todos al prompt, o deja que tu agente los lea si trabajas en tu repo.
+> **Output**: Cuando Claude consolide el PRD, guárdalo en `specs/prd.md`.
 
 ---
 
@@ -82,6 +82,8 @@ Presenta los hallazgos en una tabla:
 |---|-------------------|---------------|---------------|--------------------|
 
 Para cada conflicto, propón una recomendación, pero espera mi decisión antes de continuar. Estas decisiones moldearán todo el PRD.
+
+Cuando haya decidido todos, consolida la tabla con una columna "Decisión" para guardarla como docs/conflictos.md, y solo entonces empieza el Segmento 1.
 
 ═══════════════════════════════════════════════
 SEGMENTOS DEL PRD (producir uno a la vez)

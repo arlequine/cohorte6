@@ -1,4 +1,4 @@
-# Internal Solution Brief — AI for Developers Cohorte 4
+# Internal Solution Brief — AI for Developers
 
 ## Para quién es este template
 
@@ -12,14 +12,14 @@ Este template es para participantes que vienen de empresas y van a construir una
 2. **Genera un deep research de contexto:** Usa AI para investigar cómo otras organizaciones han resuelto problemas similares, qué tecnologías aplican, qué resultados obtuvieron.
 3. **Genera un deep research de riesgos:** Usa AI para encontrar las razones por las cuales este tipo de soluciones fallan en contextos corporativos.
 4. **Documenta todo en Markdown:** Estado actual del proceso, entrevistas con stakeholders, investigación, restricciones técnicas.
-5. **Completa este Internal Solution Brief:** Llena cada sección con base en tu investigación.
+5. **Completa este Internal Solution Brief:** Llena cada sección con base en tu investigación y guárdalo en `docs/isb.md` de tu repo personal.
 
 ### Reglas de llenado
 
 - Cuantifica siempre que puedas. "Es lento" no sirve. "El proceso toma 5 días y genera 3 errores por semana" sí sirve.
 - Si no conoces una restricción (ej: política de seguridad), pregúntale a tu sponsor. Ese es tu trabajo esta semana.
 - Piensa en quién va a aprobar la adopción de tu solución, no solo en quién la va a usar.
-- Si tienes dudas sobre la tarea, el canal de la cohorte y los instructores son tu primer recurso. También tienes el **espacio de refuerzo del miércoles 26 de agosto, 7-8pm**, dedicado a esta estación.
+- Si tienes dudas sobre la tarea, el canal de la cohorte y los mentores son tu primer recurso. También tienes el espacio de refuerzo de esta estación.
 
 ---
 
@@ -190,8 +190,8 @@ Esto es tan importante como lo que sí haces. Define qué queda FUERA del alcanc
 - [ ] Deep research de contexto completado
 - [ ] Deep research de riesgos completado
 - [ ] Internal Solution Brief completado (este documento)
-- [ ] Listo para presentar en la Estación 2 (jueves 27 de agosto)
+- [ ] Entregado en un pull request con la etiqueta `estacion-1`, antes de la Estación 2
 
 ---
 
-*AI for Developers | 30X — Cohorte 4 — Agosto–Octubre 2026*
+*AI for Developers | 30X*
