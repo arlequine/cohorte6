@@ -4,7 +4,7 @@ La entrega es el plan completo del alcance definido del proyecto. El validador s
 
 ## 1. Punto de partida real
 
-En [business-rules.md de EntreVista AI](../estacion5/agentic_interviewer_ai/aidlc-docs/construction/auth-lambda/functional-design/business-rules.md), las reglas BR-PASS-01 a 04 exigen al menos ocho caracteres, una mayúscula ASCII, una minúscula ASCII y un dígito. BR-PASS-06 prohíbe registrar contraseñas. BR-PASS-07 describe errores por regla.
+En [business-rules.md de EntreVista AI](../ejemplos/entrevista-ai/aidlc-docs-v1/construction/auth-lambda/functional-design/business-rules.md), las reglas BR-PASS-01 a 04 exigen al menos ocho caracteres, una mayúscula ASCII, una minúscula ASCII y un dígito. BR-PASS-06 prohíbe registrar contraseñas. BR-PASS-07 describe errores por regla.
 
 Usamos esas reglas existentes para aprender a preparar una tarea; no son una recomendación general para diseñar políticas de contraseñas. No construiremos el sistema completo de autenticación.
 

@@ -1,0 +1,45 @@
+{
+  "etiqueta": "estacion-4",
+  "titulo": "Estación 4 · Diseñando el QUÉ con AI-DLC",
+  "fuente": "estacion4/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-4`, antes de la Estación 5, que incluya:\n- La carpeta `aidlc/` con la fase Inception aprobada\n- `specs/arquitectura.md` con el C4 y los NFRs\n- Al menos un ADR\n- En la descripción del PR: qué unidad vas a construir primero y una corrección que le hiciste al agente en alguna etapa",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Requerimientos",
+      "cumple": "`requirements.md` con requerimientos funcionales, NFRs con valores numéricos y criterios de éxito del MVP",
+      "parcial": "NFRs sin números o sin criterios de éxito",
+      "no_cumple": "No hay requerimientos"
+    },
+    {
+      "nombre": "Historias",
+      "cumple": "Historias con escenarios Gherkin de camino feliz y alternativo, con un `ENTONCES` verificable",
+      "parcial": "Historias sin escenarios alternativos o con `ENTONCES` vagos",
+      "no_cumple": "No hay historias"
+    },
+    {
+      "nombre": "Unidades",
+      "cumple": "Al menos tres unidades por dominio de negocio, con dependencias y la primera unidad elegida",
+      "parcial": "Unidades por capa técnica o sin dependencias",
+      "no_cumple": "No hay unidades"
+    },
+    {
+      "nombre": "Arquitectura",
+      "cumple": "`specs/arquitectura.md` con C4 nivel 1 y 2 en Mermaid y NFRs traducidos a tácticas verificables",
+      "parcial": "Solo el C4 o solo los NFRs",
+      "no_cumple": "No hay arquitectura"
+    },
+    {
+      "nombre": "Decisiones",
+      "cumple": "Al menos un ADR de una decisión difícil de revertir, con alternativas y consecuencias",
+      "parcial": "ADR sin alternativas o sin consecuencias",
+      "no_cumple": "No hay ADR"
+    },
+    {
+      "nombre": "Control humano",
+      "cumple": "Inception completa en `aidlc-state.md`, coherente con el stack del walking skeleton, y el PR cuenta una corrección al agente",
+      "parcial": "Inception incompleta o el diseño ignora el walking skeleton",
+      "no_cumple": "No se usó AI-DLC"
+    }
+  ]
+}

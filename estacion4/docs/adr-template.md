@@ -1,35 +1,55 @@
-# ADR-[Número]: [Título de la Decisión]
+---
+# Plantilla basada en MADR 4.0.0 (https://github.com/adr/madr). Guarda cada ADR como specs/adr/NNNN-titulo-corto.md.
+status: "{propuesto | aceptado | rechazado | deprecado | reemplazado por ADR-NNNN}"
+date: {AAAA-MM-DD de la última actualización}
+decision-makers: {quién decidió: tú, tu equipo; anota si el agente propuso la decisión}
+---
 
-> [!TIP]
-> Un buen ADR no justifica por qué algo es "bueno", sino por qué es la "mejor opción entre las disponibles" para este caso específico.
+# {Título corto que nombre el problema y la solución elegida}
 
-## Estado
-- **Estado:** [Propuesto | Aceptado | Deprecado]
-- **Fecha:** YYYY-MM-DD
-- **Decisor:** [Nombre del estudiante / IA]
+> Un buen ADR no justifica por qué algo es "bueno", sino por qué es la mejor opción entre las disponibles para este caso.
 
-## Contexto y Problema
-*Describe brevemente el desafío técnico que enfrentamos.*
-*Ejemplo: Necesitamos una forma de procesar imágenes de gran tamaño sin bloquear el hilo principal de la API para mantener una buena experiencia de usuario.*
+## Contexto y problema
 
-## Alternativas Consideradas
-1. **Opción A:** [Ej. Procesamiento Síncrono en la API] - *Descartada por impacto en latencia.*
-2. **Opción B:** [Ej. Worker con Cola de Mensajes (SQS)] - *Opción recomendada.*
-3. **Opción C:** [Ej. Solución Third-party (Cloudinary)] - *Descartada por costos altos a largo plazo.*
+{Dos o tres frases sobre el desafío técnico, de preferencia como pregunta. Di qué componente o unidad afecta.}
+*Ejemplo: ¿Cómo procesamos imágenes grandes sin bloquear la API y sin empeorar la latencia del usuario?*
+
+## Factores de decisión
+
+* {Un NFR o restricción que pesa en la decisión. Ejemplo: P95 de la API < 500 ms}
+* {Otro factor. Ejemplo: el equipo no tiene experiencia operando colas}
+
+## Opciones consideradas
+
+* {Opción A. Ejemplo: procesamiento síncrono en la API}
+* {Opción B. Ejemplo: worker con cola de mensajes}
+* {Opción C. Ejemplo: servicio externo}
 
 ## Decisión
-*Nuestra elección es **[Opción Seleccionada]**.*
 
-### Justificación Técnica
-- **Punto 1:** [Ej. Desacoplamiento total del procesamiento].
-- **Punto 2:** [Ej. Capacidad de escalar workers de forma independiente].
+Opción elegida: "{Opción B}", porque {justificación: el factor que decide}.
 
-## Consecuencias y Trade-offs
-Toda decisión técnica tiene un precio. Sé honesto:
+### Consecuencias
 
-*   **Lo bueno (Pros):** [Ej. Sistema resiliente, API siempre disponible].
-*   **Lo malo (Contras):** [Ej. Introduce complejidad de infraestructura, requiere manejo de estados 'pending' en el front].
-*   **Impacto en NFRs:** [Ej. Mejora la Disponibilidad pero aumenta la Latencia de finalización de tarea].
+* Bueno, porque {consecuencia positiva. Ejemplo: la API queda disponible aunque el procesamiento tarde}
+* Malo, porque {consecuencia negativa. Toda decisión tiene una. Ejemplo: agrega infraestructura y estados "pendiente" en el frontend}
 
----
-*Validado mediante el framework AI-DLC - Fase Inception.*
+### Confirmación
+
+{Cómo se verifica que la implementación cumple la decisión: un test, una métrica, una revisión. Ejemplo: test de carga con P95 < 500 ms en CI.}
+
+## Pros y contras de las opciones
+
+### {Opción A}
+
+* Bueno, porque {argumento}
+* Malo, porque {argumento}
+
+### {Opción C}
+
+* Bueno, porque {argumento}
+* Malo, porque {argumento}
+
+## Más información
+
+{NFR relacionado, enlaces a artefactos de AI-DLC (por ejemplo, `decisions.md` o `nfr-design/`) y cuándo conviene revisar esta decisión.}

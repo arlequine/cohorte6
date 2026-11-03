@@ -15,7 +15,8 @@ OpenAI retira `gpt-4o`, `gpt-4o-mini`, `gpt-4.1` y `gpt-4.1-mini` de la API el 1
 | Persona simulada | `gpt-6-luna` | `PERSONA_MODEL` | E8 `qa-agent-eval` |
 | Juez | `gpt-6-luna` (subir a `gpt-6-sol` si se queda corto) | `JUDGE_MODEL` | E8 `qa-agent-eval` |
 | Agente bajo prueba | `gpt-6-luna` | `AGENT_MODEL` | E8 `qa-agent-eval` |
-| Ejemplos de diseño (Claude Agent SDK) | `claude-opus-5-5` / `claude-sonnet-5-5` | — | E4, E5 `agentic_interviewer_ai` |
+| Ejemplos de diseño (Claude Agent SDK) | `claude-opus-5-5` / `claude-sonnet-5-5` | — | `ejemplos/entrevista-ai` (E4, E5) |
+| Coding agent para AI-DLC en E4 y E5 | Un modelo capaz de razonamiento, por ejemplo `claude-opus-5-5` | — | E4, E5 |
 | Agente del walking skeleton | `claude-haiku-5-5` | `ANTHROPIC_MODEL` | `plantilla-alumno`, E3 `walking-skeleton` |
 
 ## Frameworks y herramientas
@@ -29,7 +30,7 @@ OpenAI retira `gpt-4o`, `gpt-4o-mini`, `gpt-4.1` y `gpt-4.1-mini` de la API el 1
 | TypeScript | ^6.0 | `plantilla-alumno`, E3 |
 | Vitest | ^5.0 | `plantilla-alumno`, E3 (C4 usaba 2 y 4 en otros ejemplos) |
 | ESLint + `eslint-config-next` | ^9 / ^16.4 | `plantilla-alumno`, E3 |
-| AI-DLC (awslabs/aidlc-workflows) | Por verificar | E1, E4, E5 |
+| AI-DLC (awslabs/aidlc-workflows) | 2.11.2 (CLI `aidlc`, perfil `classic`), revisado el 3 de noviembre de 2026. La demo de E1 y el ejemplo `ejemplos/entrevista-ai/aidlc-docs-v1` usan las reglas 1.0.1 | E1 (demo), E4, E5 |
 | Playwright | Por definir (C4 usaba ^1.48) | E8 |
 | playwright-bdd | Por definir | E8 |
 | openai SDK | Por definir | E8, E11 |

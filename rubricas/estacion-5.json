@@ -1,0 +1,39 @@
+{
+  "etiqueta": "estacion-5",
+  "titulo": "Estación 5 · Diseñando el CÓMO con AI-DLC",
+  "fuente": "estacion5/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-5`, antes de la Estación 6, que incluya:\n- Los artefactos de Construction de tu primera unidad en `aidlc/`\n- Al menos dos ADRs en formato MADR en `specs/adr/`\n- El código de la unidad con sus tests, con CI en verde\n- En la descripción del PR: la URL de Vercel, la tabla de escenarios Gherkin y el test que verifica cada uno",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Diseño funcional",
+      "cumple": "Entidades, reglas numeradas y flujos de la unidad aprobados, con el lenguaje del dominio",
+      "parcial": "Falta uno de los tres o usa términos de implementación",
+      "no_cumple": "No hay diseño funcional"
+    },
+    {
+      "nombre": "NFRs",
+      "cumple": "NFRs de la unidad con valores numéricos verificables",
+      "parcial": "NFRs con adjetivos en lugar de números",
+      "no_cumple": "No hay NFRs"
+    },
+    {
+      "nombre": "MADR",
+      "cumple": "Al menos dos ADRs en `specs/adr/` en formato MADR, con alternativas descartadas y consecuencias negativas",
+      "parcial": "Un ADR, o ADRs sin alternativas o sin consecuencias",
+      "no_cumple": "No hay ADRs"
+    },
+    {
+      "nombre": "Código",
+      "cumple": "La unidad implementada en el stack del repo, siguiendo el diseño aprobado y desplegada",
+      "parcial": "Implementación parcial o que se aparta del diseño sin un ADR",
+      "no_cumple": "No hay código"
+    },
+    {
+      "nombre": "Tests",
+      "cumple": "Tests de reglas y de escenarios Gherkin, con la trazabilidad en el PR, y CI en verde",
+      "parcial": "Hay tests, pero sin trazabilidad a Gherkin o con CI en rojo",
+      "no_cumple": "No hay tests"
+    }
+  ]
+}

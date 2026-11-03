@@ -60,6 +60,7 @@ estacionN/
 └── repos/        ← código de práctica y demo
 plantillas/       ← plantillas de estación y de guía del mentor
 plantilla-alumno/ ← repo inicial de cada alumno: se crea en la Nivelación 1 y se completa en E3
+ejemplos/         ← artefactos de diseño de EntreVista AI, el producto de referencia (E4 a E6)
 scripts/          ← utilidades: sync-skills.sh, generar-rubricas.mjs, semaforo.mjs
 rubricas/         ← rúbricas en JSON que usa el Juez; se generan desde las guías
 deck/             ← cambios al deck comercial para la cohorte
