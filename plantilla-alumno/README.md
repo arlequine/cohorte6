@@ -34,7 +34,8 @@ Necesitas Node 22 (`nvm use` toma la versión de `.nvmrc`).
 | 1 | Tu entrega de la Nivelación 1 en `nivelacion/` |
 | 2 | Investigación en `docs/` y PRD en `specs/` |
 | 3 | El walking skeleton: endpoint del agente con Claude, logs, secret scanning en CI y deploy en Vercel |
-| 4 en adelante | Las especificaciones y el código de tu producto, estación por estación |
+| 3 y 4 | AI-DLC en las Estaciones 4 y 5: la especificación en `aidlc/` y `specs/`, y tu primera unidad con tests |
+| 4 en adelante | El resto de tu producto, estación por estación |
 
 ## Entregas y el Juez
 

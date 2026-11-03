@@ -11,6 +11,8 @@
 #
 # [directorio] es la raíz del proyecto donde viven .agents/ y .claude/ (por defecto, el actual).
 # Nunca borra skills que existan solo en .claude/skills/: esas se reportan y se dejan intactas.
+# Omite las skills aidlc y aidlc-*: las instala AI-DLC (Estaciones 4 y 5) en la carpeta de cada herramienta
+# y no deben copiarse de una herramienta a otra.
 
 set -eu
 
@@ -32,6 +34,9 @@ diferencias=0
 for dir in "$origen"/*/; do
   [ -d "$dir" ] || continue
   nombre="$(basename "$dir")"
+  case "$nombre" in
+    aidlc | aidlc-*) continue ;;
+  esac
   if [ ! -f "$dir/SKILL.md" ]; then
     echo "Omitida: $nombre (no tiene SKILL.md)"
     continue
@@ -54,6 +59,9 @@ if [ -d "$destino" ]; then
   for dir in "$destino"/*/; do
     [ -d "$dir" ] || continue
     nombre="$(basename "$dir")"
+    case "$nombre" in
+      aidlc | aidlc-*) continue ;;
+    esac
     [ -d "$origen/$nombre" ] || echo "Solo en .claude/skills (no se toca): $nombre"
   done
 fi
