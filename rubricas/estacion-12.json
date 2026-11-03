@@ -1,0 +1,27 @@
+{
+  "etiqueta": "estacion-12",
+  "titulo": "Estación 12 · Demo Day",
+  "fuente": "estacion12/README.md",
+  "entregable": "1. Escribe tu guion siguiendo la estructura de arriba.\n2. Ensáyalo en voz alta.\n3. Graba tu video.\n4. Agrega a tu repo `docs/demo-day.md` con:\n   - La URL de tu producto\n   - El enlace a tu video\n   - Tu guion\n5. Súbelo en un pull request con la etiqueta `estacion-12` y comparte el enlace a ese archivo en el formulario de la cohorte antes de la sesión, para que los mentores organicen las presentaciones.",
+  "notas": "El Demo Day no se califica. Esta lista solo verifica que tu entregable esté completo, para que los mentores puedan organizar la sesión y compartir tu trabajo.",
+  "criterios": [
+    {
+      "nombre": "URL",
+      "cumple": "`docs/demo-day.md` tiene la URL de tu producto",
+      "parcial": null,
+      "no_cumple": "No tiene la URL"
+    },
+    {
+      "nombre": "Video",
+      "cumple": "Tiene un enlace al video que se abre sin iniciar sesión",
+      "parcial": "El enlace existe, pero pide permisos o no se puede verificar",
+      "no_cumple": "No tiene video"
+    },
+    {
+      "nombre": "Guion",
+      "cumple": "Tiene un guion con las cinco partes del speech",
+      "parcial": "Guion incompleto",
+      "no_cumple": "No tiene guion"
+    }
+  ]
+}

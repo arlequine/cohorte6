@@ -1,0 +1,45 @@
+{
+  "etiqueta": "estacion-9",
+  "titulo": "Estación 9 · Despliegue con infraestructura como código",
+  "fuente": "estacion9/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-9`, antes de la Estación 10, que incluya:\n- `infra/` con la tabla, el usuario de IAM y las variables de Vercel\n- El pipeline con plan comentado en el PR, y el apply y el deploy en main funcionando\n- En la descripción: la URL de producción y una respuesta de `GET /api/historial`\n- Dos o tres líneas sobre qué detectó el `terraform plan` que no habrías visto a simple vista",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Infraestructura como código",
+      "cumple": "Tabla, usuario y variables de Vercel en Terraform; nada creado a mano",
+      "parcial": "Parte de la infraestructura creada a mano",
+      "no_cumple": "Sin Terraform"
+    },
+    {
+      "nombre": "Mínimo privilegio",
+      "cumple": "El usuario de la app solo puede leer y escribir su tabla; el rol del pipeline solo toca recursos del proyecto",
+      "parcial": "Permisos más amplios de lo necesario",
+      "no_cumple": "Credenciales de administrador en la app o en GitHub"
+    },
+    {
+      "nombre": "Pipeline",
+      "cumple": "Plan en el PR, apply y deploy en main, todo en verde",
+      "parcial": "Falta el plan en el PR o el deploy es manual",
+      "no_cumple": "No hay pipeline de infraestructura"
+    },
+    {
+      "nombre": "Secretos",
+      "cumple": "OIDC para AWS; ningún secreto en el repo ni en el código",
+      "parcial": "OIDC, pero algún valor sensible en un archivo del repo",
+      "no_cumple": "Llaves de AWS guardadas en GitHub o en el repo"
+    },
+    {
+      "nombre": "Historial",
+      "cumple": "Se guarda en producción y se puede consultar con token",
+      "parcial": "Funciona solo en local",
+      "no_cumple": "No funciona"
+    },
+    {
+      "nombre": "Reflexión",
+      "cumple": "Explica qué detectó el plan",
+      "parcial": "Descripción superficial",
+      "no_cumple": "No hay"
+    }
+  ]
+}

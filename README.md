@@ -60,10 +60,26 @@ estacionN/
 └── repos/        ← código de práctica y demo
 plantillas/       ← plantillas de estación y de guía del mentor
 plantilla-alumno/ ← repo inicial de cada alumno: se crea en la Nivelación 1 y se completa en E3
-scripts/          ← utilidades, como sync-skills.sh
+scripts/          ← utilidades: sync-skills.sh, generar-rubricas.mjs, semaforo.mjs
+rubricas/         ← rúbricas en JSON que usa el Juez; se generan desde las guías
 deck/             ← cambios al deck comercial para la cohorte
 versions.md       ← modelos, SDKs y herramientas fijados para la cohorte
 ```
+
+## Entregas, Juez y semáforo
+
+Cada alumno entrega con un pull request en su repo, con el título `<etiqueta>: <resumen>` y la etiqueta de la estación: `nivelacion-1`, `nivelacion-2` o `estacion-N`.
+
+- **Juez.** Al etiquetar el PR, la Action de `plantilla-alumno/.github/workflows/juez.yml` descarga `rubricas/<etiqueta>.json` de este repo, evalúa el PR con Claude y deja un comentario por criterio y una etiqueta `semaforo-verde`, `semaforo-amarillo` o `semaforo-rojo`. Usa la llave `ANTHROPIC_API_KEY` del alumno, que se configura en E3; antes de eso, el Juez deja instrucciones y los mentores revisan. Es orientativo: nunca bloquea el merge.
+- **Rúbricas.** La fuente es la sección `## Rúbrica` de cada guía (tabla `Criterio | Cumple | Parcial | No cumple`). Si la cambias, corre `node scripts/generar-rubricas.mjs` y sube los JSON; CI falla si no coinciden.
+- **Semáforo.** Los mentores son colaboradores de los repos de los alumnos. Con una lista `nombre,owner/repo`:
+
+  ```bash
+  GITHUB_TOKEN=... node scripts/semaforo.mjs alumnos.csv > semaforo.csv
+  GITHUB_TOKEN=... node scripts/semaforo.mjs alumnos.csv --estacion estacion-3   # incluye quién no ha entregado
+  ```
+
+  El CSV trae alumno, repo, etiqueta, PR, estado, semáforo, puntaje y fecha. Revisa primero los rojos, los amarillos y los `sin-juez`; los verdes solo necesitan una lectura rápida.
 
 ## Cómo contribuir
 

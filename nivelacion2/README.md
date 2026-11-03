@@ -42,7 +42,16 @@ La guía usa Claude Code, la herramienta de referencia. Si usas Cursor, Codex, A
    - Qué herramienta usaste y si tuviste que invocar la skill a mano
 
 ## Entregable
-`nivelacion/triage.md` en tu repo personal, antes de la Estación 1. No subas tu token de Supabase ni archivos de configuración de MCP que lo contengan.
+`nivelacion/triage.md` en tu repo personal, en un pull request con la etiqueta `nivelacion-2`, antes de la Estación 1. No subas tu token de Supabase ni archivos de configuración de MCP que lo contengan.
+
+## Rúbrica
+
+| Criterio | Cumple | Parcial | No cumple |
+|---|---|---|---|
+| Triage | La tabla final muestra los 8 tickets clasificados según las reglas de la skill | Tabla incompleta o clasificación que no sigue las reglas | No hay tabla |
+| Regla modificada | Explica qué regla cambió y qué ticket cambió de nivel por eso | Cambió una regla, pero no muestra el efecto | No cambió ninguna regla |
+| Herramienta | Indica qué coding agent usó y si invocó la skill a mano | Falta uno de los dos datos | No lo indica |
+| Secretos | Ningún token ni configuración de MCP con credenciales en el repo | — | Hay un token o una credencial en el repo |
 
 ## Cómo alimenta la siguiente estación
 El patrón modelo + MCP + skill es la base de todo el programa. En la Estación 3 lo vuelves a usar dentro del harness de tu propio producto, y desde ahí en cada estación.

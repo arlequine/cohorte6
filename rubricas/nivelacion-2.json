@@ -1,0 +1,33 @@
+{
+  "etiqueta": "nivelacion-2",
+  "titulo": "Nivelación 2 · Tu primer agente: triage de tickets con MCP y Skills",
+  "fuente": "nivelacion2/README.md",
+  "entregable": "`nivelacion/triage.md` en tu repo personal, en un pull request con la etiqueta `nivelacion-2`, antes de la Estación 1. No subas tu token de Supabase ni archivos de configuración de MCP que lo contengan.",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Triage",
+      "cumple": "La tabla final muestra los 8 tickets clasificados según las reglas de la skill",
+      "parcial": "Tabla incompleta o clasificación que no sigue las reglas",
+      "no_cumple": "No hay tabla"
+    },
+    {
+      "nombre": "Regla modificada",
+      "cumple": "Explica qué regla cambió y qué ticket cambió de nivel por eso",
+      "parcial": "Cambió una regla, pero no muestra el efecto",
+      "no_cumple": "No cambió ninguna regla"
+    },
+    {
+      "nombre": "Herramienta",
+      "cumple": "Indica qué coding agent usó y si invocó la skill a mano",
+      "parcial": "Falta uno de los dos datos",
+      "no_cumple": "No lo indica"
+    },
+    {
+      "nombre": "Secretos",
+      "cumple": "Ningún token ni configuración de MCP con credenciales en el repo",
+      "parcial": null,
+      "no_cumple": "Hay un token o una credencial en el repo"
+    }
+  ]
+}

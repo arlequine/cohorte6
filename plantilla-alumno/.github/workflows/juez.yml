@@ -1,0 +1,43 @@
+name: Juez
+
+# Primera revisión automática de cada entrega contra la rúbrica de su estación.
+# Corre en los PR con etiqueta estacion-N o nivelacion-N. Es orientativo: nunca bloquea el merge.
+# Necesita el secreto ANTHROPIC_API_KEY (lo configuras en la Estación 3). La variable JUEZ_MODELO es opcional.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: juez-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  evaluar:
+    if: >-
+      github.event.pull_request.draft == false &&
+      (contains(join(github.event.pull_request.labels.*.name, ' '), 'estacion-') ||
+       contains(join(github.event.pull_request.labels.*.name, ' '), 'nivelacion-')) &&
+      (github.event.action != 'labeled' ||
+       startsWith(github.event.label.name, 'estacion-') ||
+       startsWith(github.event.label.name, 'nivelacion-'))
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Evaluar contra la rúbrica
+        run: node scripts/juez.ts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JUEZ_MODELO: ${{ vars.JUEZ_MODELO }}

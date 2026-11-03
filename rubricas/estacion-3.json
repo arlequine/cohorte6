@@ -1,0 +1,45 @@
+{
+  "etiqueta": "estacion-3",
+  "titulo": "Estación 3 · Harness engineering y walking skeleton",
+  "fuente": "estacion3/README.md",
+  "entregable": "Un pull request en tu repo personal, con la etiqueta `estacion-3`, antes de la Estación 4, que incluya:\n- Los siete puntos de la tarea, con CI en verde\n- La URL de Vercel en la descripción del PR\n- Dos o tres líneas sobre qué tuviste que corregirle al agente y qué cambió después de completar `AGENTS.md`",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Despliegue",
+      "cumple": "La URL responde y el endpoint exige el token",
+      "parcial": "La URL responde, pero el endpoint está abierto",
+      "no_cumple": "No está desplegado"
+    },
+    {
+      "nombre": "Agente",
+      "cumple": "Valida la entrada, lee el modelo del entorno y maneja errores",
+      "parcial": "Responde, pero sin validación o sin manejo de errores",
+      "no_cumple": "No responde"
+    },
+    {
+      "nombre": "Tests",
+      "cumple": "Lógica y ruta probadas sin llamar a la API real",
+      "parcial": "Hay tests, pero llaman a la API o no cubren errores",
+      "no_cumple": "Sin tests"
+    },
+    {
+      "nombre": "Harness",
+      "cumple": "`AGENTS.md` completo y una skill propia sincronizada",
+      "parcial": "Uno de los dos",
+      "no_cumple": "Ninguno"
+    },
+    {
+      "nombre": "CI",
+      "cumple": "Verde, con verify, skills sincronizadas y secret scanning",
+      "parcial": "Verde, sin secret scanning",
+      "no_cumple": "Rojo o inexistente"
+    },
+    {
+      "nombre": "Reflexión",
+      "cumple": "Explica qué corrigió y qué cambió con el harness",
+      "parcial": "Descripción superficial",
+      "no_cumple": "No hay"
+    }
+  ]
+}

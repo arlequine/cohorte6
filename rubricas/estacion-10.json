@@ -1,0 +1,45 @@
+{
+  "etiqueta": "estacion-10",
+  "titulo": "Estación 10 · Seguridad",
+  "fuente": "estacion10/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-10`, antes de la Estación 11, que incluya:\n- Los controles en el pipeline, en verde\n- `docs/modelo-amenazas.md`, `docs/seguridad.md` y `docs/runbook-dr.md`\n- El resultado del red team (`docs/red-team.md`)\n- Al menos un hallazgo **cerrado y verificado**: el cambio que lo corrige y la evidencia de que ya no ocurre",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Controles en el pipeline",
+      "cumple": "Semgrep, `npm audit`, Dependabot y gitleaks; el deploy espera a que pasen",
+      "parcial": "Faltan uno o dos controles, o el deploy no espera",
+      "no_cumple": "Sin controles nuevos"
+    },
+    {
+      "nombre": "Modelo de amenazas",
+      "cumple": "Los diez riesgos evaluados para su producto y los tres principales justificados",
+      "parcial": "Evaluación genérica, no aplicada a su producto",
+      "no_cumple": "No hay"
+    },
+    {
+      "nombre": "Red team",
+      "cumple": "Corrido contra su URL, con al menos dos casos propios",
+      "parcial": "Solo los casos de la solución de referencia",
+      "no_cumple": "No se corrió"
+    },
+    {
+      "nombre": "Hallazgo cerrado",
+      "cumple": "Cambio en el código o la infraestructura con evidencia reproducible",
+      "parcial": "Cambio sin evidencia, o evidencia sin cambio",
+      "no_cumple": "Ningún hallazgo cerrado"
+    },
+    {
+      "nombre": "Recuperación",
+      "cumple": "PITR y protección contra borrado activos, y runbook con pasos y comandos",
+      "parcial": "Solo uno de los dos",
+      "no_cumple": "Nada"
+    },
+    {
+      "nombre": "Reporte",
+      "cumple": "Claro, con severidad, impacto y estado de cada hallazgo",
+      "parcial": "Incompleto",
+      "no_cumple": "No hay"
+    }
+  ]
+}
