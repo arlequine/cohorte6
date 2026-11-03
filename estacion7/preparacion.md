@@ -1,8 +1,8 @@
 # Antes de estación 7: prepara todas las tareas
 
-**Fecha de clase:** martes 15 de septiembre de 2026, 7 PM Bogotá. **Tiempo orientativo:** 75–105 minutos; depende del tamaño y madurez de tu proyecto. Continúa el paquete iniciado en clase. Entrega antes de la clase en el canal habitual del curso.
+**Cuándo:** entre la Estación 6 y la 7. **Tiempo orientativo:** 75–105 minutos; depende del tamaño y madurez de tu proyecto. Continúa el paquete iniciado en clase y entrégalo en un pull request con la etiqueta `estacion-6` antes de la Estación 7.
 
-Prepara todas las tareas necesarias para implementar el alcance definido de tu proyecto en estaciones 4 y 5. Usa la skill de OpenSymphony `create-implementation-plan` para generar y revisar el paquete completo. En estación 7 el instructor mostrará cómo despachar tareas por dependencias; después podrás aplicar el proceso a tu proyecto. No es necesario implementar todo antes de clase. Si te falta tu diseño, usa los artefactos de EntreVista AI de estación 5; el validador de contraseña es solo una muestra del formato.
+Prepara todas las tareas necesarias para implementar el alcance definido de tu proyecto en estaciones 4 y 5. Usa la skill de OpenSymphony `create-implementation-plan` para generar y revisar el paquete completo. En la Estación 7 verás cómo despachar tareas por dependencias y despacharás la primera de tu plan. No es necesario implementar nada antes de clase. Si te falta tu diseño, usa los artefactos de EntreVista AI en [`ejemplos/entrevista-ai/`](../ejemplos/entrevista-ai/); el validador de contraseña es solo una muestra del formato.
 
 ## 1. Revisa el mapa (5 minutos)
 
@@ -12,35 +12,30 @@ Nuestro recorrido será: tarea lista → ejecución → pruebas → revisión �
 
 ## 2. Comprueba tus herramientas (10–15 minutos)
 
-Mantén el arnés que ya usas en el curso. Comprueba que puedes abrir el repositorio, hacer una consulta sobre un archivo y ejecutar un comando con tu cuenta autenticada. No necesitas instalar varios arneses.
+Mantén el coding agent que ya usas en el curso (lo instalaste en la [Nivelación 1](../nivelacion1/README.md)). Comprueba que puedes abrir tu repositorio, hacer una consulta sobre un archivo y ejecutar un comando con tu cuenta autenticada. No necesitas instalar varios.
 
-Si aún no tienes ninguno, usa Claude Code siguiendo la [instalación oficial](https://code.claude.com/docs/en/quickstart). Requiere una cuenta con acceso; instalarlo no concede una suscripción.
-
-| Sistema | Instalación de Claude Code |
-|---|---|
-| macOS con Homebrew | `brew install --cask claude-code` |
-| Windows con WinGet | `winget install Anthropic.ClaudeCode` |
-| Linux, macOS sin Homebrew o WSL | Sigue la opción nativa de la guía oficial |
-
-Ejecuta `claude --version`, abre `claude` en tu repo y completa la autenticación. Si ya usas otro arnés, registra su nombre y versión o pantalla de información.
+Registra el nombre y la versión de tu herramienta (`claude --version` en Claude Code).
 
 Comprueba Git con `git --version`; si falta, usa [Git para tu sistema](https://git-scm.com/install/). Abre una terminal en tu proyecto y ejecuta `git status`. Debe reconocer el repositorio. No borres cambios existentes para dejarlo limpio.
 
-En **GitHub**, inicia sesión y confirma que puedes acceder al repo donde trabajarás y crear una rama/PR. En **Linear**, entra al espacio del curso y confirma que puedes crear y editar una tarea en el equipo acordado. No hace falta configurar una API ni MCP para esta preparación: la interfaz web sirve.
+En **GitHub**, inicia sesión y confirma que puedes acceder al repo donde trabajarás y crear una rama/PR. En **Linear**, usa un workspace propio (el plan gratuito permite 250 issues y dos equipos, así que uno compartido por la cohorte se llena) y confirma que puedes crear y editar una tarea. Para publicar desde tu agente, configura el [MCP de Linear](https://linear.app/docs/mcp) (`https://mcp.linear.app/mcp`); si no, la interfaz web sirve.
 
 **Smoke test del arnés:** pide «Lee el README y las instrucciones de este repo; dime el objetivo y el comando de pruebas, citando los archivos. No modifiques nada». Comprueba tú las referencias.
 
 ## 3. Genera el plan completo con la skill (35–50 minutos)
 
-La [skill create-implementation-plan](../estacion6/skills/create-implementation-plan/SKILL.md) está incluida en el material. Abre su archivo en tu arnés y pídele que lo lea y siga. No necesitas instalar OpenSymphony para usar estas instrucciones. Si ya tienes la skill instalada, invócala por su nombre.
+La [skill create-implementation-plan](../estacion6/skills/create-implementation-plan/SKILL.md) está incluida en el material. Copia su carpeta a `.agents/skills/` de tu repo y corre `npm run sync-skills`: así la encuentra cualquier herramienta. No necesitas instalar OpenSymphony para usarla.
 
-Trabaja en la raíz de tu proyecto. Proporciona las rutas reales a tu PRD, Inception, Construction, decisiones técnicas y código existente. Envía este prompt:
+Trabaja en la raíz de tu proyecto, en una rama `estacion-6`. Tus artefactos están en `specs/` (PRD, arquitectura y ADRs) y en `aidlc/spaces/default/intents/<tu-intención>/` (Inception y Construction de AI-DLC). Envía este prompt:
 
 ```text
 Usa la skill create-implementation-plan para preparar TODAS las tareas
 necesarias para implementar el alcance aprobado de mi proyecto.
-Lee primero mis artefactos de estaciones 4 y 5 y el estado actual del repo.
+Lee primero specs/, los artefactos de AI-DLC en aidlc/ (sobre todo las unidades
+de trabajo y el plan de entrega) y el estado actual del repo.
 No limites el plan a una feature ni a una tarea de muestra.
+La arquitectura ya está en specs/arquitectura.md: no crees docs/architecture.md
+y no reescribas AGENTS.md; si propones cambios, déjalos como sugerencia.
 
 Crea docs/tasks/task-package.yaml, docs/tasks/milestones.md y un archivo
 Markdown por tarea con el frontmatter y las secciones exigidos por la skill.
@@ -77,31 +72,30 @@ Pide al agente una segunda pasada de revisión del paquete y comprueba tú sus c
 - Cada tarea tiene aceptación observable y un plan de validación concreto.
 - Hay tareas iniciales ejecutables; los bloqueos restantes están explícitos.
 
-Ejecuta la validación disponible del repo y registra el resultado actual. No inventes pruebas exitosas. Si no existe runner, incluye su preparación como tarea y expresa las dependencias correspondientes. Mantén contexto y decisiones en los archivos existentes de tu proyecto; no reemplaces las reglas de AI-DLC.
+Ejecuta la validación disponible del repo y registra el resultado actual. No inventes pruebas exitosas. Si no existe runner, incluye su preparación como tarea y expresa las dependencias correspondientes. Mantén contexto y decisiones en los archivos existentes de tu proyecto; no reemplaces los archivos de AI-DLC.
 
 ## 5. Prepara la publicación en Linear (10 minutos)
 
 Revisa primero el paquete completo. `create-implementation-plan` genera el plan; la publicación es un paso separado. Con `convert-tasks-to-linear`, si lo tienes disponible, valida el paquete y revisa el dry-run antes de autorizar la publicación en el equipo y proyecto correctos.
 
-También puedes publicarlo por la interfaz web. Mantén correspondencia entre IDs locales e issues reales, milestones y dependencias. No publiques de nuevo tareas ya existentes. Usa un proyecto de preparación sin despacho automático activo: publicar en un proyecto observado por un orquestador puede iniciar trabajo.
+También puedes publicarlo desde tu agente con el MCP de Linear o por la interfaz web. Mantén correspondencia entre IDs locales e issues reales, milestones y dependencias. No publiques de nuevo tareas ya existentes. Usa un proyecto de preparación sin despacho automático activo: publicar en un proyecto observado por un orquestador puede iniciar trabajo.
 
 Si faltan acceso, integración o tiempo de publicación, entrega el paquete completo validado y registra «publicación pendiente». Ese bloqueo no justifica reducirlo a una tarea. La importación puede resolverse en E7.
 
 ## 6. Entrega (5 minutos)
 
-- Enlace al repo con manifest, milestones y **todos** los archivos de tareas.
-- Tabla de cobertura y resultado de la revisión del grafo.
-- Enlace al proyecto de Linear y correspondencia de IDs, o bloqueo de publicación.
-- Arnés utilizado y comando de validación con resultado real, sin credenciales.
-- Primera tarea ejecutable identificada y una pregunta para clase.
+Abre un pull request con la etiqueta `estacion-6` (ver la [guía de la Estación 6](../estacion6/README.md#entregable)) con:
+
+- Manifest, milestones y **todos** los archivos de tareas, más la tabla de cobertura.
+- En la descripción: resultado de la revisión del grafo, enlace al proyecto de Linear con la correspondencia de IDs (o el bloqueo de publicación), herramienta utilizada, comando de validación con su resultado real (sin credenciales), primera tarea ejecutable y una pregunta para clase.
 
 **El plan está preparado** cuando cubre todo el alcance y permite decidir qué ejecutar primero y qué debe esperar. **Necesitas apoyo** si quedan requisitos sin descomponer o decisiones que impiden planificar. Reporta sistema operativo, paso, comando y error exacto después de 10 minutos de bloqueo de instalación.
 
 ## Qué haremos en estación 7
 
-Recorreremos las seis secciones del curso de Parlina y veremos una demo del instructor: instalación de OpenSymphony, planificación completa, publicación en Linear, despacho, revisión por agentes y landing de una tarea revisada previamente. Después exploraremos los grafos de tareas, conocimiento y código. Instalar OpenSymphony, EBO, Prime Agent o exo no es requisito de esta preparación.
+Veremos los patrones de coordinación de agentes y una demo de OpenSymphony: despacho, revisión por agentes, integración de una tarea revisada y los grafos de tareas y memoria. Después despacharás la primera tarea de tu plan, con OpenSymphony o a mano con tu agente (ver la [guía de la Estación 7](README.md)).
 
-Ruta de la clase: 50 minutos de conceptos y recorrido por Parlina, 60 de demo en vivo y 10 de preguntas. La implementación de tu proyecto continúa después de clase; no habrá bloques de ejercicios durante la sesión.
+Instalar OpenSymphony es opcional. Si quieres usarlo en clase, llega con Rust 1.97.1 o más nuevo y `cargo install opensymphony` terminado; tarda en compilar.
 
 ## Recursos y profundización opcional
 

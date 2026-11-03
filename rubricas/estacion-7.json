@@ -1,0 +1,39 @@
+{
+  "etiqueta": "estacion-7",
+  "titulo": "Estación 7 · Orquestación de agentes de código",
+  "fuente": "estacion7/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-7`, antes de la Estación 8, que incluya `docs/tasks/ejecucion-e7.md` con:\n- Al menos tres tareas del plan cerradas, cada una con su issue de Linear y su PR integrado\n- Por PR: la revisión del agente, lo que corregiste y la evidencia de validación\n- La ruta que usaste (A o B) y el arnés\n- Dos o tres líneas sobre qué cambiarías en tus tareas o en tu harness después de verlas ejecutarse",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Tareas",
+      "cumple": "Al menos tres tareas del plan cerradas, cada una en su PR integrado",
+      "parcial": "Una o dos tareas cerradas",
+      "no_cumple": "Ninguna tarea cerrada"
+    },
+    {
+      "nombre": "Revisión",
+      "cumple": "Cada PR tiene revisión de un agente y revisión humana, con los comentarios atendidos",
+      "parcial": "Falta una de las dos revisiones en algún PR",
+      "no_cumple": "Los PR se integraron sin revisión"
+    },
+    {
+      "nombre": "Evidencia",
+      "cumple": "Cada PR muestra comandos y resultados de validación y los criterios de aceptación cumplidos, con CI en verde",
+      "parcial": "Evidencia incompleta en algún PR",
+      "no_cumple": "Sin evidencia"
+    },
+    {
+      "nombre": "Dependencias",
+      "cumple": "Las tareas se despacharon en el orden que permite el grafo y Linear refleja su estado",
+      "parcial": "Alguna tarea fuera de orden o Linear desactualizado",
+      "no_cumple": "No se respetaron dependencias"
+    },
+    {
+      "nombre": "Memoria",
+      "cumple": "Hay handoff o memoria por tarea y la bitácora muestra cómo se usó en la siguiente",
+      "parcial": "Handoff sin uso posterior",
+      "no_cumple": "No hay handoff ni memoria"
+    }
+  ]
+}
