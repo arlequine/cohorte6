@@ -1,0 +1,45 @@
+{
+  "etiqueta": "estacion-8",
+  "titulo": "Estación 8 · Aseguramiento de calidad",
+  "fuente": "estacion8/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-8`, antes de la Estación 9, que incluya:\n- La skill `qa-testing` adaptada a tu producto\n- Las pruebas E2E, BDD y de API, en verde en CI\n- `evals/` con personas, rúbrica, fallos críticos y golden dataset\n- El workflow de calidad con el job de evaluación en verde\n- En la descripción del PR: el resultado de la calibración del Juez y una captura de la configuración de checks obligatorios",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "E2E",
+      "cumple": "Dos flujos críticos con Page Objects, locators por rol o etiqueta y sin esperas fijas",
+      "parcial": "Un flujo, o tests con selectores sueltos",
+      "no_cumple": "No hay E2E"
+    },
+    {
+      "nombre": "BDD",
+      "cumple": "Un `.feature` en español con tres escenarios, incluidos casos de red teaming del PRD, que se ejecutan",
+      "parcial": "Escenarios que no se ejecutan o sin casos del PRD",
+      "no_cumple": "No hay escenarios"
+    },
+    {
+      "nombre": "API",
+      "cumple": "Contratos y errores del endpoint del agente probados con request builders",
+      "parcial": "Solo el camino feliz o llamadas sueltas",
+      "no_cumple": "No hay pruebas de API"
+    },
+    {
+      "nombre": "Evaluación",
+      "cumple": "Personas con casos adversariales, rúbrica alineada al PRD y fallos críticos verificados con código",
+      "parcial": "Rúbrica genérica o sin fallos críticos",
+      "no_cumple": "No hay evaluación del agente"
+    },
+    {
+      "nombre": "Calibración",
+      "cumple": "Golden dataset etiquetado por el alumno y concordancia del Juez de 80 % o más",
+      "parcial": "Golden dataset sin calibración o concordancia menor",
+      "no_cumple": "No hay golden dataset"
+    },
+    {
+      "nombre": "Gate en CI",
+      "cumple": "Workflow de calidad en verde, con los jobs como checks obligatorios",
+      "parcial": "Workflow en verde pero sin checks obligatorios",
+      "no_cumple": "No hay workflow"
+    }
+  ]
+}
