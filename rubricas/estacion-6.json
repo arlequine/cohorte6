@@ -1,0 +1,39 @@
+{
+  "etiqueta": "estacion-6",
+  "titulo": "Estación 6 · Del spec al plan de implementación",
+  "fuente": "estacion6/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-6`, antes de la Estación 7, que incluya:\n- `docs/tasks/` con el manifest, los milestones, **todos** los archivos de tareas y `cobertura.md`\n- En la descripción del PR: el enlace al proyecto de Linear con la correspondencia de IDs (o \"publicación pendiente\" con el bloqueo), la primera tarea ejecutable y el resultado de la revisión del grafo",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Cobertura",
+      "cumple": "`cobertura.md` vincula cada requisito del alcance con tareas o con evidencia existente, y los vacíos están explícitos",
+      "parcial": "Hay requisitos sin tarea ni evidencia, o el plan cubre solo una parte del alcance",
+      "no_cumple": "No hay tabla de cobertura"
+    },
+    {
+      "nombre": "Tareas",
+      "cumple": "Cada tarea tiene alcance, fuera de alcance, criterios de aceptación observables y un plan de validación con comandos reales",
+      "parcial": "Tareas con criterios vagos o sin plan de validación",
+      "no_cumple": "Tareas de una línea o sin archivo propio"
+    },
+    {
+      "nombre": "Grafo",
+      "cumple": "IDs únicos, milestones y dependencias válidos, sin ciclos, con tareas ejecutables identificadas y bloqueos explícitos",
+      "parcial": "Errores de referencias o bloqueos sin explicar",
+      "no_cumple": "No hay dependencias"
+    },
+    {
+      "nombre": "Trazabilidad",
+      "cumple": "Las tareas citan los artefactos de AI-DLC y `specs/` de los que salen",
+      "parcial": "Algunas tareas sin referencia a la especificación",
+      "no_cumple": "Las tareas no se relacionan con el diseño"
+    },
+    {
+      "nombre": "Publicación",
+      "cumple": "Publicado en Linear con correspondencia de IDs, o bloqueo documentado",
+      "parcial": "Publicado sin correspondencia de IDs",
+      "no_cumple": "No se intentó publicar ni se explica por qué"
+    }
+  ]
+}
