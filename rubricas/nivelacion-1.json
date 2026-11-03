@@ -1,0 +1,33 @@
+{
+  "etiqueta": "nivelacion-1",
+  "titulo": "Nivelación 1 · Tu entorno y tu punto de partida",
+  "fuente": "nivelacion1/README.md",
+  "entregable": "Tu repo `ai4dev-<tu-usuario>` con:\n- `nivelacion/entrega.md` completo\n- `nivelacion/reto/` con el código y los tests del reto\n\nSúbelo en un pull request con la etiqueta `nivelacion-1` (así se entregan todas las estaciones; ver [Entregas y el Juez](../plantilla-alumno/README.md#entregas-y-el-juez)) y comparte el enlace del repo en el formulario de la cohorte antes de la Estación 1.",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Entorno",
+      "cumple": "Todo lo obligatorio en verde",
+      "parcial": "Falta una herramienta obligatoria",
+      "no_cumple": "Faltan dos o más"
+    },
+    {
+      "nombre": "Repo personal",
+      "cumple": "Creado, con `entrega.md` y el reto",
+      "parcial": "Creado, con entregable incompleto",
+      "no_cumple": "No existe"
+    },
+    {
+      "nombre": "Diagnóstico",
+      "cumple": "Las 20 preguntas calificadas",
+      "parcial": "Incompleto",
+      "no_cumple": "No entregado"
+    },
+    {
+      "nombre": "Reto",
+      "cumple": "Tests pasando y notas sobre cómo trabajaste con el agente",
+      "parcial": "Código sin tests o tests fallando",
+      "no_cumple": "No entregado"
+    }
+  ]
+}

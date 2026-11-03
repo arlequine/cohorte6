@@ -34,6 +34,7 @@ Respuestas cortas a lo que siempre se pregunta.
 
 ## Cierre y refuerzo
 - Qué recordar de la tarea y el entregable
+- Revisión de entregas: corre `node scripts/semaforo.mjs alumnos.csv --estacion <etiqueta>` y revisa primero los rojos, amarillos, `sin-juez` y `sin-pr`
 - Qué revisar en la sesión de refuerzo
 
 ## Notas para el siguiente mentor

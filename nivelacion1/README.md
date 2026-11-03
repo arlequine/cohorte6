@@ -106,7 +106,7 @@ Tu repo `ai4dev-<tu-usuario>` con:
 - `nivelacion/entrega.md` completo
 - `nivelacion/reto/` con el código y los tests del reto
 
-Comparte el enlace del repo en el formulario de la cohorte antes de la Estación 1.
+Súbelo en un pull request con la etiqueta `nivelacion-1` (así se entregan todas las estaciones; ver [Entregas y el Juez](../plantilla-alumno/README.md#entregas-y-el-juez)) y comparte el enlace del repo en el formulario de la cohorte antes de la Estación 1.
 
 ## Rúbrica
 

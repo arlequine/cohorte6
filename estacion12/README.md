@@ -46,7 +46,16 @@ Súbelo a un enlace que se pueda abrir sin iniciar sesión (YouTube no listado, 
    - La URL de tu producto
    - El enlace a tu video
    - Tu guion
-5. Comparte el enlace a ese archivo en el formulario de la cohorte antes de la sesión, para que los mentores organicen las presentaciones.
+5. Súbelo en un pull request con la etiqueta `estacion-12` y comparte el enlace a ese archivo en el formulario de la cohorte antes de la sesión, para que los mentores organicen las presentaciones.
+
+## Rúbrica
+El Demo Day no se califica. Esta lista solo verifica que tu entregable esté completo, para que los mentores puedan organizar la sesión y compartir tu trabajo.
+
+| Criterio | Cumple | Parcial | No cumple |
+|---|---|---|---|
+| URL | `docs/demo-day.md` tiene la URL de tu producto | — | No tiene la URL |
+| Video | Tiene un enlace al video que se abre sin iniciar sesión | El enlace existe, pero pide permisos o no se puede verificar | No tiene video |
+| Guion | Tiene un guion con las cinco partes del speech | Guion incompleto | No tiene guion |
 
 ## Checklist del día
 

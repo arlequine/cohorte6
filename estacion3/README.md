@@ -60,7 +60,7 @@ Trabaja en tu repo personal, con tu coding agent. Pídele los cambios por partes
 4. **Agrega logs en JSON.** Un evento por petición con el modelo, los tokens y la duración.
 5. **Crea una skill propia.** Un procedimiento que vayas a repetir en tu proyecto, en `.agents/skills/`. Corre `npm run sync-skills`.
 6. **Agrega secret scanning al CI.** Un job con gitleaks en `.github/workflows/ci.yml`.
-7. **Despliega en Vercel.** Importa tu repo, define `ANTHROPIC_API_KEY` y `AGENT_ACCESS_TOKEN` en las variables de entorno y verifica que la URL responde.
+7. **Despliega en Vercel.** Importa tu repo, define `ANTHROPIC_API_KEY` y `AGENT_ACCESS_TOKEN` en las variables de entorno y verifica que la URL responde. Agrega también `ANTHROPIC_API_KEY` como secreto del repo en GitHub (**Settings → Secrets and variables → Actions**): desde aquí el Juez evalúa tus entregas.
 
 Antes de cada commit, el pre-commit corre `npm run verify`. Si no lo tienes activo, corre `npm run hooks`.
 
