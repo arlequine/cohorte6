@@ -1,12 +1,12 @@
-# Banco de Productos Curados — AI for Developers | 30X (Cohorte 4)
+# Banco de Productos Curados — AI for Developers | 30X
 
 ## Cuatro oportunidades reales para construir en 6 semanas
 
 El equipo de 30X realizó un análisis de oportunidades de mercado y seleccionó cuatro productos con alto potencial, evidencia validada en la industria y factibilidad técnica dentro del tiempo del programa. En la Cohorte 1, estudiantes construyeron productos funcionales en estas mismas categorías y los presentaron ante founders de la red 30X.
 
-**Tu misión:** elegir uno y convertirlo en un producto funcional end-to-end, semana a semana hasta el Demo Day (octubre 1, 2026).
+**Tu misión:** elegir uno y convertirlo en un producto funcional end-to-end, semana a semana hasta el Demo Day.
 
-> **Importante:** elige el producto en el que te sea más fácil encontrar clientes o usuarios reales con quienes validar tu solución a lo largo de las 6 semanas (agosto 25 — septiembre 29). El acceso continuo a personas del dominio es clave para que el producto evolucione con feedback real.
+> **Importante:** elige el producto en el que te sea más fácil encontrar clientes o usuarios reales con quienes validar tu solución a lo largo de las 6 semanas del programa. El acceso continuo a personas del dominio es clave para que el producto evolucione con feedback real.
 
 ---
 
@@ -190,4 +190,4 @@ Todas las opciones son viables y factibles en 6 semanas. La clave para elegir bi
 
 **Elige el Sistema de Escrow Autónomo** si tu entorno se compone del ecosistema Web3, empresas de Fintech o builders que implementan infraestructuras de transacciones para aplicaciones B2B.
 
-> **Recuerda:** el producto que elijas lo presentarás en el Demo Day ante founders de la red 30X. Los mejores proyectos tendrán la oportunidad de presentar en vivo. Elige con ambición.
+> **Recuerda:** el producto que elijas lo presentarás en el Demo Day, en vivo y en un video de tres minutos. Elige con ambición.

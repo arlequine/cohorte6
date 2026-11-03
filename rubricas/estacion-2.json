@@ -1,0 +1,45 @@
+{
+  "etiqueta": "estacion-2",
+  "titulo": "Estación 2 · De la idea a la definición",
+  "fuente": "estacion2/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-2`, antes de la Estación 3, que incluya:\n- `docs/` con tu PVB refinado y tu investigación\n- `docs/conflictos.md` con los conflictos y tus decisiones\n- `specs/prd.md` con los 13 segmentos\n- Solo FDE: `docs/stakeholders.md`",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Conflictos",
+      "cumple": "`docs/conflictos.md` lista las contradicciones de tus documentos y la decisión tomada en cada una",
+      "parcial": "Lista conflictos, pero sin decisiones o con decisiones sin justificar",
+      "no_cumple": "No hay análisis de conflictos"
+    },
+    {
+      "nombre": "PRD",
+      "cumple": "`specs/prd.md` tiene los 13 segmentos y se apoya en lo que hay en `docs/`",
+      "parcial": "Faltan segmentos o hay contenido genérico que no sale de tus documentos",
+      "no_cumple": "No hay PRD"
+    },
+    {
+      "nombre": "Métricas",
+      "cumple": "Una North Star, KPIs con meta y métricas de calidad del agente con su forma de medirlas",
+      "parcial": "Métricas sin meta o sin las del agente",
+      "no_cumple": "No hay métricas"
+    },
+    {
+      "nombre": "Evaluación del agente",
+      "cumple": "Dataset de prueba, criterios con umbral y casos adversariales",
+      "parcial": "Plan sin umbrales o sin casos adversariales",
+      "no_cumple": "No hay plan de evaluación"
+    },
+    {
+      "nombre": "Alcance",
+      "cumple": "MVP en MoSCoW con un Must acotado y los Won't Have justificados",
+      "parcial": "Todo es Must o no hay Won't Have",
+      "no_cumple": "No hay alcance"
+    },
+    {
+      "nombre": "Honestidad",
+      "cumple": "Lo que no se sabe está marcado como TBD con cómo averiguarlo",
+      "parcial": "Algunas cifras o afirmaciones sin fuente",
+      "no_cumple": "El PRD inventa datos que no están en `docs/`"
+    }
+  ]
+}

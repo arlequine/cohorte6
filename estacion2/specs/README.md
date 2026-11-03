@@ -1,26 +1,5 @@
 # specs/
 
-Esta carpeta es **el output** del pipeline de co-creación.
+El output de la Estación 2. Aquí está el PRD de EntreVista AI, el ejemplo trabajado: `prd.md`, generado con el Prompt 1 de `prompts-especificacion.md` a partir de `docs/`.
 
-Cuando ejecutes los prompts de `prompts-especificacion.md` con Claude, los documentos consolidados se guardan acá:
-
-| Archivo | Origen | Cuándo |
-|---------|--------|--------|
-| `prd.md` | Prompt 1 — PRD | Esta semana (tu primera tarea) |
-| `arquitectura.md` | Prompt 2 — Arquitectura técnica | Estación 3 — Especificación y Arquitectura (MADR) |
-| `backlog.md` | Prompt 3 — Backlog de ingeniería | Estaciones de Implementación (E4-E6) |
-
----
-
-## Tu tarea para esta semana
-
-Producir `specs/prd.md` siguiendo:
-
-1. **Refinar tu PVB** con los frameworks de la Estación 2.
-2. **Crear tu carpeta `docs/`** con tus documentos de research (PVB, mercado, ICP, etc.).
-3. **Abrir Claude (Pro recomendado)** o ChatGPT.
-4. **Pegar el Prompt 1** de `prompts-especificacion.md` y adjuntar TODOS tus documentos de `docs/`.
-5. **Co-crear segmento por segmento.** No avanzar hasta aprobar el actual.
-6. **Consolidar el PRD final** en `specs/prd.md`.
-
-> **No borres este `README.md`** — sirve para que cualquiera que clone el repo entienda qué va acá.
+En tu repo personal, tu PRD va en `specs/prd.md`. En las Estaciones 4 y 5 el flujo AI-DLC parte de ese PRD y agrega aquí los artefactos de diseño.

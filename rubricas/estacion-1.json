@@ -1,0 +1,39 @@
+{
+  "etiqueta": "estacion-1",
+  "titulo": "Estación 1 · Introducción y demostración",
+  "fuente": "estacion1/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-1`, antes de la Estación 2, que incluya:\n- `docs/pvb.md` o `docs/isb.md`\n- Tu investigación de validación en `docs/`\n- `docs/critica.md`",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Template",
+      "cumple": "PVB o ISB con todas las secciones llenas o marcadas como pendientes con lo que falta investigar",
+      "parcial": "Secciones vacías sin explicación o con respuestas genéricas",
+      "no_cumple": "No hay PVB ni ISB"
+    },
+    {
+      "nombre": "Problema",
+      "cumple": "Un dolor concreto de un usuario o área concreta, cuantificado, con un análisis de por qué sobrevive al próximo modelo",
+      "parcial": "Problema general o sin análisis de durabilidad",
+      "no_cumple": "No hay problema definido"
+    },
+    {
+      "nombre": "Validación",
+      "cumple": "Deep research de validación en Markdown, con fuentes",
+      "parcial": "Investigación sin fuentes o fuera de `docs/`",
+      "no_cumple": "No hay investigación de validación"
+    },
+    {
+      "nombre": "Crítica",
+      "cumple": "`docs/critica.md` con riesgos concretos y por qué fracasan productos parecidos, y el template refleja lo que encontró",
+      "parcial": "Hay crítica, pero el template no cambió con ella",
+      "no_cumple": "No hay crítica"
+    },
+    {
+      "nombre": "Honestidad",
+      "cumple": "Las cifras tienen fuente y lo que no se sabe está marcado como pendiente",
+      "parcial": "Algunas cifras sin fuente",
+      "no_cumple": "El template inventa datos que no están en la investigación"
+    }
+  ]
+}
