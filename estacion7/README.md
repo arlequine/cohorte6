@@ -20,7 +20,11 @@ Pasar del plan a la ejecución: despachar tareas de tu plan a agentes respetando
 | 110–120 | Entregable, rúbrica y preguntas | Claridad sobre lo que sigue |
 
 ## Ejemplo trabajado
-La demo usa un plan de EntreVista AI publicado en Linear: una tarea nueva para mostrar el despacho y otra que ya pasó por varias rondas de revisión para mostrar la integración. Los conceptos de la primera parte están resumidos en las slides ([HTML](estacion7.html), [PDF](estacion7.pdf)); las capturas de la app son de la documentación de OpenSymphony y tienen datos de ejemplo.
+La demo usa un plan de EntreVista AI publicado en Linear: una tarea nueva para mostrar el despacho y otra que ya pasó por varias rondas de revisión para mostrar la integración.
+
+Material de apoyo:
+- [`conceptos.md`](conceptos.md): la guía de la primera parte (capas, problemas, patrones, Symphony y gobernanza), con fuentes y una pregunta por sección para tu proyecto
+- Slides en [HTML](estacion7.html) y [PDF](estacion7.pdf). Las capturas de la app son de la documentación de OpenSymphony y tienen datos de ejemplo
 
 ## Tu tarea
 Trabaja en tu repo personal. Elige una de dos rutas; las dos cuentan igual.
@@ -85,4 +89,4 @@ Enlaces revisados el 3 de noviembre de 2026. Lista completa en [`../estacion6/re
 - [OpenAI Symphony](https://github.com/openai/symphony): la especificación que implementa
 - [MCP de Linear](https://linear.app/docs/mcp)
 - [Git worktree](https://git-scm.com/docs/git-worktree)
-- Las slides de esta carpeta son de la Cohorte 4; este README es el vigente
+- [Conceptos de la estación](conceptos.md)

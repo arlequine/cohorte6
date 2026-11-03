@@ -7,7 +7,7 @@ El alumno sale con su primera tarea del plan despachada a un agente y en revisi�
 - [ ] Instala OpenSymphony en la versión vigente (`cargo install opensymphony`, Rust 1.97.1 o más nuevo) y el arnés de la demo. La forma más directa es Codex con tu sesión de ChatGPT; OpenHands necesita Python 3.13, `uv` y una llave de un proveedor de modelos
 - [ ] En tu repo de demo (rama `ensayo-e6`, con el plan publicado en Linear) corre `opensymphony init --target-branch main` y revisa qué agregó: `WORKFLOW.md`, `config.yaml`, skills en `.agents/skills/` y `.opensymphony/`. Corre `npm run sync-skills` y `npm run verify`
 - [ ] Despacha una tarea de punta a punta, hasta que la revisión por agentes pase varias rondas, y déjala lista para integrar en la demo. Prepara otra tarea nueva, sin dependencias, para despacharla en vivo
-- [ ] Repasa las slides 2 a 8 ([`estacion7.html`](estacion7.html)): resumen las 23 lecciones del curso de Parlina usado en la Cohorte 4. Si tienes acceso al curso, úsalo para preparar los ejemplos; si no, las slides bastan para el bloque de conceptos
+- [ ] Lee [`conceptos.md`](conceptos.md) y sus fuentes: es el contenido del bloque de conceptos (slides 3 a 7). Prepara un ejemplo propio para cada sección
 - [ ] Ensaya la ruta B con Claude Code: una tarea en un worktree, el prompt "Dispatch manual" y una revisión con un subagente. Es el plan B de la demo y la ruta de quien no logre instalar OpenSymphony
 - [ ] Revisa el semáforo con `node scripts/semaforo.mjs alumnos.csv --estacion estacion-6`: quién llega sin plan o sin publicarlo en Linear
 
@@ -15,11 +15,11 @@ El alumno sale con su primera tarea del plan despachada a un agente y en revisi�
 
 | Min | Qué hace el mentor | Qué hacen los alumnos | Slide o archivo |
 |---|---|---|---|
-| 0–10 | Taxonomía: modelo, arnés, meta-arnés, superficie cliente y orquestador | Ubican su herramienta y la de la demo en el mapa | Slides 1–3 |
-| 10–35 | Patrones de coordinación (Ralph, Gas Town, GSD) y especificación de Symphony: `WORKFLOW.md`, workspaces, despacho y reconciliación | Preguntas; eligen qué patrón se parece a cómo trabajan hoy | Slides 4–8 |
-| 35–65 | Demo de OpenSymphony (ver Demo) | Observan y anotan dudas | Repo de demo |
+| 0–10 | Las capas (modelo, arnés, meta-arnés y orquestador) y los tres problemas | Ubican su herramienta y la de la demo en el mapa | Slides 1–4, `conceptos.md` §1–2 |
+| 10–35 | Patrones de coordinación, especificación de Symphony y gobernanza | Eligen qué patrón se parece a cómo trabajan hoy y qué evidencia piden para integrar | Slides 5–8, `conceptos.md` §3–5 |
+| 35–65 | Demo de OpenSymphony (ver Demo) | Observan y anotan dudas | Slides 9–17, repo de demo |
 | 65–70 | Pausa | | |
-| 70–110 | Circula: primero a quien no logra instalar (pásalo a la ruta B), luego a quien el agente se trabó | Despachan su primera tarea y revisan su PR | README "Tu tarea" |
+| 70–110 | Circula: primero a quien no logra instalar (pásalo a la ruta B), luego a quien el agente se trabó | Despachan su primera tarea y revisan su PR | Slide 18, README "Tu tarea" |
 | 110–120 | Entregable, rúbrica y conexión con E8 | Preguntas | README "Entregable" |
 
 ## Demo
@@ -72,6 +72,6 @@ Plan B si algo falla en vivo:
 - En el refuerzo, revisa en voz alta un PR de agente con el grupo: qué comentarios hizo el revisor, cuáles eran correctos y qué se le escapó
 
 ## Notas para el siguiente mentor
-En la Cohorte 4 esta estación fue 50 minutos de conceptos, 60 de demo y 10 de preguntas, sin práctica. Para la Cohorte 6 se acortaron los conceptos para dar 40 minutos de práctica, como pidió el post-mortem de la Cohorte 3 ([`../estacion6/fuente/post-mortem.md`](../estacion6/fuente/post-mortem.md)).
+En la Cohorte 4 esta estación fue 50 minutos de conceptos, 60 de demo y 10 de preguntas, sin práctica, y los conceptos venían de un curso externo en Parlina. Para la Cohorte 6 los conceptos viven en [`conceptos.md`](conceptos.md), escrita a partir del prompt de ese curso ([`../estacion6/fuente/prompt-parlina-orquestacion.md`](../estacion6/fuente/prompt-parlina-orquestacion.md)) y de fuentes primarias, y la sesión da 40 minutos de práctica, como pidió el post-mortem de la Cohorte 3 ([`../estacion6/fuente/post-mortem.md`](../estacion6/fuente/post-mortem.md)).
 
 Pendiente: se llena al terminar la Cohorte 6.
