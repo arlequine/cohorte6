@@ -6,7 +6,7 @@ Que toda la infraestructura de tu producto quede descrita en código y que cada 
 ## Antes de la clase
 - Tu repo personal con el walking skeleton de la Estación 3 desplegado en Vercel y CI en verde
 - Terraform 1.10 o superior (`terraform -version`) y AWS CLI
-- Una cuenta de AWS con permisos de administrador sobre una cuenta de práctica (no la de producción de tu empresa)
+- Una cuenta de AWS con permisos de administrador sobre una cuenta de práctica (no la de producción de tu empresa). Si la creas nueva, elige el plan **Paid**: las cuentas nuevas en el plan Free se cierran solas a los 6 meses o al acabarse sus créditos. Lo que usamos queda dentro del nivel gratuito permanente o cuesta centavos
 - Un token de Vercel ([vercel.com/account/tokens](https://vercel.com/account/tokens))
 - Docker y una cuenta gratuita de LocalStack con su token, si quieres probar en local (ver "Probar en local")
 
@@ -57,7 +57,7 @@ Push a main ──► verificar ─► secretos ─► terraform apply ─► de
 Trabaja en tu repo personal, con tu coding agent. Usa el skill y los MCPs de IaC si tu herramienta los tiene configurados (Terraform MCP y AWS Documentation MCP: ver `mcp/README.md`).
 
 1. **Agrega el historial en DynamoDB.** Pide a tu agente que guarde cada conversación en una tabla (`DYNAMODB_TABLE`) con un TTL de 30 días y que exponga `GET /api/historial` protegido con el mismo token. Con tests que no llamen a AWS.
-2. **Escribe la infraestructura en `infra/`.** La tabla de DynamoDB, un usuario de IAM con permisos solo sobre esa tabla y las variables de entorno de producción en Vercel. Recuerda que Vercel reserva los nombres `AWS_*`: usa el prefijo `APP_AWS_`.
+2. **Escribe la infraestructura en `infra/`.** La tabla de DynamoDB en modo provisionado con 1 unidad de lectura y 1 de escritura (así queda dentro del nivel gratuito), un usuario de IAM con permisos solo sobre esa tabla y las variables de entorno de producción en Vercel. Recuerda que Vercel reserva los nombres `AWS_*`: usa el prefijo `APP_AWS_`.
 3. **Pruébala en local** con LocalStack (ver "Probar en local").
 4. **Corre el bootstrap una vez** con tus credenciales de AWS:
    ```bash

@@ -59,7 +59,8 @@ Plan B si algo falla en vivo:
 
 ## Preguntas frecuentes
 - **¿Por qué no desplegamos la app en AWS?** Porque el walking skeleton ya vive en Vercel desde la semana 3 y cambiar de plataforma a mitad del curso no aporta al aprendizaje. La ruta B está documentada para quien la necesite.
-- **¿Cuánto cuesta?** DynamoDB en modo bajo demanda y el bucket del estado cuestan centavos con el tráfico de práctica. La ruta B sí genera costo fijo por el balanceador y los contenedores.
+- **¿Cuánto cuesta?** La tabla usa modo provisionado con 1 unidad de lectura y 1 de escritura, dentro del nivel gratuito permanente de DynamoDB (25 unidades de cada tipo y 25 GB por cuenta y región). El bucket del estado cuesta centavos. La ruta B sí genera costo fijo por el balanceador y los contenedores.
+- **¿Por qué no modo bajo demanda?** Escala solo, pero el nivel gratuito no lo cubre: se cobra cada petición. Para un producto real con tráfico variable puede convenir; para la práctica, el provisionado mínimo es gratis.
 - **¿Por qué la app usa llaves de IAM si el pipeline usa OIDC?** Por simplicidad en esta estación. Cambiarlas por OIDC de Vercel es un reto del track avanzado y un buen tema para E10.
 - **¿Puedo usar OpenTofu en lugar de Terraform?** Sí, el código es compatible. Las guías y el pipeline usan Terraform.
 
