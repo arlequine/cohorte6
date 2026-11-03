@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Corre lint, tipos y tests antes de cada commit.
+# Funciona igual con cualquier coding agent. Actívalo una vez con: npm run hooks
+set -e
+npm run --silent verify
+bash scripts/sync-skills.sh --check >/dev/null

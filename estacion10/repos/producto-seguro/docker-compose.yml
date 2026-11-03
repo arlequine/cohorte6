@@ -1,0 +1,19 @@
+# LocalStack para probar la infraestructura en tu máquina.
+# Desde marzo de 2026 LocalStack exige una cuenta y un token, también en su plan gratuito (Hobby).
+# Crea tu token en https://app.localstack.cloud/workspace/auth-tokens y expórtalo antes de levantar:
+#   export LOCALSTACK_AUTH_TOKEN=ls-...
+#   docker compose up -d
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: producto-localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      LOCALSTACK_AUTH_TOKEN: "${LOCALSTACK_AUTH_TOKEN:?Define LOCALSTACK_AUTH_TOKEN antes de levantar LocalStack}"
+      SERVICES: dynamodb,iam,sts
+    volumes:
+      - localstack_data:/var/lib/localstack
+
+volumes:
+  localstack_data:
