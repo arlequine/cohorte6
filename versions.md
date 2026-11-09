@@ -2,7 +2,7 @@
 
 Fuente única de modelos, SDKs y herramientas. El resto del repo referencia este archivo y no repite números. Revisar antes de cada cohorte.
 
-Última revisión de modelos: 31 de octubre de 2026. Precios de Claude y herramientas de observabilidad: 9 de noviembre de 2026. Resto de frameworks y herramientas: pendiente (issue #12).
+Última revisión de modelos: 31 de octubre de 2026. Precios de Claude y herramientas de observabilidad: 9 de noviembre de 2026. Resto de frameworks y herramientas: 9 de noviembre de 2026 (issue #12): todos los proyectos Node instalan y pasan sus tests con estas versiones en `validar-material.yml`.
 
 ## Modelos
 
@@ -36,12 +36,12 @@ USD por millón de tokens, de la [página de precios](https://platform.claude.co
 | Herramienta | Versión | Dónde se usa |
 |---|---|---|
 | Node.js | 22 (`.nvmrc`); 22.15 o más donde se usa el SDK 3.x de OpenTelemetry | Todos los proyectos |
-| Next.js | ^16.4 | `plantilla-alumno`, E3 (C4 usaba 15 y 16.1 en otros ejemplos) |
-| React | ^19.3 | `plantilla-alumno`, E3 |
-| `@anthropic-ai/sdk` | ^1.3 | `plantilla-alumno`, E3 |
-| TypeScript | ^6.0 | `plantilla-alumno`, E3 |
-| Vitest | ^5.0 | `plantilla-alumno`, E3 (C4 usaba 2 y 4 en otros ejemplos) |
-| ESLint + `eslint-config-next` | ^9 / ^16.4 | `plantilla-alumno`, E3 |
+| Next.js | ^16.4 | Todos los proyectos Node: `plantilla-alumno`, E3, E8, E9, E10 y E11 (C4 usaba 15 y 16.1) |
+| React | ^19.3 | Todos los proyectos Node |
+| `@anthropic-ai/sdk` | ^1.3 | `plantilla-alumno`, E3, E8, E9, E10 y E11 `entrevista-obs` |
+| TypeScript | ^6.0 | Todos los proyectos Node |
+| Vitest | ^5.0 | Todos los proyectos Node (C4 usaba 2 y 4) |
+| ESLint + `eslint-config-next` | ^9 / ^16.4 | Todos los proyectos Node |
 | AI-DLC (awslabs/aidlc-workflows) | 2.11.2 (CLI `aidlc`, perfil `classic`), revisado el 3 de noviembre de 2026. La demo de E1 y el ejemplo `ejemplos/entrevista-ai/aidlc-docs-v1` usan las reglas 1.0.1 | E1 (demo), E4, E5 |
 | `@playwright/test` | ^1.64.1 | E8 `entrevista-qa` (C4 usaba ^1.48) |
 | playwright-bdd | ^9.2.1 | E8 `entrevista-qa` |
