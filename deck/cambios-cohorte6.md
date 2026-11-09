@@ -1,6 +1,8 @@
 # Deck · Cambios para la Cohorte 6
 
-Texto corregido, slide por slide, para actualizar el deck comercial *AI For Developers by 30X* (versión de la Cohorte 4, 12 slides) con lo que cambia en la Cohorte 6. Quien mantenga el deck puede aplicarlo directamente; el diseño visual no cambia.
+Texto corregido, slide por slide, para actualizar el deck comercial *AI For Developers by 30X* (versión de la Cohorte 4, 12 slides) con lo que cambia en la Cohorte 6. El deck de la Cohorte 6 tiene **11 slides**: se quita la del equipo y la de inversión ya no muestra precio.
+
+**El deck ya aplicado está en [`ai-for-devs-deck-cohorte6.pdf`](ai-for-devs-deck-cohorte6.pdf)**, con el mismo diseño. Se genera con `python3 deck/generar-deck.py deck/ai-for-devs-deck-cohorte6.pdf` (requiere `pip install weasyprint`); para cambiar un texto, edita el script y vuelve a generarlo. Los datos sin definir salen como "por confirmar".
 
 Los datos que aún no están definidos aparecen como **[PENDIENTE: …]**. La lista completa está al final, seguida de una tabla que traza cada promesa del deck al material del repo.
 
@@ -11,7 +13,9 @@ Revisado contra el repo el 9 de noviembre de 2026 (PRs #26 a #31).
 | Cambio | Slides |
 |---|---|
 | Cohorte 4 → Cohorte 6, con fechas pendientes | 4, 5, 6, 11, 12 |
-| Sin instructores asignados por estación: cualquier mentor puede impartir cualquiera | 3, 5, 6, 7, 11 |
+| Sin instructores ni mentores con nombre: los mentores rotan entre estaciones | 3, 5, 6, 7, 11 |
+| Se quita la slide del equipo | 7 |
+| Sin precio ni descuentos por volumen, para no crear confusiones | 11 |
 | Nivelación con diagnóstico y dos tracks | 2, 5 |
 | Todas las estaciones con el contenido y el entregable que tiene el repo | 5, 6 |
 | Cualquier coding agent permitido, con Claude Code como referencia | 4, 5, 8 |
@@ -107,14 +111,7 @@ Sin cambios.
 **Por qué:** el Demo Day es una sesión de presentaciones sin evaluadores; el mentor coordina para que presenten todos los que se pueda, y el video respalda a quien no alcance. E11 ya no ensaya el pitch en clase: aporta la cifra de costo y el dashboard que se usan en la presentación, y el speech se prepara con la guía de E12.
 
 ## Slide 7 · Equipo
-
-| Elemento | Actual | Nuevo |
-|---|---|---|
-| Mención de estaciones en cada bio | "Estaciones 6, 7 y 10", "Estaciones 1, 2 y 12", "Estación 3", "Estaciones 4 y 5", "Estaciones 8, 9, 11" | *(quitar de todas las bios)* |
-| Título | Instructores con experiencia de clase mundial. | Mentores con experiencia de clase mundial. |
-| Bios | Leonardo González, Danny Bravo, Carlos Alarcón, Christian Braatz, Andrés Caicedo y speakers invitados | **[PENDIENTE: equipo de mentores de la Cohorte 6]** |
-
-**Por qué:** cualquier mentor puede impartir cualquier estación y la asignación todavía no está definida.
+**Se quita la slide completa.** Los mentores rotan entre estaciones, así que el deck no nombra a nadie ni asigna estaciones. Las demás slides hablan de "mentores expertos" sin nombres. Desde aquí, los números de este documento son los del deck de la Cohorte 4; en el deck nuevo cada slide baja uno (Herramientas pasa a ser la 7 y el Cierre, la 11).
 
 ## Slide 8 · Herramientas
 
@@ -138,7 +135,8 @@ Sin cambios de texto. Nota: el "reporte detallado por participante" depende del 
 
 | Elemento | Actual | Nuevo |
 |---|---|---|
-| Subtítulo | Resultados concretos que observamos en C1 y C2 cuando los participantes vuelven a sus equipos. | Resultados concretos que observamos en **[PENDIENTE: cohortes con datos]** cuando los participantes vuelven a sus equipos. |
+| Subtítulo | Resultados concretos que observamos en C1 y C2 cuando los participantes vuelven a sus equipos. | Resultados concretos que observamos en cohortes anteriores cuando los participantes vuelven a sus equipos. |
+| Pie | Inversión recuperada en los primeros 2-3 meses de aplicación post-programa. | *(quitar: sin precio en el deck, la cifra no tiene contra qué compararse)* |
 
 **Por qué:** si hay datos de las cohortes 3 a 5, conviene citarlos.
 
@@ -151,7 +149,11 @@ Sin cambios de texto. Nota: el "reporte detallado por participante" depende del 
 | Duración | 7 semanas · 18 de agosto – 1 de octubre 2026 | 7 semanas · **[PENDIENTE: fechas de la Cohorte 6]** |
 | Sesiones en vivo | 12 estaciones · martes y jueves, 7-9pm COT. Todas quedan grabadas. | 12 estaciones · **[PENDIENTE: días y horario]**. Todas quedan grabadas. |
 | Modalidad | 100% online en vivo, cupos limitados a 60 por cohorte. | 100% online en vivo, cupos limitados a **[PENDIENTE: cupos]** por cohorte. |
-| Inversión por participante | USD 1,500 | **[PENDIENTE: confirmar precio de la Cohorte 6]** |
+| Introducción | Compare el costo de AI For Developers con el costo de no hacer nada: … | Compare lo que su equipo recibe con el costo de no hacer nada: … |
+| Beneficios corporativos | Descuentos por volumen, facturación empresarial y reporte de resultados por participante. | Facturación empresarial y reporte de resultados por participante. |
+| Bloque oscuro de inversión | INVERSIÓN POR PARTICIPANTE · USD 1,500 · descuentos por volumen para grupos de 3+, 5+ y 10+ | PARA SU ORGANIZACIÓN · Un programa a la medida de su equipo: facturación empresarial y soporte administrativo dedicado, reporte de resultados por participante y personalización del producto a un proyecto real de su organización |
+
+**Por qué:** el precio y los descuentos se quitan del deck para no crear confusiones; se comunican en la reunión de consultoría.
 
 ## Slide 12 · Cierre
 
@@ -170,8 +172,6 @@ Sin cambios de texto. Nota: el "reporte detallado por participante" depende del 
 | Fechas de inicio, de cada semana, del Demo Day y de cierre de ventas | 4, 5, 6, 11, 12 |
 | Días y horario de las sesiones | 5, 6, 11 |
 | Cupos por cohorte | 4, 11, 12 |
-| Precio por participante | 11 |
-| Equipo de mentores de la Cohorte 6 | 7 |
 | Cohortes con datos de resultados | 10 |
 
 ---
@@ -198,5 +198,5 @@ Cada estación del deck tiene material que entrega lo que promete. Si una fila c
 | 6 | E12 · Presentación + video | `estacion12/` |
 | 4, 8 | Cualquier coding agent, Claude Code de referencia | README de la raíz (convención), tablas de equivalencias de cada estación, `mcp/README.md` de los repos de referencia |
 | 9, 11 | Reporte de resultados por participante | Rúbricas en `rubricas/`, Juez en `plantilla-alumno/.github/workflows/juez.yml`, semáforo en `scripts/semaforo.mjs` |
-| 3, 7, 11 | Cualquier mentor puede impartir cualquier estación | `MENTOR.md` de cada estación (falta el ensayo por otro mentor, issue #13) |
+| 3, 11 | Cualquier mentor puede impartir cualquier estación | `MENTOR.md` de cada estación (falta el ensayo por otro mentor, issue #13) |
 
