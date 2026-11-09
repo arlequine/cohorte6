@@ -54,7 +54,7 @@ Push a main ──► verificar ─► secretos ─► terraform apply ─► de
 
 ## Tu tarea
 
-Trabaja en tu repo personal, con tu coding agent. Usa el skill y los MCPs de IaC si tu herramienta los tiene configurados (Terraform MCP y AWS Documentation MCP: ver `mcp/README.md`).
+Trabaja en tu repo personal, con tu coding agent. Antes de empezar, copia la skill [`iac`](repos/producto-desplegado/.agents/skills/iac/SKILL.md) a `.agents/skills/` (y corre `npm run sync-skills`) y configura los MCP de Terraform, AWS Documentation y LocalStack con el bloque de tu herramienta en [`mcp/README.md`](repos/producto-desplegado/mcp/README.md#estación-9-terraform-aws-documentation-y-localstack). Con el MCP de Terraform, tu agente consulta el schema real de cada recurso en lugar de escribirlo de memoria.
 
 1. **Agrega el historial en DynamoDB.** Pide a tu agente que guarde cada conversación en una tabla (`DYNAMODB_TABLE`) con un TTL de 30 días y que exponga `GET /api/historial` protegido con el mismo token. Con tests que no llamen a AWS.
 2. **Escribe la infraestructura en `infra/`.** La tabla de DynamoDB en modo provisionado con 1 unidad de lectura y 1 de escritura (así queda dentro del nivel gratuito), un usuario de IAM con permisos solo sobre esa tabla y las variables de entorno de producción en Vercel. Recuerda que Vercel reserva los nombres `AWS_*`: usa el prefijo `APP_AWS_`.
@@ -80,6 +80,16 @@ Trabaja en tu repo personal, con tu coding agent. Usa el skill y los MCPs de IaC
 
 6. **Agrega el pipeline** con los jobs de infraestructura y deploy, y `vercel.json` para que producción solo se despliegue desde el pipeline.
 7. **Abre un PR**, revisa el plan que el pipeline comenta y fusiónalo. Comprueba que `GET /api/historial` devuelve tus conversaciones en producción.
+
+### Equivalencias por herramienta
+
+| | Claude Code (referencia) | Cursor | Codex | Antigravity | GitHub Copilot |
+|---|---|---|---|---|---|
+| Skill `iac` | `.claude/skills/` (copia con `npm run sync-skills`) | `.agents/skills/` | `.agents/skills/` | `.agents/skills/` | `.agents/skills/` |
+| MCP de Terraform, AWS Documentation y LocalStack | `.mcp.json` | `.cursor/mcp.json` | `.codex/config.toml` | `/mcp` en `agy` | `.vscode/mcp.json` |
+| Token de LocalStack para el MCP | `${LOCALSTACK_AUTH_TOKEN}` | `${env:LOCALSTACK_AUTH_TOKEN}` | `env_vars = ["LOCALSTACK_AUTH_TOKEN"]` | Exportado antes de abrir `agy` | `${input:localstack-token}` |
+
+Los MCP ayudan, pero no son obligatorios: el `terraform plan` del pipeline revisa los cambios igual con cualquier herramienta.
 
 ## Probar en local
 

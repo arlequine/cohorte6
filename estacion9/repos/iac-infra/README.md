@@ -6,8 +6,8 @@ Infraestructura AWS desplegable tanto en **LocalStack** (desarrollo local) como 
 
 ```
 iac-infra/
-├── .mcp.json                          # MCPs para Claude Code: Terraform, AWS Docs, LocalStack
-├── .claude/skills/iac/SKILL.md        # Skill de IaC (steering file por defecto del programa)
+├── mcp/README.md                      # MCPs de Terraform, AWS Docs y LocalStack para cada herramienta
+├── .agents/skills/iac/SKILL.md        # Skill de IaC (copiada en .claude/skills/ para Claude Code)
 ├── docker-compose.yml                 # LocalStack Pro (emulador AWS local)
 ├── package.json                       # Scripts npm para ciclo de vida Terraform
 ├── infra/
@@ -151,8 +151,8 @@ export LOCALSTACK_AUTH_TOKEN=<tu-token>   # persistir en ~/.bashrc si lo usas se
 
 | Archivo | Qué hace |
 |---------|----------|
-| `.mcp.json` | Registra los tres MCPs de infraestructura. **Terraform MCP** (schemas reales del provider), **AWS Documentation MCP** (docs y límites) y **LocalStack MCP** (gestionar el emulador desde el chat). Claude Code los levanta al abrir el repo. |
-| `.claude/skills/iac/SKILL.md` | **Skill de IaC**: naming, tags, seguridad, un código para dos destinos y cómo trabaja el agente. Claude Code lo carga automáticamente. |
+| `mcp/README.md` | Los tres MCPs de infraestructura: **Terraform MCP** (schemas reales del provider), **AWS Documentation MCP** (docs y límites) y **LocalStack MCP** (gestionar el emulador desde el chat). Remite a la configuración para las cinco herramientas. |
+| `.agents/skills/iac/SKILL.md` | **Skill de IaC**: naming, tags, seguridad, un código para dos destinos y cómo trabaja el agente. Cursor, Codex, Antigravity y Copilot la leen de `.agents/skills/`; Claude Code, de la copia en `.claude/skills/`. |
 
 Para tu propio proyecto: copia ambos archivos y ajusta el skill a tu producto.
 

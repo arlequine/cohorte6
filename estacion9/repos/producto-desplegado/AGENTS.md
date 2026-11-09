@@ -19,7 +19,8 @@ Producto de referencia de la Estación 9 del programa AI for Developers: una app
 - `infra/` Terraform: `main.tf` (recursos), `bootstrap/` (bucket del estado y rol OIDC, se aplica una vez a mano)
 - `tests/` tests de Vitest
 - `docs/` investigación y contexto del producto; `specs/` PRD y especificaciones
-- `.agents/skills/` skills compartidas por todas las herramientas
+- `.agents/skills/` skills compartidas por todas las herramientas (`iac` para todo lo de `infra/`)
+- `mcp/` configuración de los MCP de Terraform, AWS Documentation y LocalStack para cada herramienta
 
 ## Convenciones
 - TypeScript estricto; nada de `any`.
