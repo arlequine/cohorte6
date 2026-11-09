@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ import { clientLogger } from '@/infrastructure/logging/client-logger';
 
 const SVC = 'login-page';
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
   const [username, setUsername] = useState('');
@@ -88,5 +88,14 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+// useSearchParams obliga a renderizar en el cliente: Next.js exige un límite de Suspense para prerenderizar la página.
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

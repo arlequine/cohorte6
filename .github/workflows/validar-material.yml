@@ -112,6 +112,25 @@ jobs:
       - name: Perfil de humo con los umbrales del script
         run: k6 run -e PAUSA_S=0.2 carga/entrevista.js
 
+  hr-ia:
+    name: node · estacion11/repos/requirement-hr-ia (Cohorte 4, track avanzado)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: estacion11/repos/requirement-hr-ia/webapp
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx eslint .
+      - run: npx vitest run
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
   playwright:
     name: playwright · estacion8/repos/entrevista-qa
     runs-on: ubuntu-latest

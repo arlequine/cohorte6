@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, profile }) {
       if (user) {
-        token.tenantId = (user as Record<string, string>).tenantId;
+        token.tenantId = (user as unknown as Record<string, string>).tenantId;
         logger.info(AUTH_SERVICE, 'JWT token created', {
           tenantId: token.tenantId as string,
           context: { userId: token.sub, email: token.email },

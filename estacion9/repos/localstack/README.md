@@ -42,7 +42,7 @@ awslocal --version        # aws-cli/x.x.x
 ### 1. Clonar / posicionarse en este directorio
 
 ```bash
-cd clase9/repos/localstack
+cd estacion9/repos/localstack
 ```
 
 ### 2. Configurar variables de entorno

@@ -45,7 +45,7 @@ El producto está implementado, testeado y validado. Ahora la pregunta que el eq
 - [ ] **Claude Code** instalado y con MCP habilitado (ver la guía de herramientas de la Clase 3).
 - [ ] **LocalStack Pro**: `LOCALSTACK_AUTH_TOKEN` exportado en tu entorno (la demo usa ECS, ALB, EC2 y Secrets Manager).
 - [ ] **Cuenta AWS** con permisos de creación de recursos (VPC, EC2, ECS, ELB, IAM, DynamoDB, S3, Secrets Manager) — la usaremos al final para el deploy real.
-- [ ] Clona el repo de la sesión: `clases/clase9/repos/iac-infra`.
+- [ ] Clona el repo de la sesión: `estacion9/repos/iac-infra`.
 
 ## ✅ Tu tarea
 
@@ -84,7 +84,7 @@ Recomendado: clonarlo antes de la sesión para tener el entorno listo.
 
 | Repo | Contenido |
 |------|-----------|
-| `clase9/repos/iac-infra` | Infraestructura completa del producto: spec de arquitectura, módulos Terraform (networking · compute · storage), providers para LocalStack y AWS, scripts de validación, skill de IaC y `.mcp.json` |
+| `estacion9/repos/iac-infra` | Infraestructura completa del producto: spec de arquitectura, módulos Terraform (networking · compute · storage), providers para LocalStack y AWS, scripts de validación, skill de IaC y la configuración de MCP (`mcp/README.md`) |
 
 ## 📚 Recursos
 
