@@ -7,6 +7,7 @@ El alumno sale con su infraestructura en código y un pipeline que lleva cada ca
 - [ ] En tu cuenta de práctica, crea un repo de demo desde la solución de referencia (`repos/producto-desplegado/`), conéctalo a Vercel y deja el bootstrap aplicado y las variables de GitHub configuradas. El pipeline debe quedar en verde con un push a main
 - [ ] Ten abierto un PR de ejemplo que cambie algo pequeño de la infraestructura (por ejemplo, una etiqueta en la tabla), para mostrar el plan comentado
 - [ ] Levanta LocalStack con tu token y corre `bash scripts/tf-local.sh apply` para la demo en local
+- [ ] Configura en Claude Code los tres MCP con el bloque de `mcp/README.md` (`.mcp.json`) y comprueba que responden: pide el schema de `aws_dynamodb_table` con el MCP de Terraform
 - [ ] Revisa en `versions.md` las versiones de Terraform y de los providers
 - [ ] Revisa el semáforo: quién no tiene su walking skeleton de E3 desplegado. Sin él, la ruta C no tiene dónde aterrizar
 

@@ -5,7 +5,7 @@ description: Convenciones de infraestructura como código del proyecto — Terra
 
 # IaC — convenciones del proyecto
 
-> Steering file por defecto del programa AI for Developers | 30X. Cópialo a `.claude/skills/iac/SKILL.md` en tu proyecto y ajusta nombres, región y módulos a tu producto.
+> Steering file de la ruta B (todo en AWS). Cópialo a `.agents/skills/iac/SKILL.md` en tu proyecto (y a `.claude/skills/` si usas Claude Code) y ajusta nombres, región y módulos a tu producto.
 
 ## 1. Dónde va cada cosa
 
