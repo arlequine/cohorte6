@@ -70,7 +70,7 @@ export default async function CampaignsPage() {
                   </TableCell>
                 </TableRow>
               ) : (
-                campaigns.map((campaign: Record<string, string>) => (
+                campaigns.map((campaign) => (
                   <TableRow key={campaign.campaignId} data-testid={`campaign-row-${campaign.campaignId}`}>
                     <TableCell className="font-medium">
                       <Link href={`/campaigns/${campaign.campaignId}`} className="hover:underline">

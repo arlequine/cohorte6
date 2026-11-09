@@ -806,7 +806,7 @@ Puedes añadir tantos archivos adicionales a `docs/` como tengas: benchmarks, no
 
 > **Mete las transcripciones de tus reuniones con clientes en `docs/`.** Si grabaste o transcribiste una conversación con un usuario o cliente real, esa transcripción es **oro puro** como input del PRD — captura el problema en las palabras del usuario, no en las tuyas. Pegala como un `.md` más. (Y ver el mensaje de fondo más abajo: nada reemplaza hablar con el cliente real.)
 
-> **Markdown > PDF para los inputs.** Convertí tus documentos a Markdown antes de meterlos en `docs/`. Opus es el modelo que vas a usar para el análisis serio, y es **caro**: el Markdown es mucho más eficiente en tokens que un PDF (un PDF arrastra layout, imágenes y ruido que se traduce en tokens que pagás sin que aporten). Mismo contenido, fracción del costo. Como regla: si lo podés pasar a `.md`, pasalo.
+> **Markdown > PDF para los inputs.** Convierte tus documentos a Markdown antes de meterlos en `docs/`. Para el análisis serio vas a usar un modelo capaz de razonamiento, que suele ser el más caro, y un PDF arrastra layout, imágenes y ruido que se cobran como tokens sin aportar nada. Mismo contenido, fracción del costo: si lo puedes pasar a `.md`, pásalo.
 
 **3. Abre `estacion2/prompts-especificacion.md` del repo del programa y copia el Prompt 1 — PRD.**
 
@@ -814,11 +814,11 @@ Es un prompt largo. Está completo, listo para pegar. NO lo modifiques.
 
 **4. Abre una conversación nueva dedicada solo a tu PRD.** Pega el Prompt 1 y adjunta (o, si trabajas dentro de tu repo con tu coding agent, deja que lea) **todos** los archivos de tu `docs/`.
 
-> **Tip que te ahorra la frustración #1 de la clase — el modelo correcto.** Este prompt está diseñado para avanzar **segmento por segmento**, deteniéndose en cada uno a pedirte aprobación. Con un modelo mediano y poco razonamiento (por ejemplo, Sonnet en esfuerzo medio) el modelo a veces **no respeta** ese ritmo: se adelanta, te escupe varios segmentos de una, o ignora el "pará y pregúntame". Si te pasa, tenés dos salidas:
-> 1. **Abrí una sesión nueva con Opus** (sigue el prompt segmento-por-segmento con mucha más disciplina), o
-> 2. Decile explícitamente **"no vayamos paso a paso"** y dejá que genere el PRD de corrido, para después refinarlo.
+> **Tip que te ahorra la frustración #1 de la clase: el modelo correcto.** Este prompt está diseñado para avanzar **segmento por segmento**, deteniéndose en cada uno a pedirte aprobación. Con un modelo mediano o con poco esfuerzo de razonamiento, el modelo a veces **no respeta** ese ritmo: se adelanta, te entrega varios segmentos de una vez o ignora el "detente y pregúntame". Si te pasa, tienes dos salidas:
+> 1. **Abre una sesión nueva con el modelo más capaz de razonamiento que tengas** (en tu herramienta, el de mayor esfuerzo de razonamiento; [`versions.md`](../versions.md) dice cuál usa el programa), o
+> 2. Dile explícitamente **"no vayamos paso a paso"** y deja que genere el PRD de corrido, para después refinarlo.
 >
-> No pelees con un modelo que no quiere ir despacio: cambiá de modelo o cambiá de modo. Es la causa #1 de frustración en esta práctica.
+> No pelees con un modelo que no quiere ir despacio: cambia de modelo o de modo. Es la causa #1 de frustración en esta práctica.
 
 > **Si trabajás en Claude Code** (la herramienta de referencia; las demás tienen equivalentes para reanudar sesiones), tres comandos que te salvan la sesión:
 > - **`/init`** — arranca el contexto del repo (lee la estructura, los `docs/`, los steering files).

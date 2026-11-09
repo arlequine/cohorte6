@@ -16,7 +16,7 @@ OpenAI retira `gpt-4o`, `gpt-4o-mini`, `gpt-4.1` y `gpt-4.1-mini` de la API el 1
 | Juez | `claude-sonnet-5-5` (más capaz que el agente que evalúa) | `JUDGE_MODEL` | E8 `entrevista-qa` |
 | Agente bajo prueba | `claude-haiku-5-5` | `ANTHROPIC_MODEL` | E8 `entrevista-qa` |
 | Ejemplos de diseño (Claude Agent SDK) | `claude-opus-5-5` / `claude-sonnet-5-5` | — | `ejemplos/entrevista-ai` (E4, E5) |
-| Coding agent para AI-DLC en E4 y E5 | Un modelo capaz de razonamiento, por ejemplo `claude-opus-5-5` | — | E4, E5 |
+| Modelo para el PRD (E2) y para AI-DLC (E4 y E5) | Un modelo capaz de razonamiento, por ejemplo `claude-opus-5-5` | — | E2, E4, E5 |
 | Agente del walking skeleton | `claude-haiku-5-5` | `ANTHROPIC_MODEL` | `plantilla-alumno`, E3 `walking-skeleton` |
 | Agente de EntreVista AI instrumentado | `claude-haiku-5-5` | `ANTHROPIC_MODEL` | E11 `entrevista-obs` |
 

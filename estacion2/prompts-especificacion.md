@@ -31,7 +31,7 @@ proyecto/
 
 > [!TIP]
 > **Inputs**: Coloca en `docs/` todos los documentos que tengas: overview, ICP, mercado, transcripciones de entrevistas con usuarios/clientes, análisis competitivos, benchmarks, notas de campo. Adjúntalos todos al prompt, o deja que tu agente los lea si trabajas en tu repo.
-> **Output**: Cuando Claude consolide el PRD, guárdalo en `specs/prd.md`.
+> **Output**: Cuando el modelo consolide el PRD, guárdalo en `specs/prd.md`.
 
 ---
 
