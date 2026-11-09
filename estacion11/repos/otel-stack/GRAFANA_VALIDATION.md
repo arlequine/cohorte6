@@ -1,3 +1,5 @@
+> **Nota de la Cohorte 6:** esta validación es de la app completa de la Cohorte 4 (`../requirement-hr-ia`), que se conserva como referencia avanzada. La app de la Estación 11 es `../entrevista-obs` y se valida con su README. Para cargar los dashboards de esta guía: `DASHBOARDS_DIR=../requirement-hr-ia/grafana-dashboards docker compose up -d`.
+
 # Manual de Validación — Grafana UI
 
 > AI for Developers | 30X · Clase 11 — Observabilidad

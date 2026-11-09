@@ -1,0 +1,51 @@
+{
+  "etiqueta": "estacion-11",
+  "titulo": "Estación 11 · Observabilidad",
+  "fuente": "estacion11/README.md",
+  "entregable": "Un pull request en tu repo personal con la etiqueta `estacion-11`, antes de la Estación 12, que incluya:\n- La skill `observabilidad` adaptada a tu producto\n- `instrumentation.ts`, los spans `invoke_agent` y `chat` con atributos `gen_ai.*`, las métricas de latencia, tokens y costo, y los logs con `trace_id`\n- Los tests de la telemetría, en verde en CI\n- Al menos un dashboard en `grafana-dashboards/`\n- El script de k6 en `carga/` con sus umbrales\n- `docs/observabilidad.md` con el costo por conversación, la latencia P95 y la proyección mensual\n- En la descripción del PR: una captura del dashboard durante la prueba de carga, una captura de una traza de un turno en Tempo y el resumen de k6",
+  "notas": null,
+  "criterios": [
+    {
+      "nombre": "Instrumentación",
+      "cumple": "SDK que arranca solo con `OTEL_EXPORTER_OTLP_ENDPOINT`; spans `invoke_agent` y `chat` anidados con los atributos `gen_ai.*` de la tarea y `error.type` en los fallos",
+      "parcial": "Spans del modelo sin el `invoke_agent`, con atributos incompletos o con nombres `gen_ai.*` inventados",
+      "no_cumple": "No hay spans del agente"
+    },
+    {
+      "nombre": "Métricas y costo",
+      "cumple": "Latencia y tokens con los nombres de las convenciones, contador de gasto e histograma de costo por conversación calculados con una tabla de precios fechada",
+      "parcial": "Latencia y tokens sin costo, o costo sin fuente de precios",
+      "no_cumple": "No hay métricas del agente"
+    },
+    {
+      "nombre": "Logs",
+      "cumple": "Logs con `trace_id` y `span_id` que llegan a Loki y saltan a su traza",
+      "parcial": "Logs estructurados sin correlación con la traza",
+      "no_cumple": "Logs sueltos con `console.log`"
+    },
+    {
+      "nombre": "Tests de telemetría",
+      "cumple": "Tests con exportadores en memoria que verifican la jerarquía de spans, los atributos de tokens y el cálculo de costo",
+      "parcial": "Tests solo del cálculo de costo",
+      "no_cumple": "No hay tests de la telemetría"
+    },
+    {
+      "nombre": "Dashboard",
+      "cumple": "JSON versionado con latencia, tokens, costo por conversación y errores, con descripción en cada panel",
+      "parcial": "Dashboard sin costo o creado a mano sin JSON en el repo",
+      "no_cumple": "No hay dashboard"
+    },
+    {
+      "nombre": "Prueba de carga",
+      "cumple": "Script de k6 que recorre una conversación completa, con umbrales del PRD y un modo sin costo; resumen en el PR",
+      "parcial": "Script que solo golpea un endpoint, o sin umbrales",
+      "no_cumple": "No hay prueba de carga"
+    },
+    {
+      "nombre": "Costo para el pitch",
+      "cumple": "`docs/observabilidad.md` con costo por conversación P50 y P95, latencia P95 y proyección mensual con el volumen del PRD",
+      "parcial": "Solo el costo de una conversación o sin proyección",
+      "no_cumple": "No hay cifras"
+    }
+  ]
+}
