@@ -1,0 +1,47 @@
+name: Prueba de carga
+
+# Corre k6 contra la app con el motor simulado: misma instrumentación que con Claude, sin llave y sin costo.
+# Se dispara a mano (Actions → Prueba de carga → Run workflow) o en un PR con la etiqueta `prueba-de-carga`.
+# Si un umbral de carga/entrevista.js no se cumple, el job falla.
+
+on:
+  workflow_dispatch:
+    inputs:
+      perfil:
+        description: Perfil de k6 (humo, carga o rt9)
+        default: humo
+  pull_request:
+    types: [labeled, synchronize]
+
+jobs:
+  k6:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'prueba-de-carga')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+      - name: Levantar la app con el motor simulado
+        run: |
+          npm run start > app.log 2>&1 &
+          for i in $(seq 60); do curl -sf http://localhost:3000/api/health > /dev/null && exit 0; sleep 1; done
+          cat app.log; exit 1
+        env:
+          AGENT_MODE: simulado
+          SIMULADO_LATENCIA_MS: "600"
+      - uses: grafana/setup-k6-action@v1
+      - name: k6
+        run: k6 run -e PERFIL=${{ inputs.perfil || 'humo' }} -e PAUSA_S=0.5 --summary-export resumen-k6.json carga/entrevista.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prueba-de-carga
+          path: |
+            resumen-k6.json
+            app.log

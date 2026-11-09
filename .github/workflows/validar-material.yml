@@ -21,6 +21,7 @@ jobs:
           - estacion9/repos/producto-desplegado
           - estacion10/repos/producto-seguro
           - estacion8/repos/entrevista-qa
+          - estacion11/repos/entrevista-obs
     defaults:
       run:
         working-directory: ${{ matrix.proyecto }}
@@ -83,6 +84,33 @@ jobs:
         run: node scripts/generar-rubricas.mjs --check
       - name: Tests de los scripts
         run: node --test scripts/*.test.mjs
+
+  k6:
+    name: k6 · estacion11/repos/entrevista-obs
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: estacion11/repos/entrevista-obs
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+      - name: Levantar la app con el motor simulado
+        run: |
+          npm run start > app.log 2>&1 &
+          for i in $(seq 60); do curl -sf http://localhost:3000/api/health > /dev/null && exit 0; sleep 1; done
+          cat app.log; exit 1
+        env:
+          AGENT_MODE: simulado
+          SIMULADO_LATENCIA_MS: "200"
+      - uses: grafana/setup-k6-action@v1
+      - name: Perfil de humo con los umbrales del script
+        run: k6 run -e PAUSA_S=0.2 carga/entrevista.js
 
   playwright:
     name: playwright · estacion8/repos/entrevista-qa

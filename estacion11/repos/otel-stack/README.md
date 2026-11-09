@@ -8,7 +8,7 @@ Stack de observabilidad opensource listo para usar. Un solo `docker compose up -
 graph TB
     subgraph app["Tu Aplicación — Next.js"]
         auto["instrumentation.ts\nAuto-instrumentación\nHTTP, fetch, routing"]
-        manual["endpoint /api/chat\nSpans manuales\nllm.model, llm.tokens.*\nllm.latency_ms"]
+        manual["/api/agent\nSpans manuales\ninvoke_agent → chat\ngen_ai.usage.*, costo"]
         app_out((" "))
         auto --> app_out
         manual --> app_out
@@ -336,14 +336,17 @@ El Collector acepta traces, métricas y logs en el mismo endpoint. El SDK de Ope
 
 El stack no trae dashboards propios: los dashboards viven **junto a la aplicación que instrumentan**, versionados como JSON, y Grafana los carga al arrancar mediante provisioning.
 
-Por defecto `docker-compose.yml` monta la carpeta del repo hermano `../requirement-hr-ia/grafana-dashboards` en `/var/lib/grafana/dashboards`. Los cuatro dashboards que trae la app aparecen en Grafana sin importar nada a mano:
+Por defecto `docker-compose.yml` monta la carpeta del repo hermano `../entrevista-obs/grafana-dashboards`, la app de referencia de la Estación 11, en `/var/lib/grafana/dashboards`:
 
 | Dashboard | Qué muestra |
 |-----------|-------------|
-| Host Metrics | CPU, memoria y red del host |
-| Next.js App | Heap, event loop, GC y latencia HTTP del proceso |
-| Session Traces Explorer | Recorrido de una sesión de usuario a través de los traces |
-| Agente LLM | Latencia de inferencia por modelo, tokens por hora y errores del modelo |
+| EntreVista AI · Agente | Latencia del modelo y de cada turno, tokens por tipo, costo por hora y por entrevista, errores por `error.type` y los turnos más lentos en Tempo |
+
+La app completa de la Cohorte 4 (`../requirement-hr-ia`) trae cuatro dashboards más (host, proceso de Next.js, sesiones y su agente con OpenAI). Para verlos:
+
+```bash
+DASHBOARDS_DIR=../requirement-hr-ia/grafana-dashboards docker compose up -d
+```
 
 Para usar los dashboards de tu propio producto, apunta la variable al directorio con tus JSON:
 

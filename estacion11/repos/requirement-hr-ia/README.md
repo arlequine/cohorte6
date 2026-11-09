@@ -10,6 +10,8 @@ scripts/             Bootstrap de LocalStack (tablas DynamoDB)
 grafana-dashboards/  Dashboards de Grafana como codigo (JSON) — Grafana los carga via provisioning
 ```
 
+> **Cohorte 6:** la app de referencia de la Estación 11 es [`../entrevista-obs`](../entrevista-obs), sobre el mismo stack que el repo de cada alumno (Claude, walking skeleton) y con atributos `gen_ai.*`, costo y k6. Esta app completa de la Cohorte 4 (OpenAI, NextAuth, DynamoDB, Telegram, atributos `llm.*`) se conserva como referencia avanzada del track avanzado. Su skill de observabilidad está en `.agents/skills/observabilidad/` (copiada a `.claude/skills/` para Claude Code).
+>
 > Esta copia es la version de la **Clase 11 (Observabilidad)** del producto EntreVista AI: trae la webapp instrumentada, los dashboards y el bootstrap local. La infraestructura Terraform y la documentacion AI-DLC viven en el repo completo del producto y no hacen falta para esta sesion.
 
 ## Quick Start (Desarrollo Local)
